@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Terraria Class Guide</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Nunito:wght@400;600;700&display=swap');
+
+:root {
+  --bg: #f0f2f5;
+  --card: #ffffff;
+  --border: #e0e5ec;
+  --text: #1a2233;
+  --muted: #6b7a99;
+
+  --melee: #d42b2b;
+  --melee-dim: #fdeaea;
+  --ranged: #1e9e58;
+  --ranged-dim: #e6f7ef;
+  --magic: #6633dd;
+  --magic-dim: #ede8ff;
+  --summon: #c48a00;
+  --summon-dim: #fff8e0;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Nunito', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── HEADER ── */
+header {
+  background: linear-gradient(135deg, #ffffff 0%, #eef0f8 100%);
+  padding: 44px 24px 36px;
+  border-bottom: 2px solid var(--border);
+  text-align: center;
+}
+
+.header-icon {
+  font-size: 48px;
+  display: block;
+  margin-bottom: 14px;
+}
+
+header h1 {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(26px, 5vw, 42px);
+  letter-spacing: 2px;
+  color: #1a2233;
+}
+
+header p {
+  margin-top: 10px;
+  color: var(--muted);
+  font-size: 15px;
+  font-weight: 600;
+}
+
+/* ── MAIN ── */
+main {
+  flex: 1;
+  max-width: 1100px;
+  margin: auto;
+  width: 100%;
+  padding: 48px 20px 64px;
+}
+
+.section-label {
+  text-align: center;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 36px;
+}
+
+/* ── GRID ── */
+.classes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+/* ── CLASS CARD ── */
+.class-card {
+  background: var(--card);
+  border-radius: 16px;
+  border: 1.5px solid var(--border);
+  padding: 32px 24px 28px;
+  text-decoration: none;
+  color: var(--text);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.22s cubic-bezier(.34,1.56,.64,1), border-color 0.2s, box-shadow 0.2s;
+}
+
+.class-card::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 4px;
+  border-radius: 0 0 16px 16px;
+}
+
+.class-card:hover {
+  transform: translateY(-6px) scale(1.02);
+}
+
+/* ── MELEE ── */
+.card-melee { border-color: rgba(212,43,43,0.2); }
+.card-melee::after { background: var(--melee); }
+.card-melee:hover { border-color: rgba(212,43,43,0.5); box-shadow: 0 10px 32px rgba(212,43,43,0.12); }
+
+/* ── RANGED ── */
+.card-ranged { border-color: rgba(30,158,88,0.2); }
+.card-ranged::after { background: var(--ranged); }
+.card-ranged:hover { border-color: rgba(30,158,88,0.5); box-shadow: 0 10px 32px rgba(30,158,88,0.12); }
+
+/* ── MAGIC ── */
+.card-magic { border-color: rgba(102,51,221,0.2); }
+.card-magic::after { background: var(--magic); }
+.card-magic:hover { border-color: rgba(102,51,221,0.5); box-shadow: 0 10px 32px rgba(102,51,221,0.14); }
+
+/* ── SUMMONING ── */
+.card-summon { border-color: rgba(196,138,0,0.2); }
+.card-summon::after { background: var(--summon); }
+.card-summon:hover { border-color: rgba(196,138,0,0.5); box-shadow: 0 10px 32px rgba(196,138,0,0.14); }
+
+/* ── CARD CONTENT ── */
+.card-emoji {
+  font-size: 52px;
+  margin-bottom: 18px;
+  display: block;
+  transition: transform 0.22s cubic-bezier(.34,1.56,.64,1);
+}
+
+.class-card:hover .card-emoji {
+  transform: scale(1.15) rotate(-3deg);
+}
+
+.card-title {
+  font-family: 'Cinzel', serif;
+  font-size: 20px;
+  font-weight: 900;
+  letter-spacing: 1px;
+  margin-bottom: 10px;
+}
+
+.card-melee  .card-title { color: var(--melee); }
+.card-ranged .card-title { color: var(--ranged); }
+.card-magic  .card-title { color: var(--magic); }
+.card-summon .card-title { color: var(--summon); }
+
+.card-desc {
+  font-size: 13px;
+  color: var(--muted);
+  text-align: center;
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+.card-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.tag {
+  font-size: 10.5px;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 20px;
+  letter-spacing: 0.5px;
+}
+
+.card-melee  .tag { background: var(--melee-dim);  color: var(--melee);  border: 1px solid rgba(212,43,43,0.2); }
+.card-ranged .tag { background: var(--ranged-dim); color: var(--ranged); border: 1px solid rgba(30,158,88,0.2); }
+.card-magic  .tag { background: var(--magic-dim);  color: var(--magic);  border: 1px solid rgba(102,51,221,0.2); }
+.card-summon .tag { background: var(--summon-dim); color: var(--summon); border: 1px solid rgba(196,138,0,0.2); }
+
+.card-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: 'Nunito', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  padding: 9px 22px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  letter-spacing: 0.4px;
+  transition: filter 0.15s, transform 0.15s;
+  margin-top: auto;
+  color: #fff;
+}
+
+.card-melee  .card-btn { background: var(--melee); }
+.card-ranged .card-btn { background: var(--ranged); }
+.card-magic  .card-btn { background: var(--magic); }
+.card-summon .card-btn { background: var(--summon); }
+
+.class-card:hover .card-btn {
+  filter: brightness(1.1);
+  transform: scale(1.04);
+}
+
+/* ── DIFFICULTY DOTS ── */
+.difficulty {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 20px;
+  font-size: 11px;
+  color: var(--muted);
+  font-weight: 600;
+}
+
+.dots { display: flex; gap: 4px; }
+
+.dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: #dde2ed;
+}
+
+.card-melee  .dot.on { background: var(--melee); }
+.card-ranged .dot.on { background: var(--ranged); }
+.card-magic  .dot.on { background: var(--magic); }
+.card-summon .dot.on { background: var(--summon); }
+
+/* ── DIVIDER ── */
+.divider {
+  width: 40px; height: 2px;
+  border-radius: 2px;
+  margin: 0 auto 16px;
+  opacity: 0.4;
+}
+.card-melee  .divider { background: var(--melee); }
+.card-ranged .divider { background: var(--ranged); }
+.card-magic  .divider { background: var(--magic); }
+.card-summon .divider { background: var(--summon); }
+
+/* ── FOOTER ── */
+footer {
+  text-align: center;
+  padding: 24px;
+  color: var(--muted);
+  font-size: 12px;
+  border-top: 1px solid var(--border);
+  background: #fff;
+}
+</style>
+</head>
+<body>
+
+<header>
+  <span class="header-icon">⚔️</span>
+  <h1>Terraria Class Guide</h1>
+  <p>Pilih kelas favoritmu dan lihat panduan setup lengkap dari awal hingga endgame</p>
+</header>
+
+<main>
+  <p class="section-label">Pilih Kelas</p>
+  <div class="classes-grid">
+
+    <!-- MELEE -->
+    <a class="class-card card-melee" href="#">
+      <span class="card-emoji">🗡️</span>
+      <div class="card-title">Melee</div>
+      <div class="divider"></div>
+      <p class="card-desc">Bertarung jarak dekat dengan pedang, tombak, dan senjata berat. Ketangguhan dan damage tinggi adalah andalanmu.</p>
+      <div class="card-tags">
+        <span class="tag">High Defense</span>
+        <span class="tag">Close Range</span>
+        <span class="tag">Tank</span>
+      </div>
+      <div class="difficulty">
+        <span>Difficulty</span>
+        <div class="dots">
+          <div class="dot on"></div><div class="dot on"></div>
+          <div class="dot"></div><div class="dot"></div><div class="dot"></div>
+        </div>
+      </div>
+      <span class="card-btn">Lihat Panduan →</span>
+    </a>
+
+    <!-- RANGED -->
+    <a class="class-card card-ranged" href="#">
+      <span class="card-emoji">🏹</span>
+      <div class="card-title">Ranged</div>
+      <div class="divider"></div>
+      <p class="card-desc">Serang musuh dari kejauhan dengan panah, peluru, dan roket. Mobilitas tinggi dan aman dari serangan langsung.</p>
+      <div class="card-tags">
+        <span class="tag">Long Range</span>
+        <span class="tag">High DPS</span>
+        <span class="tag">Mobile</span>
+      </div>
+      <div class="difficulty">
+        <span>Difficulty</span>
+        <div class="dots">
+          <div class="dot on"></div><div class="dot on"></div><div class="dot on"></div>
+          <div class="dot"></div><div class="dot"></div>
+        </div>
+      </div>
+      <span class="card-btn">Lihat Panduan →</span>
+    </a>
+
+    <!-- MAGIC -->
+    <a class="class-card card-magic" href="#">
+      <span class="card-emoji">🔵</span>
+      <div class="card-title">Magic</div>
+      <div class="divider"></div>
+      <p class="card-desc">Kuasai mana dan sihir untuk meluncurkan serangan sihir yang dahsyat. Powerful namun rapuh — butuh manajemen mana yang baik.</p>
+      <div class="card-tags">
+        <span class="tag">Burst Damage</span>
+        <span class="tag">AoE</span>
+        <span class="tag">Mana Cost</span>
+      </div>
+      <div class="difficulty">
+        <span>Difficulty</span>
+        <div class="dots">
+          <div class="dot on"></div><div class="dot on"></div>
+          <div class="dot on"></div><div class="dot on"></div><div class="dot"></div>
+        </div>
+      </div>
+      <span class="card-btn">Lihat Panduan →</span>
+    </a>
+
+    <!-- SUMMONING -->
+    <a class="class-card card-summon" href="summoning.html">
+      <span class="card-emoji">🔮</span>
+      <div class="card-title">Summoning</div>
+      <div class="divider"></div>
+      <p class="card-desc">Panggil minion dan sentry untuk bertempur bagimu. Bermain pasif sambil mengatur pertempuran dari belakang.</p>
+      <div class="card-tags">
+        <span class="tag">Minions</span>
+        <span class="tag">Passive</span>
+        <span class="tag">Whip</span>
+      </div>
+      <div class="difficulty">
+        <span>Difficulty</span>
+        <div class="dots">
+          <div class="dot on"></div><div class="dot on"></div>
+          <div class="dot on"></div><div class="dot on"></div><div class="dot on"></div>
+        </div>
+      </div>
+      <span class="card-btn">Lihat Panduan →</span>
+    </a>
+
+  </div>
+</main>
+
+<footer>
+  Data diadaptasi dari Terraria Wiki · Class Setup Guide
+</footer>
+
+</body>
+</html>

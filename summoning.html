@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Terraria Summoner Class Setup</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Nunito:wght@400;600;700&display=swap');
+
+:root {
+  --bg: #f0f2f5;
+  --card: #ffffff;
+  --section: #f7f8fb;
+  --border: #e0e5ec;
+  --accent: #6633dd;
+  --accent2: #8855ff;
+  --gold: #c48a00;
+  --text: #1a2233;
+  --muted: #6b7a99;
+  --link: #4466cc;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Nunito', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+}
+
+header {
+  background: #ffffff;
+  padding: 32px 24px 24px;
+  border-bottom: 2px solid var(--border);
+}
+
+header h1 {
+  font-family: 'Cinzel', serif;
+  font-size: 26px;
+  letter-spacing: 1px;
+  color: var(--text);
+}
+
+header p {
+  margin-top: 6px;
+  color: var(--muted);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.container {
+  max-width: 1180px;
+  margin: auto;
+  padding: 24px 20px 48px;
+}
+
+/* Stage Card */
+.stage {
+  background: var(--card);
+  border-radius: 14px;
+  margin: 20px 0;
+  border: 1.5px solid var(--border);
+  overflow: hidden;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.stage:hover {
+  border-color: rgba(102,51,221,0.3);
+  box-shadow: 0 4px 20px rgba(102,51,221,0.07);
+}
+
+.stage-header {
+  padding: 13px 20px;
+  background: #f4f1ff;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-bottom: 1.5px solid var(--border);
+}
+
+.stage-header h2 {
+  font-family: 'Cinzel', serif;
+  font-size: 15px;
+  color: var(--text);
+  letter-spacing: 0.5px;
+}
+
+.stage-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+  flex-shrink: 0;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 14px;
+  padding: 16px;
+}
+
+/* Section Box */
+.section {
+  background: var(--section);
+  border-radius: 10px;
+  padding: 14px;
+  border: 1px solid var(--border);
+}
+
+.section h3 {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  color: var(--accent);
+  margin-bottom: 10px;
+  padding-bottom: 7px;
+  border-bottom: 1px solid rgba(102,51,221,0.15);
+}
+
+/* Item Row */
+.item {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 5px 8px;
+  border-radius: 6px;
+  text-decoration: none;
+  color: var(--link);
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.3;
+  transition: background 0.15s, color 0.15s, transform 0.12s;
+}
+
+.item:hover {
+  background: rgba(102,51,221,0.07);
+  color: var(--accent);
+  transform: translateX(3px);
+}
+
+.item img {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+  image-rendering: pixelated;
+  flex-shrink: 0;
+  transition: transform 0.15s;
+}
+
+.item:hover img {
+  transform: scale(1.2);
+}
+
+/* Note Box */
+.note {
+  margin: 0 16px 16px;
+  padding: 10px 14px;
+  background: #fffbea;
+  border-left: 3px solid var(--gold);
+  border-radius: 0 8px 8px 0;
+  font-size: 12.5px;
+  color: #7a5c00;
+  line-height: 1.6;
+}
+
+footer {
+  text-align: center;
+  padding: 24px;
+  color: var(--muted);
+  font-size: 12px;
+  border-top: 1px solid var(--border);
+  background: #fff;
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container" style="padding-top:0;padding-bottom:0;">
+    <h1>🔮 Terraria — Summoner Class Setup</h1>
+    <p>Pre-Bosses → Endgame · Based on Terraria Wiki class progression</p>
+  </div>
+</header>
+
+<div class="container">
+
+<!-- ═══ Pre (King Slime) (Eye Of Cthulhu) ═══ -->
+<div class="stage">
+  <div class="stage-header"><div class="stage-dot"></div><h2>Pre-Bosses (King Slime) (Eye Of Cthulhu)</h2></div>
+  <div class="grid">
+    <div class="section">
+      <h3>Weapons</h3>
+
+      <a class="item" href="https://terraria.wiki.gg/wiki/Leather_Whip" target="_blank"><img src="https://terraria.wiki.gg/images/Leather_Whip.png">Leather Whip</a>
+      
+    </div>
+    <div class="section">
+      <h3>Minions</h3>
+
+      <a class="item" href="https://terraria.wiki.gg/wiki/Finch_Staff" target="_blank"><img src="https://terraria.wiki.gg/images/Finch_Staff.png">Finch Staff</a>
+      <a class="item" href="https://terraria.wiki.gg/wiki/Abigail%27s_Flower" target="_blank"><img src="https://terraria.wiki.gg/images/Abigail%27s_Flower.png">Abigail's Flower</a>
+      <a class="item" href="https://terraria.wiki.gg/wiki/Flinx_Staff" target="_blank"><img src="https://terraria.wiki.gg/images/Flinx_Staff.png">Flinx Staff</a>
+
+    </div>
+    <div class="section">
+      <h3>Armor</h3>
+
+      <a class="item" href="https://terraria.wiki.gg/wiki/Flinx_Fur_Coat" target="_blank"><img src="https://terraria.wiki.gg/images/Flinx_Fur_Coat.png">Flinx Fur Coat</a>
+    
+    </div>
+
+    <div class="section">
+      <h3>Potions</h3>
+
+      <a class="item" href="https://terraria.wiki.gg/wiki/Summoning_Potion" target="_blank"><img src="https://terraria.wiki.gg/images/Summoning_Potion.png">Summoning Potion</a>
+
+    </div>
+  </div>
+  <div class="note">💡 Gunakan armor terbaik yang ada untuk Helmet dan Boots</div>
+</div>
+
+<!-- ═══ Pre (Eater of Worlds) (Brain of Cthulhu) ═══ -->
+<div class="stage">
+  <div class="stage-header"><div class="stage-dot"></div><h2>Pre (Eater of Worlds) (Brain of Cthulhu)</h2></div>
+  <div class="grid">
+    <div class="section">
+      <h3>Weapons</h3>
+
+      <a class="item" href="https://terraria.wiki.gg/wiki/Soulscourge" target="_blank"><img src="https://terraria.wiki.gg/images/Soulscourge.png">Soulscourge</a>
+      <a class="item" href="https://terraria.wiki.gg/wiki/Vasculash" target="_blank"><img src="https://terraria.wiki.gg/images/Vasculash.png">Vasculash</a>
+      
+    </div>
+    <div class="section">
+      <h3>Minions</h3>
+
+      <a class="item" href="https://terraria.wiki.gg/wiki/Imp_Staff" target="_blank"><img src="https://terraria.wiki.gg/images/Imp_Staff.png">Imp Staff</a>
+      
+    </div>
+    <div class="section">
+      <h3>Armor</h3>
+
+      <a class="item" href="https://terraria.wiki.gg/wiki/Flinx_Fur_Coat" target="_blank"><img src="https://terraria.wiki.gg/images/Flinx_Fur_Coat.png">Flinx Fur Coat</a>
+    
+    </div>
+
+    <div class="section">
+      <h3>Potions</h3>
+
+      <a class="item" href="https://terraria.wiki.gg/wiki/Summoning_Potion" target="_blank"><img src="https://terraria.wiki.gg/images/Summoning_Potion.png">Summoning Potion</a>
+
+    </div>
+  </div>
+  <div class="note">💡 Gunakan armor terbaik yang ada untuk Helmet dan Boots</div>
+</div>
+
+<!-- ═══ Pre (Queen Bee) (Deerclops) ═══ -->
+<div class="stage">
+  <div class="stage-header"><div class="stage-dot"></div><h2>Pre (Queen Bee) (Deerclops)</h2></div>
+  <div class="grid">
+    <div class="section">
+      <h3>Weapons</h3>
+
+      <a class="item" href="https://terraria.wiki.gg/wiki/Soulscourge" target="_blank"><img src="https://terraria.wiki.gg/images/Soulscourge.png">Soulscourge</a>
+      <a class="item" href="https://terraria.wiki.gg/wiki/Vasculash" target="_blank"><img src="https://terraria.wiki.gg/images/Vasculash.png">Vasculash</a>
+      
+    </div>
+    <div class="section">
+      <h3>Minions</h3>
+
+      <a class="item" href="https://terraria.wiki.gg/wiki/Imp_Staff" target="_blank"><img src="https://terraria.wiki.gg/images/Imp_Staff.png">Imp Staff</a>
+      
+    </div>
+    <div class="section">
+      <h3>Armor</h3>
+
+      <a class="item" href="https://terraria.wiki.gg/wiki/Flinx_Fur_Coat" target="_blank"><img src="https://terraria.wiki.gg/images/Flinx_Fur_Coat.png">Flinx Fur Coat</a>
+    
+    </div>
+
+    <div class="section">
+      <h3>Potions</h3>
+
+      <a class="item" href="https://terraria.wiki.gg/wiki/Summoning_Potion" target="_blank"><img src="https://terraria.wiki.gg/images/Summoning_Potion.png">Summoning Potion</a>
+
+    </div>
+  </div>
+  <div class="note">💡 Gunakan armor terbaik yang ada untuk Helmet dan Boots</div>
+</div>
+
+<!-- ═══ Pre (Skeletron) ═══ -->
+<div class="stage">
+  <div class="stage-header"><div class="stage-dot"></div><h2>Pre (Skeletron)</h2></div>
+  <div class="grid">
+    <div class="section">
+      <h3>Weapons</h3>
+
+      <a class="item" href="https://terraria.wiki.gg/wiki/Soulscourge" target="_blank"><img src="https://terraria.wiki.gg/images/Soulscourge.png">Soulscourge</a>
+      <a class="item" href="https://terraria.wiki.gg/wiki/Vasculash" target="_blank"><img src="https://terraria.wiki.gg/images/Vasculash.png">Vasculash</a>
+      
+    </div>
+    <div class="section">
+      <h3>Minions</h3>
+
+      <a class="item" href="https://terraria.wiki.gg/wiki/Imp_Staff" target="_blank"><img src="https://terraria.wiki.gg/images/Imp_Staff.png">Imp Staff</a>
+      
+    </div>
+    <div class="section">
+      <h3>Armor</h3>
+
+      <a class="item" href="https://terraria.wiki.gg/wiki/Bee_armor" target="_blank"><img src="https://terraria.wiki.gg/images/Bee_armor.png">Bee armor</a>
+    
+    </div>
+
+    <div class="section">
+      <h3>Potions</h3>
+
+      <a class="item" href="https://terraria.wiki.gg/wiki/Summoning_Potion" target="_blank"><img src="https://terraria.wiki.gg/images/Summoning_Potion.png">Summoning Potion</a>
+
+    </div>
+  </div>
+  <div class="note">💡 Gunakan armor terbaik yang ada untuk Helmet dan Boots</div>
+</div>
+
+<!-- ═══ Pre (Wall of Flesh) ═══ -->
+<div class="stage">
+  <div class="stage-header"><div class="stage-dot"></div><h2>Pre (Wall of Flesh)</h2></div>
+  <div class="grid">
+    <div class="section">
+      <h3>Weapons</h3>
+
+      <a class="item" href="https://terraria.wiki.gg/wiki/Soulscourge" target="_blank"><img src="https://terraria.wiki.gg/images/Soulscourge.png">Soulscourge</a>
+      <a class="item" href="https://terraria.wiki.gg/wiki/Vasculash" target="_blank"><img src="https://terraria.wiki.gg/images/Vasculash.png">Vasculash</a>
+      
+    </div>
+    <div class="section">
+      <h3>Minions</h3>
+
+      <a class="item" href="https://terraria.wiki.gg/wiki/Imp_Staff" target="_blank"><img src="https://terraria.wiki.gg/images/Imp_Staff.png">Imp Staff</a>
+      
+    </div>
+    <div class="section">
+      <h3>Armor</h3>
+
+      <a class="item" href="https://terraria.wiki.gg/wiki/Bee_armor" target="_blank"><img src="https://terraria.wiki.gg/images/Bee_armor.png">Bee armor</a>
+    
+    </div>
+
+    <div class="section">
+      <h3>Potions</h3>
+
+      <a class="item" href="https://terraria.wiki.gg/wiki/Summoning_Potion" target="_blank"><img src="https://terraria.wiki.gg/images/Summoning_Potion.png">Summoning Potion</a>
+
+    </div>
+  </div>
+  <div class="note">💡 Gunakan armor terbaik yang ada untuk Helmet dan Boots</div>
+</div>
+
+<!-- ═══ PRE-HARDMODE ═══ -->
+<!-- <div class="stage">
+  <div class="stage-header"><div class="stage-dot"></div><h2>Pre-Hardmode</h2></div>
+  <div class="grid">
+    <div class="section">
+      <h3>Weapons</h3>
+      <a class="item" href="https://terraria.wiki.gg/wiki/Hornet_Staff" target="_blank"><img src="https://static.wikia.nocookie.net/terraria_gamepedia/images/4/4f/Hornet_Staff.png/revision/latest?cb=20200516214127&format=original">Hornet Staff</a>
+      <a class="item" href="https://terraria.wiki.gg/wiki/Vampire_Frog_Staff" target="_blank"><img src="https://static.wikia.nocookie.net/terraria_gamepedia/images/3/37/Vampire_Frog_Staff.png/revision/latest?cb=20200516223310&format=original">Vampire Frog Staff</a>
+      <a class="item" href="https://terraria.wiki.gg/wiki/Imp_Staff" target="_blank"><img src="https://static.wikia.nocookie.net/terraria_gamepedia/images/7/72/Imp_Staff.png/revision/latest?cb=20200516214233&format=original">Imp Staff</a>
+      <a class="item" href="https://terraria.wiki.gg/wiki/Snapthorn" target="_blank"><img src="https://static.wikia.nocookie.net/terraria_gamepedia/images/a/a0/Snapthorn.png/revision/latest?cb=20200516222048&format=original">Snapthorn</a>
+      <a class="item" href="https://terraria.wiki.gg/wiki/Spinal_Tap" target="_blank"><img src="https://static.wikia.nocookie.net/terraria_gamepedia/images/4/4d/Spinal_Tap.png/revision/latest?cb=20201013181953&format=original">Spinal Tap</a>
+      <a class="item" href="https://terraria.wiki.gg/wiki/Ballista_Rod" target="_blank"><img src="https://static.wikia.nocookie.net/terraria_gamepedia/images/9/99/Ballista_Rod.png/revision/latest?cb=20200516190529&format=original">Ballista Rod</a>
+      <a class="item" href="https://terraria.wiki.gg/wiki/Lightning_Aura_Rod" target="_blank"><img src="https://static.wikia.nocookie.net/terraria_gamepedia/images/f/fa/Lightning_Aura_Rod.png/revision/latest?cb=20200516214736&format=original">Lightning Aura Rod</a>
+    </div>
+    <div class="section">
+      <h3>Armor</h3>
+      <a class="item" href="https://terraria.wiki.gg/wiki/Flinx_Fur_Coat" target="_blank"><img src="https://static.wikia.nocookie.net/terraria_gamepedia/images/9/93/Flinx_Fur_Coat.png/revision/latest?cb=20201013175404&format=original">Flinx Fur Coat</a>
+      <a class="item" href="https://terraria.wiki.gg/wiki/Bee_armor" target="_blank"><img src="https://static.wikia.nocookie.net/terraria_gamepedia/images/3/3d/Bee_armor.png/revision/latest?cb=20200727154326&format=original">Bee Armor</a>
+      <a class="item" href="https://terraria.wiki.gg/wiki/Obsidian_armor" target="_blank"><img src="https://static.wikia.nocookie.net/terraria_gamepedia/images/e/ea/Obsidian_armor.png/revision/latest?cb=20200821145037&format=original">Obsidian Armor</a>
+      <a class="item" href="https://terraria.wiki.gg/wiki/Pumpkin_armor" target="_blank"><img src="https://static.wikia.nocookie.net/terraria_gamepedia/images/3/37/Pumpkin_armor.png/revision/latest?cb=20200726165209&format=original">Pumpkin Armor</a>
+    </div>
+    <div class="section">
+      <h3>Accessories</h3>
+      <a class="item" href="https://terraria.wiki.gg/wiki/Feral_Claws" target="_blank"><img src="https://static.wikia.nocookie.net/terraria_gamepedia/images/9/9d/Feral_Claws.png/revision/latest?cb=20200805023554&format=original">Feral Claws</a>
+      <a class="item" href="https://terraria.wiki.gg/wiki/Pygmy_Necklace" target="_blank"><img src="https://static.wikia.nocookie.net/terraria_gamepedia/images/2/2f/Pygmy_Necklace.png/revision/latest?cb=20200516220924&format=original">Pygmy Necklace</a>
+    </div>
+    <div class="section">
+      <h3>Buffs / Potions</h3>
+      <a class="item" href="https://terraria.wiki.gg/wiki/Summoning_Potion" target="_blank"><img src="https://static.wikia.nocookie.net/terraria_gamepedia/images/9/91/Summoning_Potion.png/revision/latest?cb=20200516222643&format=original">Summoning Potion</a>
+      <a class="item" href="https://terraria.wiki.gg/wiki/Bewitching_Table" target="_blank"><img src="https://static.wikia.nocookie.net/terraria_gamepedia/images/9/9d/Bewitching_Table.png/revision/latest?cb=20200516191617&format=original">Bewitching Table</a>
+    </div>
+  </div>
+  <div class="note">💡 Bee Armor direkomendasikan jika ingin bermain pasif. Obsidian Armor (PC/Console/Mobile) memberikan +20% summon damage dan +50% whip range, cocok untuk gaya agresif.</div>
+</div> -->
+
+<!-- ═══ PRE-MECHANICAL BOSSES ═══ -->
+<!-- <div class="stage">
+  <div class="stage-header"><div class="stage-dot"></div><h2>Pre-Mechanical Bosses</h2></div>
+  <div class="grid">
+    <div class="section">
+      <h3>Weapons</h3>
+      <a class="item" href="https://terraria.wiki.gg/wiki/Spider_Staff" target="_blank"><img src="https://static.wikia.nocookie.net/terraria_gamepedia/images/6/65/Spider_Staff.png/revision/latest?cb=20200516222321&format=original">Spider Staff</a>
+      <a class="item" href="https://terraria.wiki.gg/wiki/Queen_Spider_Staff" target="_blank"><img src="https://static.wikia.nocookie.net/terraria_gamepedia/images/9/97/Queen_Spider_Staff.png/revision/latest?cb=20200516220935&format=original">Queen Spider Staff</a>
+      <a class="item" href="https://terraria.wiki.gg/wiki/Pirate_Staff" target="_blank"><img src="https://static.wikia.nocookie.net/terraria_gamepedia/images/3/3e/Pirate_Staff.png/revision/latest?cb=20200521004014&format=original">Pirate Staff</a>
+      <a class="item" href="https://terraria.wiki.gg/wiki/Sanguine_Staff" target="_blank"><img src="https://static.wikia.nocookie.net/terraria_gamepedia/images/3/3d/Sanguine_Staff.png/revision/latest?cb=20200516221447&format=original">Sanguine Staff</a>
+      <a class="item" href="https://terraria.wiki.gg/wiki/Blade_Staff" target="_blank"><img src="https://static.wikia.nocookie.net/terraria_gamepedia/images/8/89/Blade_Staff.png/revision/latest?cb=20200516192024&format=original">Blade Staff</a>
+      <a class="item" href="https://terraria.wiki.gg/wiki/Firecracker" target="_blank"><img src="https://static.wikia.nocookie.net/terraria_gamepedia/images/8/86/Firecracker.png/revision/latest?cb=20200516212311&format=original">Firecracker</a>
+      <a class="item" href="https://terraria.wiki.gg/wiki/Cool_Whip" target="_blank"><img src="https://static.wikia.nocookie.net/terraria_gamepedia/images/c/cd/Cool_Whip.png/revision/latest?cb=20200516210016&format=original">Cool Whip</a>
+    </div>
+    <div class="section">
+      <h3>Armor</h3>
+      <a class="item" href="https://terraria.wiki.gg/wiki/Spider_armor" target="_blank"><img src="https://static.wikia.nocookie.net/terraria_gamepedia/images/0/08/Spider_armor.png/revision/latest?cb=20200726165218&format=original">Spider Armor</a>
+      <a class="item" href="https://terraria.wiki.gg/wiki/Forbidden_armor" target="_blank"><img src="https://static.wikia.nocookie.net/terraria_gamepedia/images/e/e2/Forbidden_armor.png/revision/latest?cb=20201030183919&format=original">Forbidden Armor</a>
+      <a class="item" href="https://terraria.wiki.gg/wiki/Obsidian_armor" target="_blank"><img src="https://static.wikia.nocookie.net/terraria_gamepedia/images/e/ea/Obsidian_armor.png/revision/latest?cb=20200821145037&format=original">Obsidian Armor</a>
+    </div>
+    <div class="section">
+      <h3>Accessories</h3>
+      <a class="item" href="https://terraria.wiki.gg/wiki/Summoner_Emblem" target="_blank"><img src="https://static.wikia.nocookie.net/terraria_gamepedia/images/7/70/Summoner_Emblem.png/revision/latest?cb=20200516222642&format=original">Summoner Emblem</a>
+      <a class="item" href="https://terraria.wiki.gg/wiki/Berserker%27s_Glove" target="_blank"><img src="https://static.wikia.nocookie.net/terraria_gamepedia/images/0/05/Berserker%27s_Glove.png/revision/latest?cb=20200516191607&format=original">Berserker's Glove</a>
+      <a class="item" href="https://terraria.wiki.gg/wiki/Pygmy_Necklace" target="_blank"><img src="https://static.wikia.nocookie.net/terraria_gamepedia/images/2/2f/Pygmy_Necklace.png/revision/latest?cb=20200516220924&format=original">Pygmy Necklace</a>
+    </div>
+    <div class="section">
+      <h3>Buffs / Potions</h3>
+      <a class="item" href="https://terraria.wiki.gg/wiki/Flask_of_Ichor" target="_blank"><img src="https://static.wikia.nocookie.net/terraria_gamepedia/images/7/71/Flask_of_Ichor.png/revision/latest?cb=20200516212500&format=original">Flask of Ichor</a>
+      <a class="item" href="https://terraria.wiki.gg/wiki/Flask_of_Cursed_Flames" target="_blank"><img src="https://static.wikia.nocookie.net/terraria_gamepedia/images/0/08/Flask_of_Cursed_Flames.png/revision/latest?cb=20200516212455&format=original">Flask of Cursed Flames</a>
+      <a class="item" href="https://terraria.wiki.gg/wiki/Summoning_Potion" target="_blank"><img src="https://static.wikia.nocookie.net/terraria_gamepedia/images/9/91/Summoning_Potion.png/revision/latest?cb=20200516222643&format=original">Summoning Potion</a>
+      <a class="item" href="https://terraria.wiki.gg/wiki/Bewitching_Table" target="_blank"><img src="https://static.wikia.nocookie.net/terraria_gamepedia/images/9/9d/Bewitching_Table.png/revision/latest?cb=20200516191617&format=original">Bewitching Table</a>
+    </div>
+  </div>
+</div> -->
+
+<!-- ═══ PRE-PLANTERA ═══ -->
+<!-- <div class="stage">
+  <div class="stage-header"><div class="stage-dot"></div><h2>Pre-Plantera</h2></div>
+  <div class="grid">
+    <div class="section">
+      <h3>Weapons</h3>
+      <a class="item" href="https://terraria.wiki.gg/wiki/Blade_Staff" target="_blank"><img src="https://static.wikia.nocookie.net/terraria_gamepedia/images/8/89/Blade_Staff.png/revision/latest?cb=20200516192024&format=original">Blade Staff</a>
+      <a class="item" href="https://terraria.wiki.gg/wiki/Spider_Staff" target="_blank"><img src="https://static.wikia.nocookie.net/terraria_gamepedia/images/6/65/Spider_Staff.png/revision/latest?cb=20200516222321&format=original">Spider Staff</a>
+      <a class="item" href="https://terraria.wiki.gg/wiki/Optic_Staff" target="_blank"><img src="https://static.wikia.nocookie.net/terraria_gamepedia/images/8/86/Optic_Staff.png/revision/latest?cb=20200516220008&format=original">Optic Staff</a>
+      <a class="item" href="https://terraria.wiki.gg/wiki/Sanguine_Staff" target="_blank"><img src="https://static.wikia.nocookie.net/terraria_gamepedia/images/3/3d/Sanguine_Staff.png/revision/latest?cb=20200516221447&format=original">Sanguine Staff</a>
+      <a class="item" href="https://terraria.wiki.gg/wiki/Firecracker" target="_blank"><img src="https://static.wikia.nocookie.net/terraria_gamepedia/images/8/86/Firecracker.png/revision/latest?cb=20200516212311&format=original">Firecracker</a>
+      <a class="item" href="https://terraria.wiki.gg/wiki/Durendal" target="_blank"><img src="https://static.wikia.nocookie.net/terraria_gamepedia/images/f/f0/Durendal.png/revision/latest?cb=20200516211620&format=original">Durendal</a>
+    </div>
+    <div class="section">
+      <h3>Armor</h3>
+      <a class="item" href="https://terraria.wiki.gg/wiki/Spider_armor" target="_blank"><img src="https://static.wikia.nocookie.net/terraria_gamepedia/images/0/08/Spider_armor.png/revision/latest?cb=20200726165218&format=original">Spider Armor</a>
+      <a class="item" href="https://terraria.wiki.gg/wiki/Hallowed_armor" target="_blank"><img src="https://static.wikia.nocookie.net/terraria_gamepedia/images/4/48/Hallowed_armor_Hood.png/revision/latest?cb=20200527092208&format=original">Hallowed Armor</a>
+      <a class="item" href="https://terraria.wiki.gg/wiki/Squire_armor" target="_blank"><img src="https://static.wikia.nocookie.net/terraria_gamepedia/images/2/2a/Squire_armor.png/revision/latest?cb=20161115204705&format=original">Squire Armor</a>
+      <a class="item" href="https://terraria.wiki.gg/wiki/Monk_armor" target="_blank"><img src="https://static.wikia.nocookie.net/terraria_gamepedia/images/b/b7/Monk_armor.png/revision/latest?cb=20201030190414&format=original">Monk Armor</a>
+    </div>
+    <div class="section">
+      <h3>Accessories</h3>
+      <a class="item" href="https://terraria.wiki.gg/wiki/Summoner_Emblem" target="_blank"><img src="https://static.wikia.nocookie.net/terraria_gamepedia/images/7/70/Summoner_Emblem.png/revision/latest?cb=20200516222642&format=original">Summoner Emblem</a>
+      <a class="item" href="https://terraria.wiki.gg/wiki/Monk%27s_Belt" target="_blank"><img src="https://static.wikia.nocookie.net/terraria_gamepedia/images/a/af/Monk%27s_Belt.png/revision/latest?cb=20200516215416&format=original">Monk's Belt</a>
+      <a class="item" href="https://terraria.wiki.gg/wiki/Berserker%27s_Glove" target="_blank"><img src="https://static.wikia.nocookie.net/terraria_gamepedia/images/0/05/Berserker%27s_Glove.png/revision/latest?cb=20200516191607&format=original">Berserker's Glove</a>
+      <a class="item" href="https://terraria.wiki.gg/wiki/Pygmy_Necklace" target="_blank"><img src="https://static.wikia.nocookie.net/terraria_gamepedia/images/2/2f/Pygmy_Necklace.png/revision/latest?cb=20200516220924&format=original">Pygmy Necklace</a>
+    </div>
+    <div class="section">
+      <h3>Buffs / Potions</h3>
+      <a class="item" href="https://terraria.wiki.gg/wiki/Flask_of_Ichor" target="_blank"><img src="https://static.wikia.nocookie.net/terraria_gamepedia/images/7/71/Flask_of_Ichor.png/revision/latest?cb=20200516212500&format=original">Flask of Ichor</a>
+      <a class="item" href="https://terraria.wiki.gg/wiki/Flask_of_Cursed_Flames" target="_blank"><img src="https://static.wikia.nocookie.net/terraria_gamepedia/images/0/08/Flask_of_Cursed_Flames.png/revision/latest?cb=20200516212455&format=original">Flask of Cursed Flames</a>
+      <a class="item" href="https://terraria.wiki.gg/wiki/Summoning_Potion" target="_blank"><img src="https://static.wikia.nocookie.net/terraria_gamepedia/images/9/91/Summoning_Potion.png/revision/latest?cb=20200516222643&format=original">Summoning Potion</a>
+      <a class="item" href="https://terraria.wiki.gg/wiki/Bewitching_Table" target="_blank"><img src="https://static.wikia.nocookie.net/terraria_gamepedia/images/9/9d/Bewitching_Table.png/revision/latest?cb=20200516191617&format=original">Bewitching Table</a>
+    </div>
+  </div>
+  <div class="note">💡 Saat menggunakan Blade Staff, pastikan menggunakan Durendal, Snapthorn, Spinal Tap, dan Flask of Ichor untuk efisiensi terbaik.</div>
+</div> -->
+
+<!-- ═══ PRE-GOLEM ═══ -->
+<!-- <div class="stage">
+  <div class="stage-header"><div class="stage-dot"></div><h2>Pre-Golem</h2></div>
+  <div class="grid">
+    <div class="section">
+      <h3>Weapons</h3>
+      <a class="item" href="https://terraria.wiki.gg/wiki/Blade_Staff" target="_blank"><img src="https://static.wikia.nocookie.net/terraria_gamepedia/images/8/89/Blade_Staff.png/revision/latest?cb=20200516192024&format=original">Blade Staff</a>
+      <a class="item" href="https://terraria.wiki.gg/wiki/Raven_Staff" target="_blank"><img src="https://static.wikia.nocookie.net/terraria_gamepedia/images/1/10/Raven_Staff.png/revision/latest?cb=20200516221018&format=original">Raven Staff</a>
+      <a class="item" href="https://terraria.wiki.gg/wiki/Desert_Tiger_Staff" target="_blank"><img src="https://static.wikia.nocookie.net/terraria_gamepedia/images/e/e7/Desert_Tiger_Staff.png/revision/latest?cb=20200516211334&format=original">Desert Tiger Staff</a>
+      <a class="item" href="https://terraria.wiki.gg/wiki/Sanguine_Staff" target="_blank"><img src="https://static.wikia.nocookie.net/terraria_gamepedia/images/3/3d/Sanguine_Staff.png/revision/latest?cb=20200516221447&format=original">Sanguine Staff</a>
+      <a class="item" href="https://terraria.wiki.gg/wiki/Pygmy_Staff" target="_blank"><img src="https://static.wikia.nocookie.net/terraria_gamepedia/images/b/b1/Pygmy_Staff.png/revision/latest?cb=20200516220924&format=original">Pygmy Staff</a>
+      <a class="item" href="https://terraria.wiki.gg/wiki/Terraprisma" target="_blank"><img src="https://static.wikia.nocookie.net/terraria_gamepedia/images/b/b0/Terraprisma.png/revision/latest?cb=20200516222812&format=original">Terraprisma</a>
+      <a class="item" href="https://terraria.wiki.gg/wiki/Morning_Star" target="_blank"><img src="https://static.wikia.nocookie.net/terraria_gamepedia/images/b/bc/Morning_Star.png/revision/latest?cb=20200516215437&format=original">Morning Star</a>
+      <a class="item" href="https://terraria.wiki.gg/wiki/Dark_Harvest" target="_blank"><img src="https://static.wikia.nocookie.net/terraria_gamepedia/images/1/18/Dark_Harvest.png/revision/latest?cb=20200516211057&format=original">Dark Harvest</a>
+      <a class="item" href="https://terraria.wiki.gg/wiki/Kaleidoscope" target="_blank"><img src="https://static.wikia.nocookie.net/terraria_gamepedia/images/8/86/Kaleidoscope.png/revision/latest?cb=20200516214425&format=original">Kaleidoscope</a>
+    </div>
+    <div class="section">
+      <h3>Armor</h3>
+      <a class="item" href="https://terraria.wiki.gg/wiki/Spooky_armor" target="_blank"><img src="https://static.wikia.nocookie.net/terraria_gamepedia/images/a/a9/Spooky_armor.png/revision/latest?cb=20200726144113&format=original">Spooky Armor</a>
+      <a class="item" href="https://terraria.wiki.gg/wiki/Tiki_armor" target="_blank"><img src="https://static.wikia.nocookie.net/terraria_gamepedia/images/b/b0/Tiki_armor.png/revision/latest?cb=20200726005010&format=original">Tiki Armor</a>
+      <a class="item" href="https://terraria.wiki.gg/wiki/Squire%27s_Great_Helm" target="_blank"><img src="https://static.wikia.nocookie.net/terraria_gamepedia/images/e/ea/Squire%27s_Great_Helm.png/revision/latest?cb=20200516222415&format=original">Squire's Great Helm</a>
+    </div>
+    <div class="section">
+      <h3>Accessories</h3>
+      <a class="item" href="https://terraria.wiki.gg/wiki/Summoner_Emblem" target="_blank"><img src="https://static.wikia.nocookie.net/terraria_gamepedia/images/7/70/Summoner_Emblem.png/revision/latest?cb=20200516222642&format=original">Summoner Emblem</a>
+      <a class="item" href="https://terraria.wiki.gg/wiki/Hercules_Beetle" target="_blank"><img src="https://static.wikia.nocookie.net/terraria_gamepedia/images/5/5a/Hercules_Beetle.png/revision/latest?cb=20200516213949&format=original">Hercules Beetle</a>
+      <a class="item" href="https://terraria.wiki.gg/wiki/Papyrus_Scarab" target="_blank"><img src="https://static.wikia.nocookie.net/terraria_gamepedia/images/a/a8/Papyrus_Scarab.png/revision/latest?cb=20200516220254&format=original">Papyrus Scarab</a>
+      <a class="item" href="https://terraria.wiki.gg/wiki/Necromantic_Scroll" target="_blank"><img src="https://static.wikia.nocookie.net/terraria_gamepedia/images/6/67/Necromantic_Scroll.png/revision/latest?cb=20200516215813&format=original">Necromantic Scroll</a>
+      <a class="item" href="https://terraria.wiki.gg/wiki/Pygmy_Necklace" target="_blank"><img src="https://static.wikia.nocookie.net/terraria_gamepedia/images/2/2f/Pygmy_Necklace.png/revision/latest?cb=20200516220924&format=original">Pygmy Necklace</a>
+      <a class="item" href="https://terraria.wiki.gg/wiki/Berserker%27s_Glove" target="_blank"><img src="https://static.wikia.nocookie.net/terraria_gamepedia/images/0/05/Berserker%27s_Glove.png/revision/latest?cb=20200516191607&format=original">Berserker's Glove</a>
+    </div>
+    <div class="section">
+      <h3>Buffs / Potions</h3>
+      <a class="item" href="https://terraria.wiki.gg/wiki/Flask_of_Ichor" target="_blank"><img src="https://static.wikia.nocookie.net/terraria_gamepedia/images/7/71/Flask_of_Ichor.png/revision/latest?cb=20200516212500&format=original">Flask of Ichor</a>
+      <a class="item" href="https://terraria.wiki.gg/wiki/Flask_of_Cursed_Flames" target="_blank"><img src="https://static.wikia.nocookie.net/terraria_gamepedia/images/0/08/Flask_of_Cursed_Flames.png/revision/latest?cb=20200516212455&format=original">Flask of Cursed Flames</a>
+      <a class="item" href="https://terraria.wiki.gg/wiki/Summoning_Potion" target="_blank"><img src="https://static.wikia.nocookie.net/terraria_gamepedia/images/9/91/Summoning_Potion.png/revision/latest?cb=20200516222643&format=original">Summoning Potion</a>
+      <a class="item" href="https://terraria.wiki.gg/wiki/Bewitching_Table" target="_blank"><img src="https://static.wikia.nocookie.net/terraria_gamepedia/images/9/9d/Bewitching_Table.png/revision/latest?cb=20200516191617&format=original">Bewitching Table</a>
+    </div>
+  </div>
+</div> -->
+
+<!-- ═══ PRE-LUNAR EVENTS ═══ -->
+<!-- <div class="stage">
+  <div class="stage-header"><div class="stage-dot"></div><h2>Pre-Lunar Events</h2></div>
+  <div class="grid">
+    <div class="section">
+      <h3>Weapons</h3>
+      <a class="item" href="https://terraria.wiki.gg/wiki/Xeno_Staff" target="_blank"><img src="https://static.wikia.nocookie.net/terraria_gamepedia/images/4/47/Xeno_Staff.png/revision/latest?cb=20200516223729&format=original">Xeno Staff</a>
+      <a class="item" href="https://terraria.wiki.gg/wiki/Raven_Staff" target="_blank"><img src="https://static.wikia.nocookie.net/terraria_gamepedia/images/1/10/Raven_Staff.png/revision/latest?cb=20200516221018&format=original">Raven Staff</a>
+      <a class="item" href="https://terraria.wiki.gg/wiki/Terraprisma" target="_blank"><img src="https://static.wikia.nocookie.net/terraria_gamepedia/images/b/b0/Terraprisma.png/revision/latest?cb=20200516222812&format=original">Terraprisma</a>
+      <a class="item" href="https://terraria.wiki.gg/wiki/Kaleidoscope" target="_blank"><img src="https://static.wikia.nocookie.net/terraria_gamepedia/images/8/86/Kaleidoscope.png/revision/latest?cb=20200516214425&format=original">Kaleidoscope</a>
+      <a class="item" href="https://terraria.wiki.gg/wiki/Staff_of_the_Frost_Hydra" target="_blank"><img src="https://static.wikia.nocookie.net/terraria_gamepedia/images/2/20/Staff_of_the_Frost_Hydra.png/revision/latest?cb=20200516222430&format=original">Staff of the Frost Hydra</a>
+    </div>
+    <div class="section">
+      <h3>Armor</h3>
+      <a class="item" href="https://terraria.wiki.gg/wiki/Spooky_armor" target="_blank"><img src="https://static.wikia.nocookie.net/terraria_gamepedia/images/a/a9/Spooky_armor.png/revision/latest?cb=20200726144113&format=original">Spooky Armor</a>
+      <a class="item" href="https://terraria.wiki.gg/wiki/Tiki_armor" target="_blank"><img src="https://static.wikia.nocookie.net/terraria_gamepedia/images/b/b0/Tiki_armor.png/revision/latest?cb=20200726005010&format=original">Tiki Armor</a>
+    </div>
+    <div class="section">
+      <h3>Accessories</h3>
+      <a class="item" href="https://terraria.wiki.gg/wiki/Summoner_Emblem" target="_blank"><img src="https://static.wikia.nocookie.net/terraria_gamepedia/images/7/70/Summoner_Emblem.png/revision/latest?cb=20200516222642&format=original">Summoner Emblem</a>
+      <a class="item" href="https://terraria.wiki.gg/wiki/Hercules_Beetle" target="_blank"><img src="https://static.wikia.nocookie.net/terraria_gamepedia/images/5/5a/Hercules_Beetle.png/revision/latest?cb=20200516213949&format=original">Hercules Beetle</a>
+      <a class="item" href="https://terraria.wiki.gg/wiki/Papyrus_Scarab" target="_blank"><img src="https://static.wikia.nocookie.net/terraria_gamepedia/images/a/a8/Papyrus_Scarab.png/revision/latest?cb=20200516220254&format=original">Papyrus Scarab</a>
+      <a class="item" href="https://terraria.wiki.gg/wiki/Necromantic_Scroll" target="_blank"><img src="https://static.wikia.nocookie.net/terraria_gamepedia/images/6/67/Necromantic_Scroll.png/revision/latest?cb=20200516215813&format=original">Necromantic Scroll</a>
+    </div>
+    <div class="section">
+      <h3>Buffs / Potions</h3>
+      <a class="item" href="https://terraria.wiki.gg/wiki/Flask_of_Ichor" target="_blank"><img src="https://static.wikia.nocookie.net/terraria_gamepedia/images/7/71/Flask_of_Ichor.png/revision/latest?cb=20200516212500&format=original">Flask of Ichor</a>
+      <a class="item" href="https://terraria.wiki.gg/wiki/Summoning_Potion" target="_blank"><img src="https://static.wikia.nocookie.net/terraria_gamepedia/images/9/91/Summoning_Potion.png/revision/latest?cb=20200516222643&format=original">Summoning Potion</a>
+      <a class="item" href="https://terraria.wiki.gg/wiki/Bewitching_Table" target="_blank"><img src="https://static.wikia.nocookie.net/terraria_gamepedia/images/9/9d/Bewitching_Table.png/revision/latest?cb=20200516191617&format=original">Bewitching Table</a>
+    </div>
+  </div>
+</div> -->
+
+<!-- ═══ ENDGAME ═══ -->
+<!-- <div class="stage">
+  <div class="stage-header"><div class="stage-dot" style="background:#c48a00;"></div><h2>Endgame</h2></div>
+  <div class="grid">
+    <div class="section">
+      <h3>Weapons</h3>
+      <a class="item" href="https://terraria.wiki.gg/wiki/Stardust_Dragon_Staff" target="_blank"><img src="https://static.wikia.nocookie.net/terraria_gamepedia/images/a/a9/Stardust_Dragon_Staff.png/revision/latest?cb=20200516222502&format=original">Stardust Dragon Staff</a>
+      <a class="item" href="https://terraria.wiki.gg/wiki/Stardust_Cell_Staff" target="_blank"><img src="https://static.wikia.nocookie.net/terraria_gamepedia/images/2/2f/Stardust_Cell_Staff.png/revision/latest?cb=20200516222459&format=original">Stardust Cell Staff</a>
+      <a class="item" href="https://terraria.wiki.gg/wiki/Lunar_Portal_Staff" target="_blank"><img src="https://static.wikia.nocookie.net/terraria_gamepedia/images/8/87/Lunar_Portal_Staff.png/revision/latest?cb=20200516214955&format=original">Lunar Portal Staff</a>
+      <a class="item" href="https://terraria.wiki.gg/wiki/Rainbow_Crystal_Staff" target="_blank"><img src="https://static.wikia.nocookie.net/terraria_gamepedia/images/1/13/Rainbow_Crystal_Staff.png/revision/latest?cb=20200516220952&format=original">Rainbow Crystal Staff</a>
+      <a class="item" href="https://terraria.wiki.gg/wiki/Terraprisma" target="_blank"><img src="https://static.wikia.nocookie.net/terraria_gamepedia/images/b/b0/Terraprisma.png/revision/latest?cb=20200516222812&format=original">Terraprisma</a>
+      <a class="item" href="https://terraria.wiki.gg/wiki/Kaleidoscope" target="_blank"><img src="https://static.wikia.nocookie.net/terraria_gamepedia/images/8/86/Kaleidoscope.png/revision/latest?cb=20200516214425&format=original">Kaleidoscope</a>
+      <a class="item" href="https://terraria.wiki.gg/wiki/Ballista_Staff" target="_blank"><img src="https://static.wikia.nocookie.net/terraria_gamepedia/images/1/12/Ballista_Staff.png/revision/latest?cb=20200516190530&format=original">Ballista Staff</a>
+    </div>
+    <div class="section">
+      <h3>Armor</h3>
+      <a class="item" href="https://terraria.wiki.gg/wiki/Stardust_armor" target="_blank"><img src="https://static.wikia.nocookie.net/terraria_gamepedia/images/1/14/Stardust_armor.png/revision/latest?cb=20200821144210&format=original">Stardust Armor</a>
+      <a class="item" href="https://terraria.wiki.gg/wiki/Shinobi_Infiltrator%27s_armor" target="_blank"><img src="https://static.wikia.nocookie.net/terraria_gamepedia/images/9/95/Shinobi_Infiltrator%27s_Helmet.png/revision/latest?cb=20200516221720&format=original">Shinobi Infiltrator's Helmet</a>
+      <a class="item" href="https://terraria.wiki.gg/wiki/Valhalla_Knight%27s_armor" target="_blank"><img src="https://static.wikia.nocookie.net/terraria_gamepedia/images/5/52/Valhalla_Knight%27s_Breastplate.png/revision/latest?cb=20200516223302&format=original">Valhalla Knight's Breastplate</a>
+    </div>
+    <div class="section">
+      <h3>Accessories</h3>
+      <a class="item" href="https://terraria.wiki.gg/wiki/Papyrus_Scarab" target="_blank"><img src="https://static.wikia.nocookie.net/terraria_gamepedia/images/a/a8/Papyrus_Scarab.png/revision/latest?cb=20200516220254&format=original">Papyrus Scarab</a>
+      <a class="item" href="https://terraria.wiki.gg/wiki/Summoner_Emblem" target="_blank"><img src="https://static.wikia.nocookie.net/terraria_gamepedia/images/7/70/Summoner_Emblem.png/revision/latest?cb=20200516222642&format=original">Summoner Emblem</a>
+      <a class="item" href="https://terraria.wiki.gg/wiki/Hercules_Beetle" target="_blank"><img src="https://static.wikia.nocookie.net/terraria_gamepedia/images/5/5a/Hercules_Beetle.png/revision/latest?cb=20200516213949&format=original">Hercules Beetle</a>
+      <a class="item" href="https://terraria.wiki.gg/wiki/Necromantic_Scroll" target="_blank"><img src="https://static.wikia.nocookie.net/terraria_gamepedia/images/6/67/Necromantic_Scroll.png/revision/latest?cb=20200516215813&format=original">Necromantic Scroll</a>
+      <a class="item" href="https://terraria.wiki.gg/wiki/Pygmy_Necklace" target="_blank"><img src="https://static.wikia.nocookie.net/terraria_gamepedia/images/2/2f/Pygmy_Necklace.png/revision/latest?cb=20200516220924&format=original">Pygmy Necklace</a>
+    </div>
+    <div class="section">
+      <h3>Buffs / Potions</h3>
+      <a class="item" href="https://terraria.wiki.gg/wiki/Flask_of_Ichor" target="_blank"><img src="https://static.wikia.nocookie.net/terraria_gamepedia/images/7/71/Flask_of_Ichor.png/revision/latest?cb=20200516212500&format=original">Flask of Ichor</a>
+      <a class="item" href="https://terraria.wiki.gg/wiki/Flask_of_Cursed_Flames" target="_blank"><img src="https://static.wikia.nocookie.net/terraria_gamepedia/images/0/08/Flask_of_Cursed_Flames.png/revision/latest?cb=20200516212455&format=original">Flask of Cursed Flames</a>
+      <a class="item" href="https://terraria.wiki.gg/wiki/Summoning_Potion" target="_blank"><img src="https://static.wikia.nocookie.net/terraria_gamepedia/images/9/91/Summoning_Potion.png/revision/latest?cb=20200516222643&format=original">Summoning Potion</a>
+      <a class="item" href="https://terraria.wiki.gg/wiki/Bewitching_Table" target="_blank"><img src="https://static.wikia.nocookie.net/terraria_gamepedia/images/9/9d/Bewitching_Table.png/revision/latest?cb=20200516191617&format=original">Bewitching Table</a>
+    </div>
+  </div>
+</div> -->
+
+</div><!-- end .container -->
+
+<footer>
+  Data diadaptasi dari Terraria Wiki · Class Setup Guide
+</footer>
+
+</body>
+</html>
