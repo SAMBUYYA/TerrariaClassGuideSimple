@@ -6,207 +6,153 @@
 <title>Terraria Summoner Class Setup</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Nunito:wght@400;600;700&display=swap');
-
 :root {
-  --bg: #f0f2f5;
-  --card: #ffffff;
-  --section: #f7f8fb;
-  --border: #e0e5ec;
-  --accent: #6633dd;
-  --accent2: #8855ff;
-  --gold: #c48a00;
-  --text: #1a2233;
-  --muted: #6b7a99;
-  --link: #4466cc;
-  --done-bg: #f0f0f0;
-  --done-border: #c8c8d0;
+  --bg:#f0f2f5;--card:#fff;--section:#f7f8fb;--border:#e0e5ec;
+  --accent:#6633dd;--gold:#c48a00;--text:#1a2233;--muted:#6b7a99;--link:#4466cc;
+  --done-bg:#f0f0f0;--done-border:#c8c8d0;--owned:#6633dd;--skip:#cc3333;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+header{background:#fff;padding:32px 24px 24px;border-bottom:2px solid var(--border)}
+header h1{font-family:'Cinzel',serif;font-size:26px;letter-spacing:1px;color:var(--text)}
+header p{margin-top:6px;color:var(--muted);font-size:14px;font-weight:600}
+.container{max-width:100%;margin:auto;padding:24px 20px 48px}
+
+.stage{background:var(--card);border-radius:14px;margin:20px 0;border:1.5px solid var(--border);overflow:hidden;transition:border-color .2s,box-shadow .2s}
+.stage:hover{border-color:rgba(102,51,221,.3);box-shadow:0 4px 20px rgba(102,51,221,.07)}
+.stage.done{background:var(--done-bg);border-color:var(--done-border);box-shadow:none}
+.stage.done:hover{border-color:#aaaabc;box-shadow:none}
+
+.stage-header{padding:13px 20px;background:#f4f1ff;display:flex;align-items:center;gap:10px;border-bottom:1.5px solid var(--border);cursor:pointer;user-select:none;transition:background .2s;-webkit-tap-highlight-color:transparent}
+.stage-header:hover{background:#ede9ff}
+.stage.done .stage-header{background:#e8e8ee;border-bottom-color:transparent}
+.stage.done .stage-header:hover{background:#dddde8}
+.stage-header h2{font-family:'Cinzel',serif;font-size:15px;color:var(--text);letter-spacing:.5px;flex:1;transition:color .2s}
+.stage.done .stage-header h2{text-decoration:line-through;color:#999aaa}
+.stage-index{width:22px;height:22px;border-radius:6px;background:var(--accent);color:#fff;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background .2s;font-family:'Nunito',sans-serif}
+.stage.done .stage-index{background:#aaaabc}
+.stage-checkbox{appearance:none;-webkit-appearance:none;width:20px;height:20px;border-radius:5px;border:2px solid var(--accent);background:#fff;flex-shrink:0;cursor:pointer;position:relative;transition:background .15s,border-color .15s;margin-left:auto;pointer-events:none}
+.stage-checkbox:checked{background:var(--accent);border-color:var(--accent)}
+.stage-checkbox::after{content:'';position:absolute;top:2px;left:5px;width:6px;height:10px;border:2px solid white;border-top:none;border-left:none;transform:rotate(45deg) scale(0);transition:transform .15s}
+.stage-checkbox:checked::after{transform:rotate(45deg) scale(1)}
+.stage.done .stage-checkbox{border-color:#aaaabc}
+.done-label{font-size:11px;font-weight:700;color:#aaaabc;letter-spacing:.5px;white-space:nowrap}
+.stage-body{overflow:hidden;transition:max-height .35s cubic-bezier(.4,0,.2,1),opacity .3s ease;max-height:2000px;opacity:1}
+.stage.done .stage-body{max-height:0!important;opacity:0;pointer-events:none}
+
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px;padding:16px}
+.section{background:var(--section);border-radius:10px;padding:14px;border:1px solid var(--border)}
+.section h3{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1.2px;color:var(--accent);margin-bottom:10px;padding-bottom:7px;border-bottom:1px solid rgba(102,51,221,.15)}
+
+/* Item row */
+.item-wrap{display:flex;align-items:center;border-radius:6px;margin-bottom:2px;transition:background .15s;position:relative}
+.item-wrap:hover{background:rgba(102,51,221,.06)}
+.item{display:flex;align-items:center;gap:9px;padding:5px 8px;border-radius:6px;text-decoration:none;color:var(--link);font-size:13px;font-weight:600;line-height:1.3;transition:color .15s,transform .12s,opacity .25s;flex:1;min-width:0}
+.item-wrap:hover .item{color:var(--accent);transform:translateX(3px)}
+.item img{width:24px;height:24px;object-fit:contain;image-rendering:pixelated;flex-shrink:0;transition:transform .15s,filter .25s}
+.item-wrap:hover .item img{transform:scale(1.2)}
+
+/* owned state */
+.item-wrap[data-state="owned"] .item{opacity:.35;text-decoration:line-through;text-decoration-color:rgba(102,51,221,.4);color:var(--muted)}
+.item-wrap[data-state="owned"] .item img{filter:grayscale(60%)}
+.item-wrap[data-state="owned"]:hover .item{opacity:.45;transform:none;color:var(--muted)}
+.item-wrap[data-state="owned"]:hover .item img{transform:none}
+
+/* skip state */
+.item-wrap[data-state="skip"] .item{opacity:.35;text-decoration:line-through;text-decoration-color:rgba(204,51,51,.4);color:#bb7777}
+.item-wrap[data-state="skip"] .item img{filter:grayscale(70%) sepia(20%)}
+.item-wrap[data-state="skip"]:hover .item{opacity:.45;transform:none;color:#bb7777}
+.item-wrap[data-state="skip"]:hover .item img{transform:none}
+
+/* 3-state button */
+.item-btn{
+  width:18px;height:18px;border-radius:4px;
+  border:1.5px solid #c5c8d8;background:#fff;
+  flex-shrink:0;cursor:pointer;position:relative;
+  transition:background .15s,border-color .15s,transform .12s;
+  margin-right:8px;margin-left:4px;
+  display:flex;align-items:center;justify-content:center;padding:0;outline:none;
+}
+.item-btn:hover{border-color:var(--accent);transform:scale(1.12)}
+
+/* owned → purple checkmark */
+.item-btn[data-s="owned"]{background:var(--owned);border-color:var(--owned)}
+.item-btn[data-s="owned"]::before{
+  content:'';display:block;position:absolute;
+  top:50%;left:50%;
+  width:5px;height:9px;
+  border:2px solid white;border-top:none;border-left:none;
+  transform:translate(-60%, -60%) rotate(45deg);
 }
 
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-body {
-  font-family: 'Nunito', sans-serif;
-  background: var(--bg);
-  color: var(--text);
-  min-height: 100vh;
+/* skip → red X */
+.item-btn[data-s="skip"]{background:var(--skip);border-color:var(--skip)}
+.item-btn[data-s="skip"]::before,
+.item-btn[data-s="skip"]::after{
+  content:'';display:block;position:absolute;
+  width:10px;height:2px;background:white;border-radius:1px;
 }
+.item-btn[data-s="skip"]::before{transform:rotate(45deg)}
+.item-btn[data-s="skip"]::after{transform:rotate(-45deg)}
 
-header {
-  background: #ffffff;
-  padding: 32px 24px 24px;
-  border-bottom: 2px solid var(--border);
-}
-header h1 { font-family: 'Cinzel', serif; font-size: 26px; letter-spacing: 1px; color: var(--text); }
-header p { margin-top: 6px; color: var(--muted); font-size: 14px; font-weight: 600; }
+/* none → empty */
+.item-btn[data-s="none"]::before,.item-btn[data-s="none"]::after{display:none}
 
-.container { max-width: 100%; margin: auto; padding: 24px 20px 48px; }
+/* Note */
+.note{margin:0 16px 16px;padding:10px 14px;background:#fffbea;border-left:3px solid var(--gold);border-radius:0 8px 8px 0;font-size:12.5px;color:#7a5c00;line-height:1.6}
 
-/* Stage Card */
-.stage { background: var(--card); border-radius: 14px; margin: 20px 0; border: 1.5px solid var(--border); overflow: hidden; transition: border-color 0.2s, box-shadow 0.2s; }
-.stage:hover { border-color: rgba(102,51,221,0.3); box-shadow: 0 4px 20px rgba(102,51,221,0.07); }
-.stage.done { background: var(--done-bg); border-color: var(--done-border); box-shadow: none; }
-.stage.done:hover { border-color: #aaaabc; box-shadow: none; }
-
-.stage-header { padding: 13px 20px; background: #f4f1ff; display: flex; align-items: center; gap: 10px; border-bottom: 1.5px solid var(--border); cursor: pointer; user-select: none; transition: background 0.2s; -webkit-tap-highlight-color: transparent; }
-.stage-header:hover { background: #ede9ff; }
-.stage.done .stage-header { background: #e8e8ee; border-bottom-color: transparent; }
-.stage.done .stage-header:hover { background: #dddde8; }
-.stage-header h2 { font-family: 'Cinzel', serif; font-size: 15px; color: var(--text); letter-spacing: 0.5px; flex: 1; transition: color 0.2s; }
-.stage.done .stage-header h2 { text-decoration: line-through; color: #999aaa; }
-
-.stage-index { width: 22px; height: 22px; border-radius: 6px; background: var(--accent); color: #fff; font-size: 11px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: background 0.2s; font-family: 'Nunito', sans-serif; }
-.stage.done .stage-index { background: #aaaabc; }
-
-/* Stage Checkbox */
-.stage-checkbox { appearance: none; -webkit-appearance: none; width: 20px; height: 20px; border-radius: 5px; border: 2px solid var(--accent); background: #fff; flex-shrink: 0; cursor: pointer; position: relative; transition: background 0.15s, border-color 0.15s; margin-left: auto; pointer-events: none; }
-.stage-checkbox:checked { background: var(--accent); border-color: var(--accent); }
-.stage-checkbox::after { content: ''; position: absolute; top: 2px; left: 5px; width: 6px; height: 10px; border: 2px solid white; border-top: none; border-left: none; transform: rotate(45deg) scale(0); transition: transform 0.15s; }
-.stage-checkbox:checked::after { transform: rotate(45deg) scale(1); }
-.stage.done .stage-checkbox { border-color: #aaaabc; }
-
-.done-label { font-size: 11px; font-weight: 700; color: #aaaabc; letter-spacing: 0.5px; white-space: nowrap; }
-
-/* Collapsible body */
-.stage-body { overflow: hidden; transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease; max-height: 2000px; opacity: 1; }
-.stage.done .stage-body { max-height: 0 !important; opacity: 0; pointer-events: none; }
-
-.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 14px; padding: 16px; }
-
-/* Section Box */
-.section { background: var(--section); border-radius: 10px; padding: 14px; border: 1px solid var(--border); }
-.section h3 { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.2px; color: var(--accent); margin-bottom: 10px; padding-bottom: 7px; border-bottom: 1px solid rgba(102,51,221,0.15); }
-
-/* ─── Item Row ─── */
-.item-wrap {
-  display: flex;
-  align-items: center;
-  gap: 0;
-  border-radius: 6px;
-  margin-bottom: 2px;
-  transition: background 0.15s;
-  position: relative;
-}
-.item-wrap:hover { background: rgba(102,51,221,0.06); }
-
-/* The item link - takes up most space */
-.item {
-  display: flex;
-  align-items: center;
-  gap: 9px;
-  padding: 5px 8px;
-  border-radius: 6px;
-  text-decoration: none;
-  color: var(--link);
-  font-size: 13px;
-  font-weight: 600;
-  line-height: 1.3;
-  transition: color 0.15s, transform 0.12s, opacity 0.3s;
-  flex: 1;
-  min-width: 0;
-}
-.item-wrap:hover .item { color: var(--accent); transform: translateX(3px); }
-.item img { width: 24px; height: 24px; object-fit: contain; image-rendering: pixelated; flex-shrink: 0; transition: transform 0.15s; }
-.item-wrap:hover .item img { transform: scale(1.2); }
-
-/* ─── Item owned state ─── */
-.item-wrap.owned .item {
-  opacity: 0.35;
-  text-decoration: line-through;
-  text-decoration-color: rgba(102,51,221,0.5);
-  color: var(--muted);
-}
-.item-wrap.owned .item img { filter: grayscale(60%); }
-.item-wrap.owned:hover .item { opacity: 0.45; transform: none; color: var(--muted); }
-.item-wrap.owned:hover .item img { transform: none; }
-
-/* ─── Per-item checkbox ─── */
-.item-check {
-  appearance: none;
-  -webkit-appearance: none;
-  width: 16px;
-  height: 16px;
-  border-radius: 4px;
-  border: 1.5px solid #c5c8d8;
-  background: #fff;
-  flex-shrink: 0;
-  cursor: pointer;
-  position: relative;
-  transition: background 0.15s, border-color 0.15s, transform 0.12s;
-  margin-right: 8px;
-  margin-left: 4px;
-}
-.item-check:hover { border-color: var(--accent); transform: scale(1.1); }
-.item-check:checked { background: var(--accent); border-color: var(--accent); }
-.item-check::after { content: ''; position: absolute; top: 1px; left: 4px; width: 5px; height: 8px; border: 1.5px solid white; border-top: none; border-left: none; transform: rotate(45deg) scale(0); transition: transform 0.12s; }
-.item-check:checked::after { transform: rotate(45deg) scale(1); }
-
-/* Owned badge that appears on checkbox when item is owned from another stage */
-.item-check.cross-owned { border-color: var(--accent); background: rgba(102,51,221,0.15); }
-
-/* Note Box */
-.note { margin: 0 16px 16px; padding: 10px 14px; background: #fffbea; border-left: 3px solid var(--gold); border-radius: 0 8px 8px 0; font-size: 12.5px; color: #7a5c00; line-height: 1.6; }
+/* Legend */
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:11px;font-weight:700;color:var(--muted);margin-bottom:10px;align-items:center}
+.legend-item{display:flex;align-items:center;gap:5px}
+.ld{width:14px;height:14px;border-radius:3px;border:1.5px solid #c5c8d8;background:#fff;flex-shrink:0}
+.ld.owned{background:var(--owned);border-color:var(--owned)}
+.ld.skip{background:var(--skip);border-color:var(--skip)}
 
 /* Progress */
-.progress-info { display: flex; justify-content: space-between; font-size: 12px; font-weight: 700; color: var(--muted); margin-bottom: 8px; }
-.progress-info span:last-child { color: var(--accent); }
+.progress-info{display:flex;justify-content:space-between;font-size:12px;font-weight:700;color:var(--muted);margin-bottom:8px}
+.progress-info span:last-child{color:var(--accent)}
 
-/* Owned items summary */
-.owned-summary {
-  background: #fff;
-  border: 1.5px solid var(--border);
-  border-radius: 10px;
-  padding: 12px 16px;
-  margin-bottom: 16px;
-  font-size: 12px;
-  color: var(--muted);
-  font-weight: 600;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  flex-wrap: wrap;
-}
-.owned-summary b { color: var(--accent); }
-.owned-reset {
-  margin-left: auto;
-  font-size: 11px;
-  color: #cc4444;
-  cursor: pointer;
-  padding: 3px 8px;
-  border-radius: 5px;
-  border: 1px solid #cc4444;
-  background: none;
-  font-family: 'Nunito', sans-serif;
-  font-weight: 700;
-  transition: background 0.15s, color 0.15s;
-}
-.owned-reset:hover { background: #cc4444; color: #fff; }
+/* Summary bar */
+.summary{background:#fff;border:1.5px solid var(--border);border-radius:10px;padding:10px 16px;margin-bottom:16px;font-size:12px;color:var(--muted);font-weight:600;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.summary b{color:var(--owned)}
+.summary .sc{color:var(--skip)}
+.summary #ownedNames{color:#999;font-weight:400;font-size:11px;flex-basis:100%;margin-top:2px}
+.reset-btn{margin-left:auto;font-size:11px;color:#cc4444;cursor:pointer;padding:3px 8px;border-radius:5px;border:1px solid #cc4444;background:none;font-family:'Nunito',sans-serif;font-weight:700;transition:background .15s,color .15s}
+.reset-btn:hover{background:#cc4444;color:#fff}
 
-footer { text-align: center; padding: 24px; color: var(--muted); font-size: 12px; border-top: 1px solid var(--border); background: #fff; }
+footer{text-align:center;padding:24px;color:var(--muted);font-size:12px;border-top:1px solid var(--border);background:#fff}
 </style>
 </head>
 <body>
-
 <header>
-  <div class="container" style="padding-top:0;padding-bottom:0;">
+  <div class="container" style="padding-top:0;padding-bottom:0">
     <h1>🔮 Terraria — Summoner Class Setup</h1>
     <p>Pre-Bosses → Endgame · Based on Terraria Wiki class progression</p>
   </div>
 </header>
 
 <div class="container">
-
   <div class="progress-info">
     <span>Stage Progress</span>
     <span id="progressText">0 / 0 completed</span>
   </div>
 
-  <div class="owned-summary">
-    <span>🎒 Items owned: <b id="ownedCount">0</b></span>
-    <span id="ownedNames" style="color:#999;font-weight:400;font-size:11px;"></span>
-    <button class="owned-reset" onclick="resetOwned()">Reset semua</button>
+  <div class="legend">
+    <span style="margin-right:2px">Item:</span>
+    <div class="legend-item"><div class="ld"></div>Belum</div>
+    <div class="legend-item"><div class="ld owned"></div>✓ Dimiliki <span style="font-weight:400;color:#aaa">(klik 1×)</span></div>
+    <div class="legend-item"><div class="ld skip"></div>✗ Skip <span style="font-weight:400;color:#aaa">(klik 2×)</span></div>
+    <div class="legend-item" style="color:#bbb;font-weight:400">(klik 3× = reset)</div>
   </div>
 
-<!-- ═══ Pre-Bosses ═══ -->
+  <div class="summary">
+    <span>🎒 Dimiliki: <b id="ownedCount">0</b></span>
+    <span>⛔ Skip: <span class="sc" id="skipCount">0</span></span>
+    <span id="ownedNames">— belum ada item yang ditandai</span>
+    <button class="reset-btn" onclick="resetAll()">Reset semua</button>
+  </div>
+
+<!-- ═══ 1. Pre-Bosses ═══ -->
 <div class="stage" data-stage="stage-pre-bosses">
   <div class="stage-header" onclick="toggleStage(this)">
     <span class="stage-index"></span>
@@ -218,56 +164,32 @@ footer { text-align: center; padding: 24px; color: var(--muted); font-size: 12px
     <div class="grid">
       <div class="section">
         <h3>Weapons</h3>
-        <div class="item-wrap" data-item-id="leather-whip">
-          <a class="item" href="https://terraria.wiki.gg/wiki/Leather_Whip" target="_blank"><img src="https://terraria.wiki.gg/images/Leather_Whip.png">Leather Whip</a>
-          <input type="checkbox" class="item-check" title="Marked as owned">
-        </div>
-        <div class="item-wrap" data-item-id="snapthorn">
-          <a class="item" href="https://terraria.wiki.gg/wiki/Snapthorn" target="_blank"><img src="https://terraria.wiki.gg/images/Snapthorn.png">Snapthorn</a>
-          <input type="checkbox" class="item-check" title="Marked as owned">
-        </div>
+        <div class="item-wrap" data-item-id="leather-whip" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Leather_Whip" target="_blank"><img src="https://terraria.wiki.gg/images/Leather_Whip.png">Leather Whip</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        <div class="item-wrap" data-item-id="snapthorn" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Snapthorn" target="_blank"><img src="https://terraria.wiki.gg/images/Snapthorn.png">Snapthorn</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
         <h3>Meteorite Crash Site Event</h3>
-        <div class="item-wrap" data-item-id="starcrash">
-          <a class="item" href="https://terraria.wiki.gg/wiki/Starcrash" target="_blank"><img src="https://terraria.wiki.gg/images/Starcrash.png">Starcrash</a>
-          <input type="checkbox" class="item-check" title="Marked as owned">
-        </div>
+        <div class="item-wrap" data-item-id="starcrash" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Starcrash" target="_blank"><img src="https://terraria.wiki.gg/images/Starcrash.png">Starcrash</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
       </div>
       <div class="section">
         <h3>Minions</h3>
-        <h3>Blood Moon Event</h3>
-        <div class="item-wrap" data-item-id="vampire-frog-staff">
-          <a class="item" href="https://terraria.wiki.gg/wiki/Vampire_Frog_Staff" target="_blank"><img src="https://terraria.wiki.gg/images/Vampire_Frog_Staff.png">Vampire Frog Staff</a>
-          <input type="checkbox" class="item-check" title="Marked as owned">
-        </div>
-        <div class="item-wrap" data-item-id="abigails-flower">
-          <a class="item" href="https://terraria.wiki.gg/wiki/Abigail%27s_Flower" target="_blank"><img src="https://terraria.wiki.gg/images/Abigail%27s_Flower.png">Abigail's Flower</a>
-          <input type="checkbox" class="item-check" title="Marked as owned">
-        </div>
-        <div class="item-wrap" data-item-id="flinx-staff">
-          <a class="item" href="https://terraria.wiki.gg/wiki/Flinx_Staff" target="_blank"><img src="https://terraria.wiki.gg/images/Flinx_Staff.png">Flinx Staff</a>
-          <input type="checkbox" class="item-check" title="Marked as owned">
-        </div>
+        <h3 style="margin-top:8px">Blood Moon Event</h3>
+        <div class="item-wrap" data-item-id="vampire-frog-staff" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Vampire_Frog_Staff" target="_blank"><img src="https://terraria.wiki.gg/images/Vampire_Frog_Staff.png">Vampire Frog Staff</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        <div class="item-wrap" data-item-id="abigails-flower" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Abigail%27s_Flower" target="_blank"><img src="https://terraria.wiki.gg/images/Abigail%27s_Flower.png">Abigail's Flower</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        <div class="item-wrap" data-item-id="flinx-staff" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Flinx_Staff" target="_blank"><img src="https://terraria.wiki.gg/images/Flinx_Staff.png">Flinx Staff</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
       </div>
       <div class="section">
         <h3>Armor</h3>
-        <div class="item-wrap" data-item-id="flinx-fur-coat">
-          <a class="item" href="https://terraria.wiki.gg/wiki/Flinx_Fur_Coat" target="_blank"><img src="https://terraria.wiki.gg/images/Flinx_Fur_Coat.png">Flinx Fur Coat</a>
-          <input type="checkbox" class="item-check" title="Marked as owned">
-        </div>
+        <div class="item-wrap" data-item-id="flinx-fur-coat" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Flinx_Fur_Coat" target="_blank"><img src="https://terraria.wiki.gg/images/Flinx_Fur_Coat.png">Flinx Fur Coat</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
       </div>
       <div class="section">
         <h3>Potions</h3>
-        <div class="item-wrap" data-item-id="summoning-potion">
-          <a class="item" href="https://terraria.wiki.gg/wiki/Summoning_Potion" target="_blank"><img src="https://terraria.wiki.gg/images/Summoning_Potion.png">Summoning Potion</a>
-          <input type="checkbox" class="item-check" title="Marked as owned">
-        </div>
+        <div class="item-wrap" data-item-id="summoning-potion" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Summoning_Potion" target="_blank"><img src="https://terraria.wiki.gg/images/Summoning_Potion.png">Summoning Potion</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
       </div>
     </div>
     <div class="note">💡 Use the best armor available for Helmet and Boots.</div>
   </div>
 </div>
 
-<!-- ═══ Pre EoW / BoC ═══ -->
+<!-- ═══ 2. Pre EoW / BoC ═══ -->
 <div class="stage" data-stage="stage-eow-boc">
   <div class="stage-header" onclick="toggleStage(this)">
     <span class="stage-index"></span>
@@ -279,64 +201,34 @@ footer { text-align: center; padding: 24px; color: var(--muted); font-size: 12px
     <div class="grid">
       <div class="section">
         <h3>Weapons</h3>
-        <div class="item-wrap" data-item-id="soulscourge">
-          <a class="item" href="https://terraria.wiki.gg/wiki/Soulscourge" target="_blank"><img src="https://terraria.wiki.gg/images/Soulscourge.png">Soulscourge</a>
-          <input type="checkbox" class="item-check" title="Marked as owned">
-        </div>
-        <div class="item-wrap" data-item-id="vasculash">
-          <a class="item" href="https://terraria.wiki.gg/wiki/Vasculash" target="_blank"><img src="https://terraria.wiki.gg/images/Vasculash.png">Vasculash</a>
-          <input type="checkbox" class="item-check" title="Marked as owned">
-        </div>
-        <div class="item-wrap" data-item-id="snapthorn">
-          <a class="item" href="https://terraria.wiki.gg/wiki/Snapthorn" target="_blank"><img src="https://terraria.wiki.gg/images/Snapthorn.png">Snapthorn</a>
-          <input type="checkbox" class="item-check" title="Marked as owned">
-        </div>
+        <div class="item-wrap" data-item-id="soulscourge" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Soulscourge" target="_blank"><img src="https://terraria.wiki.gg/images/Soulscourge.png">Soulscourge</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        <div class="item-wrap" data-item-id="vasculash" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Vasculash" target="_blank"><img src="https://terraria.wiki.gg/images/Vasculash.png">Vasculash</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        <div class="item-wrap" data-item-id="snapthorn" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Snapthorn" target="_blank"><img src="https://terraria.wiki.gg/images/Snapthorn.png">Snapthorn</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
         <h3>Meteorite Crash Site Event</h3>
-        <div class="item-wrap" data-item-id="starcrash">
-          <a class="item" href="https://terraria.wiki.gg/wiki/Starcrash" target="_blank"><img src="https://terraria.wiki.gg/images/Starcrash.png">Starcrash</a>
-          <input type="checkbox" class="item-check" title="Marked as owned">
-        </div>
+        <div class="item-wrap" data-item-id="starcrash" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Starcrash" target="_blank"><img src="https://terraria.wiki.gg/images/Starcrash.png">Starcrash</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
       </div>
       <div class="section">
         <h3>Minions</h3>
-        <h3>Blood Moon Event</h3>
-        <div class="item-wrap" data-item-id="vampire-frog-staff">
-          <a class="item" href="https://terraria.wiki.gg/wiki/Vampire_Frog_Staff" target="_blank"><img src="https://terraria.wiki.gg/images/Vampire_Frog_Staff.png">Vampire Frog Staff</a>
-          <input type="checkbox" class="item-check" title="Marked as owned">
-        </div>
-        <div class="item-wrap" data-item-id="finch-staff">
-          <a class="item" href="https://terraria.wiki.gg/wiki/Finch_Staff" target="_blank"><img src="https://terraria.wiki.gg/images/Finch_Staff.png">Finch Staff</a>
-          <input type="checkbox" class="item-check" title="Marked as owned">
-        </div>
-        <div class="item-wrap" data-item-id="abigails-flower">
-          <a class="item" href="https://terraria.wiki.gg/wiki/Abigail%27s_Flower" target="_blank"><img src="https://terraria.wiki.gg/images/Abigail%27s_Flower.png">Abigail's Flower</a>
-          <input type="checkbox" class="item-check" title="Marked as owned">
-        </div>
-        <div class="item-wrap" data-item-id="flinx-staff">
-          <a class="item" href="https://terraria.wiki.gg/wiki/Flinx_Staff" target="_blank"><img src="https://terraria.wiki.gg/images/Flinx_Staff.png">Flinx Staff</a>
-          <input type="checkbox" class="item-check" title="Marked as owned">
-        </div>
+        <h3 style="margin-top:8px">Blood Moon Event</h3>
+        <div class="item-wrap" data-item-id="vampire-frog-staff" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Vampire_Frog_Staff" target="_blank"><img src="https://terraria.wiki.gg/images/Vampire_Frog_Staff.png">Vampire Frog Staff</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        <div class="item-wrap" data-item-id="finch-staff" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Finch_Staff" target="_blank"><img src="https://terraria.wiki.gg/images/Finch_Staff.png">Finch Staff</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        <div class="item-wrap" data-item-id="abigails-flower" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Abigail%27s_Flower" target="_blank"><img src="https://terraria.wiki.gg/images/Abigail%27s_Flower.png">Abigail's Flower</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        <div class="item-wrap" data-item-id="flinx-staff" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Flinx_Staff" target="_blank"><img src="https://terraria.wiki.gg/images/Flinx_Staff.png">Flinx Staff</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
       </div>
       <div class="section">
         <h3>Armor</h3>
-        <div class="item-wrap" data-item-id="flinx-fur-coat">
-          <a class="item" href="https://terraria.wiki.gg/wiki/Flinx_Fur_Coat" target="_blank"><img src="https://terraria.wiki.gg/images/Flinx_Fur_Coat.png">Flinx Fur Coat</a>
-          <input type="checkbox" class="item-check" title="Marked as owned">
-        </div>
+        <div class="item-wrap" data-item-id="flinx-fur-coat" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Flinx_Fur_Coat" target="_blank"><img src="https://terraria.wiki.gg/images/Flinx_Fur_Coat.png">Flinx Fur Coat</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
       </div>
       <div class="section">
         <h3>Potions</h3>
-        <div class="item-wrap" data-item-id="summoning-potion">
-          <a class="item" href="https://terraria.wiki.gg/wiki/Summoning_Potion" target="_blank"><img src="https://terraria.wiki.gg/images/Summoning_Potion.png">Summoning Potion</a>
-          <input type="checkbox" class="item-check" title="Marked as owned">
-        </div>
+        <div class="item-wrap" data-item-id="summoning-potion" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Summoning_Potion" target="_blank"><img src="https://terraria.wiki.gg/images/Summoning_Potion.png">Summoning Potion</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
       </div>
     </div>
     <div class="note">💡 Use the best armor available for Helmet and Boots.</div>
   </div>
 </div>
 
-<!-- ═══ Pre Queen Bee / Deerclops ═══ -->
+<!-- ═══ 3. Pre Queen Bee / Deerclops ═══ -->
 <div class="stage" data-stage="stage-qb-deer">
   <div class="stage-header" onclick="toggleStage(this)">
     <span class="stage-index"></span>
@@ -348,68 +240,38 @@ footer { text-align: center; padding: 24px; color: var(--muted); font-size: 12px
     <div class="grid">
       <div class="section">
         <h3>Weapons</h3>
-        <div class="item-wrap" data-item-id="soulscourge">
-          <a class="item" href="https://terraria.wiki.gg/wiki/Soulscourge" target="_blank"><img src="https://terraria.wiki.gg/images/Soulscourge.png">Soulscourge</a>
-          <input type="checkbox" class="item-check" title="Marked as owned">
-        </div>
-        <div class="item-wrap" data-item-id="vasculash">
-          <a class="item" href="https://terraria.wiki.gg/wiki/Vasculash" target="_blank"><img src="https://terraria.wiki.gg/images/Vasculash.png">Vasculash</a>
-          <input type="checkbox" class="item-check" title="Marked as owned">
-        </div>
-        <div class="item-wrap" data-item-id="snapthorn">
-          <a class="item" href="https://terraria.wiki.gg/wiki/Snapthorn" target="_blank"><img src="https://terraria.wiki.gg/images/Snapthorn.png">Snapthorn</a>
-          <input type="checkbox" class="item-check" title="Marked as owned">
-        </div>
+        <div class="item-wrap" data-item-id="soulscourge" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Soulscourge" target="_blank"><img src="https://terraria.wiki.gg/images/Soulscourge.png">Soulscourge</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        <div class="item-wrap" data-item-id="vasculash" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Vasculash" target="_blank"><img src="https://terraria.wiki.gg/images/Vasculash.png">Vasculash</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        <div class="item-wrap" data-item-id="snapthorn" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Snapthorn" target="_blank"><img src="https://terraria.wiki.gg/images/Snapthorn.png">Snapthorn</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
         <h3>Meteorite Crash Site Event</h3>
-        <div class="item-wrap" data-item-id="starcrash">
-          <a class="item" href="https://terraria.wiki.gg/wiki/Starcrash" target="_blank"><img src="https://terraria.wiki.gg/images/Starcrash.png">Starcrash</a>
-          <input type="checkbox" class="item-check" title="Marked as owned">
-        </div>
+        <div class="item-wrap" data-item-id="starcrash" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Starcrash" target="_blank"><img src="https://terraria.wiki.gg/images/Starcrash.png">Starcrash</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
       </div>
       <div class="section">
         <h3>Minions</h3>
-        <div class="item-wrap" data-item-id="imp-staff">
-          <a class="item" href="https://terraria.wiki.gg/wiki/Imp_Staff" target="_blank"><img src="https://terraria.wiki.gg/images/Imp_Staff.png">Imp Staff</a>
-          <input type="checkbox" class="item-check" title="Marked as owned">
-        </div>
+        <div class="item-wrap" data-item-id="imp-staff" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Imp_Staff" target="_blank"><img src="https://terraria.wiki.gg/images/Imp_Staff.png">Imp Staff</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
       </div>
       <div class="section">
         <h3>Sentries</h3>
-        <div class="item-wrap" data-item-id="flameburst-rod">
-          <a class="item" href="https://terraria.wiki.gg/wiki/Flameburst_sentry_summons" target="_blank"><img src="https://terraria.wiki.gg/images/Flameburst_Rod.png">Flameburst Rod</a>
-          <input type="checkbox" class="item-check" title="Marked as owned">
-        </div>
-        <div class="item-wrap" data-item-id="ballista-rod">
-          <a class="item" href="https://terraria.wiki.gg/wiki/Ballista_sentry_summons" target="_blank"><img src="https://terraria.wiki.gg/images/Ballista_Rod.png">Ballista Rod</a>
-          <input type="checkbox" class="item-check" title="Marked as owned">
-        </div>
+        <div class="item-wrap" data-item-id="flameburst-rod" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Flameburst_sentry_summons" target="_blank"><img src="https://terraria.wiki.gg/images/Flameburst_Rod.png">Flameburst Rod</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        <div class="item-wrap" data-item-id="ballista-rod" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Ballista_sentry_summons" target="_blank"><img src="https://terraria.wiki.gg/images/Ballista_Rod.png">Ballista Rod</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
       </div>
       <div class="section">
         <h3>Armor</h3>
-        <div class="item-wrap" data-item-id="obsidian-armor">
-          <a class="item" href="https://terraria.wiki.gg/wiki/Obsidian_armor" target="_blank"><img src="https://terraria.wiki.gg/images/Obsidian_armor.png">Obsidian Armor</a>
-          <input type="checkbox" class="item-check" title="Marked as owned">
-        </div>
+        <div class="item-wrap" data-item-id="obsidian-armor" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Obsidian_armor" target="_blank"><img src="https://terraria.wiki.gg/images/Obsidian_armor.png">Obsidian Armor</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
       </div>
       <div class="section">
         <h3>Buffs</h3>
-        <div class="item-wrap" data-item-id="war-table">
-          <a class="item" href="https://terraria.wiki.gg/wiki/War_Table" target="_blank"><img src="https://terraria.wiki.gg/images/War_Table.png">War Table</a>
-          <input type="checkbox" class="item-check" title="Marked as owned">
-        </div>
+        <div class="item-wrap" data-item-id="war-table" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/War_Table" target="_blank"><img src="https://terraria.wiki.gg/images/War_Table.png">War Table</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
       </div>
       <div class="section">
         <h3>Potions</h3>
-        <div class="item-wrap" data-item-id="summoning-potion">
-          <a class="item" href="https://terraria.wiki.gg/wiki/Summoning_Potion" target="_blank"><img src="https://terraria.wiki.gg/images/Summoning_Potion.png">Summoning Potion</a>
-          <input type="checkbox" class="item-check" title="Marked as owned">
-        </div>
+        <div class="item-wrap" data-item-id="summoning-potion" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Summoning_Potion" target="_blank"><img src="https://terraria.wiki.gg/images/Summoning_Potion.png">Summoning Potion</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
       </div>
     </div>
   </div>
 </div>
 
-<!-- ═══ Pre Skeletron ═══ -->
+<!-- ═══ 4. Pre Skeletron ═══ -->
 <div class="stage" data-stage="stage-skeletron">
   <div class="stage-header" onclick="toggleStage(this)">
     <span class="stage-index"></span>
@@ -421,79 +283,43 @@ footer { text-align: center; padding: 24px; color: var(--muted); font-size: 12px
     <div class="grid">
       <div class="section">
         <h3>Weapons</h3>
-        <div class="item-wrap" data-item-id="soulscourge">
-          <a class="item" href="https://terraria.wiki.gg/wiki/Soulscourge" target="_blank"><img src="https://terraria.wiki.gg/images/Soulscourge.png">Soulscourge</a>
-          <input type="checkbox" class="item-check" title="Marked as owned">
-        </div>
-        <div class="item-wrap" data-item-id="vasculash">
-          <a class="item" href="https://terraria.wiki.gg/wiki/Vasculash" target="_blank"><img src="https://terraria.wiki.gg/images/Vasculash.png">Vasculash</a>
-          <input type="checkbox" class="item-check" title="Marked as owned">
-        </div>
-        <div class="item-wrap" data-item-id="snapthorn">
-          <a class="item" href="https://terraria.wiki.gg/wiki/Snapthorn" target="_blank"><img src="https://terraria.wiki.gg/images/Snapthorn.png">Snapthorn</a>
-          <input type="checkbox" class="item-check" title="Marked as owned">
-        </div>
+        <div class="item-wrap" data-item-id="soulscourge" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Soulscourge" target="_blank"><img src="https://terraria.wiki.gg/images/Soulscourge.png">Soulscourge</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        <div class="item-wrap" data-item-id="vasculash" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Vasculash" target="_blank"><img src="https://terraria.wiki.gg/images/Vasculash.png">Vasculash</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        <div class="item-wrap" data-item-id="snapthorn" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Snapthorn" target="_blank"><img src="https://terraria.wiki.gg/images/Snapthorn.png">Snapthorn</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
         <h3>Meteorite Crash Site Event</h3>
-        <div class="item-wrap" data-item-id="starcrash">
-          <a class="item" href="https://terraria.wiki.gg/wiki/Starcrash" target="_blank"><img src="https://terraria.wiki.gg/images/Starcrash.png">Starcrash</a>
-          <input type="checkbox" class="item-check" title="Marked as owned">
-        </div>
+        <div class="item-wrap" data-item-id="starcrash" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Starcrash" target="_blank"><img src="https://terraria.wiki.gg/images/Starcrash.png">Starcrash</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
       </div>
       <div class="section">
         <h3>Minions</h3>
-        <div class="item-wrap" data-item-id="imp-staff">
-          <a class="item" href="https://terraria.wiki.gg/wiki/Imp_Staff" target="_blank"><img src="https://terraria.wiki.gg/images/Imp_Staff.png">Imp Staff</a>
-          <input type="checkbox" class="item-check" title="Marked as owned">
-        </div>
+        <div class="item-wrap" data-item-id="imp-staff" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Imp_Staff" target="_blank"><img src="https://terraria.wiki.gg/images/Imp_Staff.png">Imp Staff</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
       </div>
       <div class="section">
         <h3>Sentries</h3>
-        <div class="item-wrap" data-item-id="flameburst-rod">
-          <a class="item" href="https://terraria.wiki.gg/wiki/Flameburst_sentry_summons" target="_blank"><img src="https://terraria.wiki.gg/images/Flameburst_Rod.png">Flameburst Rod</a>
-          <input type="checkbox" class="item-check" title="Marked as owned">
-        </div>
-        <div class="item-wrap" data-item-id="ballista-rod">
-          <a class="item" href="https://terraria.wiki.gg/wiki/Ballista_sentry_summons" target="_blank"><img src="https://terraria.wiki.gg/images/Ballista_Rod.png">Ballista Rod</a>
-          <input type="checkbox" class="item-check" title="Marked as owned">
-        </div>
+        <div class="item-wrap" data-item-id="flameburst-rod" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Flameburst_sentry_summons" target="_blank"><img src="https://terraria.wiki.gg/images/Flameburst_Rod.png">Flameburst Rod</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        <div class="item-wrap" data-item-id="ballista-rod" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Ballista_sentry_summons" target="_blank"><img src="https://terraria.wiki.gg/images/Ballista_Rod.png">Ballista Rod</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
       </div>
       <div class="section">
         <h3>Armor</h3>
-        <div class="item-wrap" data-item-id="bee-armor">
-          <a class="item" href="https://terraria.wiki.gg/wiki/Bee_armor" target="_blank"><img src="https://terraria.wiki.gg/images/Bee_armor.png">Bee Armor</a>
-          <input type="checkbox" class="item-check" title="Marked as owned">
-        </div>
-        <div class="item-wrap" data-item-id="obsidian-armor">
-          <a class="item" href="https://terraria.wiki.gg/wiki/Obsidian_armor" target="_blank"><img src="https://terraria.wiki.gg/images/Obsidian_armor.png">Obsidian Armor</a>
-          <input type="checkbox" class="item-check" title="Marked as owned">
-        </div>
+        <div class="item-wrap" data-item-id="bee-armor" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Bee_armor" target="_blank"><img src="https://terraria.wiki.gg/images/Bee_armor.png">Bee Armor</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        <div class="item-wrap" data-item-id="obsidian-armor" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Obsidian_armor" target="_blank"><img src="https://terraria.wiki.gg/images/Obsidian_armor.png">Obsidian Armor</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
       </div>
       <div class="section">
         <h3>Accessories</h3>
-        <div class="item-wrap" data-item-id="pygmy-necklace">
-          <a class="item" href="https://terraria.wiki.gg/wiki/Pygmy_Necklace" target="_blank"><img src="https://terraria.wiki.gg/images/Pygmy_Necklace.png">Pygmy Necklace</a>
-          <input type="checkbox" class="item-check" title="Marked as owned">
-        </div>
+        <div class="item-wrap" data-item-id="pygmy-necklace" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Pygmy_Necklace" target="_blank"><img src="https://terraria.wiki.gg/images/Pygmy_Necklace.png">Pygmy Necklace</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
       </div>
       <div class="section">
         <h3>Buffs</h3>
-        <div class="item-wrap" data-item-id="war-table">
-          <a class="item" href="https://terraria.wiki.gg/wiki/War_Table" target="_blank"><img src="https://terraria.wiki.gg/images/War_Table.png">War Table</a>
-          <input type="checkbox" class="item-check" title="Marked as owned">
-        </div>
+        <div class="item-wrap" data-item-id="war-table" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/War_Table" target="_blank"><img src="https://terraria.wiki.gg/images/War_Table.png">War Table</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
       </div>
       <div class="section">
         <h3>Potions</h3>
-        <div class="item-wrap" data-item-id="summoning-potion">
-          <a class="item" href="https://terraria.wiki.gg/wiki/Summoning_Potion" target="_blank"><img src="https://terraria.wiki.gg/images/Summoning_Potion.png">Summoning Potion</a>
-          <input type="checkbox" class="item-check" title="Marked as owned">
-        </div>
+        <div class="item-wrap" data-item-id="summoning-potion" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Summoning_Potion" target="_blank"><img src="https://terraria.wiki.gg/images/Summoning_Potion.png">Summoning Potion</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
       </div>
     </div>
   </div>
 </div>
 
-<!-- ═══ Pre Wall of Flesh ═══ -->
+<!-- ═══ 5. Pre Wall of Flesh ═══ -->
 <div class="stage" data-stage="stage-wof">
   <div class="stage-header" onclick="toggleStage(this)">
     <span class="stage-index"></span>
@@ -505,71 +331,41 @@ footer { text-align: center; padding: 24px; color: var(--muted); font-size: 12px
     <div class="grid">
       <div class="section">
         <h3>Weapons</h3>
-        <div class="item-wrap" data-item-id="spinal-tap">
-          <a class="item" href="https://terraria.wiki.gg/wiki/Spinal_Tap" target="_blank"><img src="https://terraria.wiki.gg/images/Spinal_Tap.png">Spinal Tap</a>
-          <input type="checkbox" class="item-check" title="Marked as owned">
-        </div>
+        <div class="item-wrap" data-item-id="spinal-tap" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Spinal_Tap" target="_blank"><img src="https://terraria.wiki.gg/images/Spinal_Tap.png">Spinal Tap</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
       </div>
       <div class="section">
         <h3>Minions</h3>
-        <div class="item-wrap" data-item-id="imp-staff">
-          <a class="item" href="https://terraria.wiki.gg/wiki/Imp_Staff" target="_blank"><img src="https://terraria.wiki.gg/images/Imp_Staff.png">Imp Staff</a>
-          <input type="checkbox" class="item-check" title="Marked as owned">
-        </div>
+        <div class="item-wrap" data-item-id="imp-staff" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Imp_Staff" target="_blank"><img src="https://terraria.wiki.gg/images/Imp_Staff.png">Imp Staff</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
       </div>
       <div class="section">
         <h3>Sentries</h3>
-        <div class="item-wrap" data-item-id="flameburst-rod">
-          <a class="item" href="https://terraria.wiki.gg/wiki/Flameburst_sentry_summons" target="_blank"><img src="https://terraria.wiki.gg/images/Flameburst_Rod.png">Flameburst Rod</a>
-          <input type="checkbox" class="item-check" title="Marked as owned">
-        </div>
-        <div class="item-wrap" data-item-id="ballista-rod">
-          <a class="item" href="https://terraria.wiki.gg/wiki/Ballista_sentry_summons" target="_blank"><img src="https://terraria.wiki.gg/images/Ballista_Rod.png">Ballista Rod</a>
-          <input type="checkbox" class="item-check" title="Marked as owned">
-        </div>
+        <div class="item-wrap" data-item-id="flameburst-rod" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Flameburst_sentry_summons" target="_blank"><img src="https://terraria.wiki.gg/images/Flameburst_Rod.png">Flameburst Rod</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        <div class="item-wrap" data-item-id="ballista-rod" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Ballista_sentry_summons" target="_blank"><img src="https://terraria.wiki.gg/images/Ballista_Rod.png">Ballista Rod</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
       </div>
       <div class="section">
         <h3>Armor</h3>
-        <div class="item-wrap" data-item-id="bee-armor">
-          <a class="item" href="https://terraria.wiki.gg/wiki/Bee_armor" target="_blank"><img src="https://terraria.wiki.gg/images/Bee_armor.png">Bee Armor</a>
-          <input type="checkbox" class="item-check" title="Marked as owned">
-        </div>
-        <div class="item-wrap" data-item-id="obsidian-armor">
-          <a class="item" href="https://terraria.wiki.gg/wiki/Obsidian_armor" target="_blank"><img src="https://terraria.wiki.gg/images/Obsidian_armor.png">Obsidian Armor</a>
-          <input type="checkbox" class="item-check" title="Marked as owned">
-        </div>
+        <div class="item-wrap" data-item-id="bee-armor" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Bee_armor" target="_blank"><img src="https://terraria.wiki.gg/images/Bee_armor.png">Bee Armor</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        <div class="item-wrap" data-item-id="obsidian-armor" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Obsidian_armor" target="_blank"><img src="https://terraria.wiki.gg/images/Obsidian_armor.png">Obsidian Armor</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
       </div>
       <div class="section">
         <h3>Accessories</h3>
-        <div class="item-wrap" data-item-id="pygmy-necklace">
-          <a class="item" href="https://terraria.wiki.gg/wiki/Pygmy_Necklace" target="_blank"><img src="https://terraria.wiki.gg/images/Pygmy_Necklace.png">Pygmy Necklace</a>
-          <input type="checkbox" class="item-check" title="Marked as owned">
-        </div>
+        <div class="item-wrap" data-item-id="pygmy-necklace" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Pygmy_Necklace" target="_blank"><img src="https://terraria.wiki.gg/images/Pygmy_Necklace.png">Pygmy Necklace</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
       </div>
       <div class="section">
         <h3>Buffs</h3>
-        <div class="item-wrap" data-item-id="war-table">
-          <a class="item" href="https://terraria.wiki.gg/wiki/War_Table" target="_blank"><img src="https://terraria.wiki.gg/images/War_Table.png">War Table</a>
-          <input type="checkbox" class="item-check" title="Marked as owned">
-        </div>
-        <div class="item-wrap" data-item-id="bewitching-table">
-          <a class="item" href="https://terraria.wiki.gg/wiki/Bewitching_Table" target="_blank"><img src="https://terraria.wiki.gg/images/Bewitching_Table.png">Bewitching Table</a>
-          <input type="checkbox" class="item-check" title="Marked as owned">
-        </div>
+        <div class="item-wrap" data-item-id="war-table" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/War_Table" target="_blank"><img src="https://terraria.wiki.gg/images/War_Table.png">War Table</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        <div class="item-wrap" data-item-id="bewitching-table" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Bewitching_Table" target="_blank"><img src="https://terraria.wiki.gg/images/Bewitching_Table.png">Bewitching Table</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
       </div>
       <div class="section">
         <h3>Potions</h3>
-        <div class="item-wrap" data-item-id="summoning-potion">
-          <a class="item" href="https://terraria.wiki.gg/wiki/Summoning_Potion" target="_blank"><img src="https://terraria.wiki.gg/images/Summoning_Potion.png">Summoning Potion</a>
-          <input type="checkbox" class="item-check" title="Marked as owned">
-        </div>
+        <div class="item-wrap" data-item-id="summoning-potion" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Summoning_Potion" target="_blank"><img src="https://terraria.wiki.gg/images/Summoning_Potion.png">Summoning Potion</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
       </div>
     </div>
     <div class="note">💡 Health must have reached 400.</div>
   </div>
 </div>
 
-<!-- ═══ Pre-Mechanical Bosses ═══ -->
+<!-- ═══ 6. Pre-Mechanical Bosses ═══ -->
 <div class="stage" data-stage="stage-mech">
   <div class="stage-header" onclick="toggleStage(this)">
     <span class="stage-index"></span>
@@ -581,101 +377,50 @@ footer { text-align: center; padding: 24px; color: var(--muted); font-size: 12px
     <div class="grid">
       <div class="section">
         <h3>Weapons</h3>
-        <div class="item-wrap" data-item-id="firecracker">
-          <a class="item" href="https://terraria.wiki.gg/wiki/Firecracker" target="_blank"><img src="https://terraria.wiki.gg/images/Firecracker.png">Firecracker</a>
-          <input type="checkbox" class="item-check" title="Marked as owned">
-        </div>
-        <div class="item-wrap" data-item-id="cool-whip">
-          <a class="item" href="https://terraria.wiki.gg/wiki/Cool_Whip" target="_blank"><img src="https://terraria.wiki.gg/images/Cool_Whip.png">Cool Whip</a>
-          <input type="checkbox" class="item-check" title="Marked as owned">
-        </div>
-        <h3>After mechanical boss has been defeated</h3>
-        <div class="item-wrap" data-item-id="durendal">
-          <a class="item" href="https://terraria.wiki.gg/wiki/Durendal" target="_blank"><img src="https://terraria.wiki.gg/images/Durendal.png">Durendal</a>
-          <input type="checkbox" class="item-check" title="Marked as owned">
-        </div>
+        <div class="item-wrap" data-item-id="firecracker" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Firecracker" target="_blank"><img src="https://terraria.wiki.gg/images/Firecracker.png">Firecracker</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        <div class="item-wrap" data-item-id="cool-whip" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Cool_Whip" target="_blank"><img src="https://terraria.wiki.gg/images/Cool_Whip.png">Cool Whip</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        <h3>After mechanical boss defeated</h3>
+        <div class="item-wrap" data-item-id="durendal" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Durendal" target="_blank"><img src="https://terraria.wiki.gg/images/Durendal.png">Durendal</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
       </div>
       <div class="section">
         <h3>Minions</h3>
-        <div class="item-wrap" data-item-id="abigails-flower">
-          <a class="item" href="https://terraria.wiki.gg/wiki/Abigail%27s_Flower" target="_blank"><img src="https://terraria.wiki.gg/images/Abigail%27s_Flower.png">Abigail's Flower</a>
-          <input type="checkbox" class="item-check" title="Marked as owned">
-        </div>
-        <div class="item-wrap" data-item-id="sanguine-staff">
-          <a class="item" href="https://terraria.wiki.gg/wiki/Sanguine_Staff" target="_blank"><img src="https://terraria.wiki.gg/images/Sanguine_Staff.png">Sanguine Staff</a>
-          <input type="checkbox" class="item-check" title="Marked as owned">
-        </div>
-        <div class="item-wrap" data-item-id="blade-staff">
-          <a class="item" href="https://terraria.wiki.gg/wiki/Blade_Staff" target="_blank"><img src="https://terraria.wiki.gg/images/Blade_Staff.png">Blade Staff</a>
-          <input type="checkbox" class="item-check" title="Marked as owned">
-        </div>
+        <div class="item-wrap" data-item-id="abigails-flower" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Abigail%27s_Flower" target="_blank"><img src="https://terraria.wiki.gg/images/Abigail%27s_Flower.png">Abigail's Flower</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        <div class="item-wrap" data-item-id="sanguine-staff" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Sanguine_Staff" target="_blank"><img src="https://terraria.wiki.gg/images/Sanguine_Staff.png">Sanguine Staff</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        <div class="item-wrap" data-item-id="blade-staff" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Blade_Staff" target="_blank"><img src="https://terraria.wiki.gg/images/Blade_Staff.png">Blade Staff</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
       </div>
       <div class="section">
         <h3>Sentries</h3>
-        <div class="item-wrap" data-item-id="flameburst-rod">
-          <a class="item" href="https://terraria.wiki.gg/wiki/Flameburst_sentry_summons" target="_blank"><img src="https://terraria.wiki.gg/images/Flameburst_Rod.png">Flameburst Rod</a>
-          <input type="checkbox" class="item-check" title="Marked as owned">
-        </div>
-        <div class="item-wrap" data-item-id="ballista-rod">
-          <a class="item" href="https://terraria.wiki.gg/wiki/Ballista_sentry_summons" target="_blank"><img src="https://terraria.wiki.gg/images/Ballista_Rod.png">Ballista Rod</a>
-          <input type="checkbox" class="item-check" title="Marked as owned">
-        </div>
-        <h3>After at least one mechanical boss has been defeated</h3>
-        <div class="item-wrap" data-item-id="flameburst-cane">
-          <a class="item" href="https://terraria.wiki.gg/wiki/Flameburst_sentry_summons" target="_blank"><img src="https://terraria.wiki.gg/images/Flameburst_Cane.png">Flameburst Cane</a>
-          <input type="checkbox" class="item-check" title="Marked as owned">
-        </div>
-        <div class="item-wrap" data-item-id="ballista-cane">
-          <a class="item" href="https://terraria.wiki.gg/wiki/Ballista_sentry_summons" target="_blank"><img src="https://terraria.wiki.gg/images/Ballista_Cane.png">Ballista Cane</a>
-          <input type="checkbox" class="item-check" title="Marked as owned">
-        </div>
+        <div class="item-wrap" data-item-id="flameburst-rod" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Flameburst_sentry_summons" target="_blank"><img src="https://terraria.wiki.gg/images/Flameburst_Rod.png">Flameburst Rod</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        <div class="item-wrap" data-item-id="ballista-rod" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Ballista_sentry_summons" target="_blank"><img src="https://terraria.wiki.gg/images/Ballista_Rod.png">Ballista Rod</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        <h3>After 1 mech boss defeated</h3>
+        <div class="item-wrap" data-item-id="flameburst-cane" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Flameburst_sentry_summons" target="_blank"><img src="https://terraria.wiki.gg/images/Flameburst_Cane.png">Flameburst Cane</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        <div class="item-wrap" data-item-id="ballista-cane" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Ballista_sentry_summons" target="_blank"><img src="https://terraria.wiki.gg/images/Ballista_Cane.png">Ballista Cane</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
       </div>
       <div class="section">
         <h3>Armor</h3>
-        <div class="item-wrap" data-item-id="spider-armor">
-          <a class="item" href="https://terraria.wiki.gg/wiki/Spider_armor" target="_blank"><img src="https://terraria.wiki.gg/images/Spider_armor.png">Spider armor</a>
-          <input type="checkbox" class="item-check" title="Marked as owned">
-        </div>
-        <h3>After mechanical boss has been defeated</h3>
-        <div class="item-wrap" data-item-id="hallowed-armor">
-          <a class="item" href="https://terraria.wiki.gg/wiki/Hallowed_armor" target="_blank"><img src="https://terraria.wiki.gg/images/Hallowed_armor.png">Hallowed Armor + Hood</a>
-          <input type="checkbox" class="item-check" title="Marked as owned">
-        </div>
+        <div class="item-wrap" data-item-id="spider-armor" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Spider_armor" target="_blank"><img src="https://terraria.wiki.gg/images/Spider_armor.png">Spider armor</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        <h3>After mechanical boss defeated</h3>
+        <div class="item-wrap" data-item-id="hallowed-armor" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Hallowed_armor" target="_blank"><img src="https://terraria.wiki.gg/images/Hallowed_armor.png">Hallowed Armor + Hood</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
       </div>
       <div class="section">
         <h3>Accessories</h3>
-        <div class="item-wrap" data-item-id="summoner-emblem">
-          <a class="item" href="https://terraria.wiki.gg/wiki/Summoner_Emblem" target="_blank"><img src="https://terraria.wiki.gg/images/Summoner_Emblem.png">Summoner Emblem</a>
-          <input type="checkbox" class="item-check" title="Marked as owned">
-        </div>
-        <div class="item-wrap" data-item-id="pygmy-necklace">
-          <a class="item" href="https://terraria.wiki.gg/wiki/Pygmy_Necklace" target="_blank"><img src="https://terraria.wiki.gg/images/Pygmy_Necklace.png">Pygmy Necklace</a>
-          <input type="checkbox" class="item-check" title="Marked as owned">
-        </div>
+        <div class="item-wrap" data-item-id="summoner-emblem" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Summoner_Emblem" target="_blank"><img src="https://terraria.wiki.gg/images/Summoner_Emblem.png">Summoner Emblem</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        <div class="item-wrap" data-item-id="pygmy-necklace" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Pygmy_Necklace" target="_blank"><img src="https://terraria.wiki.gg/images/Pygmy_Necklace.png">Pygmy Necklace</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
       </div>
       <div class="section">
         <h3>Buffs</h3>
-        <div class="item-wrap" data-item-id="war-table">
-          <a class="item" href="https://terraria.wiki.gg/wiki/War_Table" target="_blank"><img src="https://terraria.wiki.gg/images/War_Table.png">War Table</a>
-          <input type="checkbox" class="item-check" title="Marked as owned">
-        </div>
-        <div class="item-wrap" data-item-id="bewitching-table">
-          <a class="item" href="https://terraria.wiki.gg/wiki/Bewitching_Table" target="_blank"><img src="https://terraria.wiki.gg/images/Bewitching_Table.png">Bewitching Table</a>
-          <input type="checkbox" class="item-check" title="Marked as owned">
-        </div>
+        <div class="item-wrap" data-item-id="war-table" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/War_Table" target="_blank"><img src="https://terraria.wiki.gg/images/War_Table.png">War Table</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        <div class="item-wrap" data-item-id="bewitching-table" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Bewitching_Table" target="_blank"><img src="https://terraria.wiki.gg/images/Bewitching_Table.png">Bewitching Table</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
       </div>
       <div class="section">
         <h3>Potions</h3>
-        <div class="item-wrap" data-item-id="summoning-potion">
-          <a class="item" href="https://terraria.wiki.gg/wiki/Summoning_Potion" target="_blank"><img src="https://terraria.wiki.gg/images/Summoning_Potion.png">Summoning Potion</a>
-          <input type="checkbox" class="item-check" title="Marked as owned">
-        </div>
+        <div class="item-wrap" data-item-id="summoning-potion" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Summoning_Potion" target="_blank"><img src="https://terraria.wiki.gg/images/Summoning_Potion.png">Summoning Potion</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
       </div>
     </div>
   </div>
 </div>
 
-<!-- ═══ Pre-Plantera ═══ -->
+<!-- ═══ 7. Pre-Plantera ═══ -->
 <div class="stage" data-stage="stage-plantera">
   <div class="stage-header" onclick="toggleStage(this)">
     <span class="stage-index"></span>
@@ -687,76 +432,37 @@ footer { text-align: center; padding: 24px; color: var(--muted); font-size: 12px
     <div class="grid">
       <div class="section">
         <h3>Weapons</h3>
-        <div class="item-wrap" data-item-id="durendal">
-          <a class="item" href="https://terraria.wiki.gg/wiki/Durendal" target="_blank"><img src="https://terraria.wiki.gg/images/Durendal.png">Durendal</a>
-          <input type="checkbox" class="item-check" title="Marked as owned">
-        </div>
+        <div class="item-wrap" data-item-id="durendal" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Durendal" target="_blank"><img src="https://terraria.wiki.gg/images/Durendal.png">Durendal</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
       </div>
       <div class="section">
         <h3>Minions</h3>
-        <div class="item-wrap" data-item-id="abigails-flower">
-          <a class="item" href="https://terraria.wiki.gg/wiki/Abigail%27s_Flower" target="_blank"><img src="https://terraria.wiki.gg/images/Abigail%27s_Flower.png">Abigail's Flower</a>
-          <input type="checkbox" class="item-check" title="Marked as owned">
-        </div>
-        <div class="item-wrap" data-item-id="sanguine-staff">
-          <a class="item" href="https://terraria.wiki.gg/wiki/Sanguine_Staff" target="_blank"><img src="https://terraria.wiki.gg/images/Sanguine_Staff.png">Sanguine Staff</a>
-          <input type="checkbox" class="item-check" title="Marked as owned">
-        </div>
-        <div class="item-wrap" data-item-id="blade-staff">
-          <a class="item" href="https://terraria.wiki.gg/wiki/Blade_Staff" target="_blank"><img src="https://terraria.wiki.gg/images/Blade_Staff.png">Blade Staff</a>
-          <input type="checkbox" class="item-check" title="Marked as owned">
-        </div>
+        <div class="item-wrap" data-item-id="abigails-flower" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Abigail%27s_Flower" target="_blank"><img src="https://terraria.wiki.gg/images/Abigail%27s_Flower.png">Abigail's Flower</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        <div class="item-wrap" data-item-id="sanguine-staff" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Sanguine_Staff" target="_blank"><img src="https://terraria.wiki.gg/images/Sanguine_Staff.png">Sanguine Staff</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        <div class="item-wrap" data-item-id="blade-staff" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Blade_Staff" target="_blank"><img src="https://terraria.wiki.gg/images/Blade_Staff.png">Blade Staff</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
       </div>
       <div class="section">
         <h3>Sentries</h3>
-        <div class="item-wrap" data-item-id="flameburst-cane">
-          <a class="item" href="https://terraria.wiki.gg/wiki/Flameburst_sentry_summons" target="_blank"><img src="https://terraria.wiki.gg/images/Flameburst_Cane.png">Flameburst Cane</a>
-          <input type="checkbox" class="item-check" title="Marked as owned">
-        </div>
-        <div class="item-wrap" data-item-id="ballista-cane">
-          <a class="item" href="https://terraria.wiki.gg/wiki/Ballista_sentry_summons" target="_blank"><img src="https://terraria.wiki.gg/images/Ballista_Cane.png">Ballista Cane</a>
-          <input type="checkbox" class="item-check" title="Marked as owned">
-        </div>
-        <div class="item-wrap" data-item-id="queen-spider-staff">
-          <a class="item" href="https://terraria.wiki.gg/wiki/Queen_Spider_Staff" target="_blank"><img src="https://terraria.wiki.gg/images/Queen_Spider_Staff.png">Queen Spider Staff</a>
-          <input type="checkbox" class="item-check" title="Marked as owned">
-        </div>
+        <div class="item-wrap" data-item-id="flameburst-cane" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Flameburst_sentry_summons" target="_blank"><img src="https://terraria.wiki.gg/images/Flameburst_Cane.png">Flameburst Cane</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        <div class="item-wrap" data-item-id="ballista-cane" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Ballista_sentry_summons" target="_blank"><img src="https://terraria.wiki.gg/images/Ballista_Cane.png">Ballista Cane</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        <div class="item-wrap" data-item-id="queen-spider-staff" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Queen_Spider_Staff" target="_blank"><img src="https://terraria.wiki.gg/images/Queen_Spider_Staff.png">Queen Spider Staff</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
       </div>
       <div class="section">
         <h3>Armor</h3>
-        <div class="item-wrap" data-item-id="chlorophyte-armor">
-          <a class="item" href="https://terraria.wiki.gg/wiki/Chlorophyte_armor" target="_blank"><img src="https://terraria.wiki.gg/images/Chlorophyte_armor.png">Chlorophyte Armor + Visor</a>
-          <input type="checkbox" class="item-check" title="Marked as owned">
-        </div>
+        <div class="item-wrap" data-item-id="chlorophyte-armor" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Chlorophyte_armor" target="_blank"><img src="https://terraria.wiki.gg/images/Chlorophyte_armor.png">Chlorophyte Armor + Visor</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
       </div>
       <div class="section">
         <h3>Accessories</h3>
-        <div class="item-wrap" data-item-id="summoner-emblem">
-          <a class="item" href="https://terraria.wiki.gg/wiki/Summoner_Emblem" target="_blank"><img src="https://terraria.wiki.gg/images/Summoner_Emblem.png">Summoner Emblem</a>
-          <input type="checkbox" class="item-check" title="Marked as owned">
-        </div>
-        <div class="item-wrap" data-item-id="pygmy-necklace">
-          <a class="item" href="https://terraria.wiki.gg/wiki/Pygmy_Necklace" target="_blank"><img src="https://terraria.wiki.gg/images/Pygmy_Necklace.png">Pygmy Necklace</a>
-          <input type="checkbox" class="item-check" title="Marked as owned">
-        </div>
+        <div class="item-wrap" data-item-id="summoner-emblem" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Summoner_Emblem" target="_blank"><img src="https://terraria.wiki.gg/images/Summoner_Emblem.png">Summoner Emblem</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        <div class="item-wrap" data-item-id="pygmy-necklace" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Pygmy_Necklace" target="_blank"><img src="https://terraria.wiki.gg/images/Pygmy_Necklace.png">Pygmy Necklace</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
       </div>
       <div class="section">
         <h3>Buffs</h3>
-        <div class="item-wrap" data-item-id="war-table">
-          <a class="item" href="https://terraria.wiki.gg/wiki/War_Table" target="_blank"><img src="https://terraria.wiki.gg/images/War_Table.png">War Table</a>
-          <input type="checkbox" class="item-check" title="Marked as owned">
-        </div>
-        <div class="item-wrap" data-item-id="bewitching-table">
-          <a class="item" href="https://terraria.wiki.gg/wiki/Bewitching_Table" target="_blank"><img src="https://terraria.wiki.gg/images/Bewitching_Table.png">Bewitching Table</a>
-          <input type="checkbox" class="item-check" title="Marked as owned">
-        </div>
+        <div class="item-wrap" data-item-id="war-table" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/War_Table" target="_blank"><img src="https://terraria.wiki.gg/images/War_Table.png">War Table</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        <div class="item-wrap" data-item-id="bewitching-table" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Bewitching_Table" target="_blank"><img src="https://terraria.wiki.gg/images/Bewitching_Table.png">Bewitching Table</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
       </div>
       <div class="section">
         <h3>Potions</h3>
-        <div class="item-wrap" data-item-id="summoning-potion">
-          <a class="item" href="https://terraria.wiki.gg/wiki/Summoning_Potion" target="_blank"><img src="https://terraria.wiki.gg/images/Summoning_Potion.png">Summoning Potion</a>
-          <input type="checkbox" class="item-check" title="Marked as owned">
-        </div>
+        <div class="item-wrap" data-item-id="summoning-potion" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Summoning_Potion" target="_blank"><img src="https://terraria.wiki.gg/images/Summoning_Potion.png">Summoning Potion</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
       </div>
     </div>
   </div>
@@ -771,166 +477,83 @@ footer { text-align: center; padding: 24px; color: var(--muted); font-size: 12px
 </footer>
 
 <script>
-  const STAGE_KEY = 'terraria-summoning';
-  const OWNED_KEY = 'terraria-summoning-owned';
+const STAGE_KEY='terraria-summoning';
+const ITEMS_KEY='terraria-summoning-items-v3';
+const CYCLE=['none','owned','skip'];
+let itemStates={};
 
-  /* ─── Owned items set (by data-item-id) ─── */
-  let ownedItems = new Set();
+function loadItems(){try{itemStates=JSON.parse(localStorage.getItem(ITEMS_KEY)||'{}')}catch(e){itemStates={}}}
+function saveItems(){localStorage.setItem(ITEMS_KEY,JSON.stringify(itemStates))}
 
-  function loadOwned() {
-    try {
-      const arr = JSON.parse(localStorage.getItem(OWNED_KEY) || '[]');
-      ownedItems = new Set(arr);
-    } catch(e) { ownedItems = new Set(); }
-  }
-
-  function saveOwned() {
-    localStorage.setItem(OWNED_KEY, JSON.stringify([...ownedItems]));
-  }
-
-  /* Apply owned state to ALL item-wraps with matching data-item-id */
-  function applyOwnedState(itemId) {
-    const owned = ownedItems.has(itemId);
-    document.querySelectorAll(`.item-wrap[data-item-id="${itemId}"]`).forEach(wrap => {
-      const cb = wrap.querySelector('.item-check');
-      if (owned) {
-        wrap.classList.add('owned');
-        cb.checked = true;
-      } else {
-        wrap.classList.remove('owned');
-        cb.checked = false;
-      }
-    });
-  }
-
-  function applyAllOwned() {
-    // Get all unique item IDs from the page
-    document.querySelectorAll('.item-wrap[data-item-id]').forEach(wrap => {
-      const id = wrap.dataset.itemId;
-      applyOwnedState(id);
-    });
-    updateOwnedSummary();
-  }
-
-  function updateOwnedSummary() {
-    const count = ownedItems.size;
-    document.getElementById('ownedCount').textContent = count;
-    const names = document.getElementById('ownedNames');
-    if (count === 0) {
-      names.textContent = '— belum ada item yang ditandai';
-    } else {
-      // Collect display names for owned items
-      const labelMap = {};
-      document.querySelectorAll('.item-wrap[data-item-id]').forEach(wrap => {
-        const id = wrap.dataset.itemId;
-        if (ownedItems.has(id) && !labelMap[id]) {
-          labelMap[id] = wrap.querySelector('.item').textContent.trim();
-        }
-      });
-      names.textContent = Object.values(labelMap).join(', ');
-    }
-  }
-
-  function resetOwned() {
-    ownedItems.clear();
-    saveOwned();
-    applyAllOwned();
-  }
-
-  /* ─── Item checkbox click handler ─── */
-  function onItemCheck(e) {
-    const wrap = e.target.closest('.item-wrap');
-    const itemId = wrap.dataset.itemId;
-    if (ownedItems.has(itemId)) {
-      ownedItems.delete(itemId);
-    } else {
-      ownedItems.add(itemId);
-    }
-    saveOwned();
-    applyOwnedState(itemId);
-    updateOwnedSummary();
-  }
-
-  /* Attach listeners to all item checkboxes */
-  function bindItemChecks() {
-    document.querySelectorAll('.item-check').forEach(cb => {
-      cb.addEventListener('click', onItemCheck);
-    });
-  }
-
-  /* ─── Stage logic ─── */
-  function stages() {
-    return Array.from(document.querySelectorAll('div.stage'));
-  }
-
-  function saveStages() {
-    localStorage.setItem(STAGE_KEY, JSON.stringify(stages().map(s => s.classList.contains('done'))));
-    renderProgress();
-  }
-
-  function loadStages() {
-    stages().forEach((s, i) => {
-      s.querySelector('.stage-index').textContent = i + 1;
-    });
-    let data = [];
-    try { data = JSON.parse(localStorage.getItem(STAGE_KEY) || '[]'); } catch(e) {}
-    stages().forEach((s, i) => {
-      const body = s.querySelector('.stage-body');
-      body.style.transition = 'none';
-      if (data[i] === true) {
-        s.classList.add('done');
-        body.style.maxHeight = '0';
-        body.style.opacity = '0';
-        s.querySelector('.done-label').style.display = 'inline';
-        s.querySelector('.stage-checkbox').checked = true;
-      } else {
-        s.classList.remove('done');
-        body.style.maxHeight = '2000px';
-        body.style.opacity = '1';
-        s.querySelector('.done-label').style.display = 'none';
-        s.querySelector('.stage-checkbox').checked = false;
-      }
-      setTimeout(() => { body.style.transition = ''; }, 100);
-    });
-    renderProgress();
-  }
-
-  function toggleStage(header) {
-    const s = header.closest('div.stage');
-    const body = s.querySelector('.stage-body');
-    const nowDone = !s.classList.contains('done');
-    if (nowDone) {
-      s.classList.add('done');
-      body.style.maxHeight = '0';
-      body.style.opacity = '0';
-      s.querySelector('.done-label').style.display = 'inline';
-      s.querySelector('.stage-checkbox').checked = true;
-    } else {
-      s.classList.remove('done');
-      body.style.maxHeight = '2000px';
-      body.style.opacity = '1';
-      s.querySelector('.done-label').style.display = 'none';
-      s.querySelector('.stage-checkbox').checked = false;
-    }
-    saveStages();
-  }
-
-  function renderProgress() {
-    const all = stages();
-    const doneNums = all.map((s, i) => s.classList.contains('done') ? i + 1 : null).filter(Boolean);
-    let text = `${doneNums.length} / ${all.length} completed`;
-    if (doneNums.length > 0) text += ` · Stage ${doneNums.join(', ')}`;
-    document.getElementById('progressText').textContent = text;
-  }
-
-  window.addEventListener('DOMContentLoaded', () => {
-    loadOwned();
-    loadStages();
-    bindItemChecks();
-    applyAllOwned();
+function applyItemId(id){
+  const s=itemStates[id]||'none';
+  document.querySelectorAll(`.item-wrap[data-item-id="${id}"]`).forEach(w=>{
+    w.dataset.state=s;
+    w.querySelector('.item-btn').dataset.s=s;
   });
-</script>
+}
 
+function applyAll(){
+  const seen=new Set();
+  document.querySelectorAll('.item-wrap[data-item-id]').forEach(w=>{
+    const id=w.dataset.itemId;
+    if(!seen.has(id)){seen.add(id);applyItemId(id);}
+  });
+  updateSummary();
+}
+
+function cycleItem(btn){
+  const id=btn.closest('.item-wrap').dataset.itemId;
+  const cur=itemStates[id]||'none';
+  const next=CYCLE[(CYCLE.indexOf(cur)+1)%CYCLE.length];
+  if(next==='none')delete itemStates[id];else itemStates[id]=next;
+  saveItems();applyItemId(id);updateSummary();
+}
+
+function updateSummary(){
+  let owned=0,skip=0;const names=[];
+  const seen=new Set();
+  document.querySelectorAll('.item-wrap[data-item-id]').forEach(w=>{
+    const id=w.dataset.itemId;if(seen.has(id))return;seen.add(id);
+    const s=itemStates[id];
+    if(s==='owned'){owned++;names.push(w.querySelector('.item').textContent.trim());}
+    if(s==='skip')skip++;
+  });
+  document.getElementById('ownedCount').textContent=owned;
+  document.getElementById('skipCount').textContent=skip;
+  const el=document.getElementById('ownedNames');
+  if(owned===0&&skip===0)el.textContent='— belum ada item yang ditandai';
+  else el.textContent=owned>0?'✓ '+names.join(', '):(skip>0?skip+' item di-skip':'');
+}
+
+function resetAll(){itemStates={};saveItems();applyAll();}
+
+/* Stage logic */
+function stages(){return Array.from(document.querySelectorAll('div.stage'))}
+function saveStages(){localStorage.setItem(STAGE_KEY,JSON.stringify(stages().map(s=>s.classList.contains('done'))));renderProgress();}
+function loadStages(){
+  stages().forEach((s,i)=>{s.querySelector('.stage-index').textContent=i+1;});
+  let data=[];try{data=JSON.parse(localStorage.getItem(STAGE_KEY)||'[]')}catch(e){}
+  stages().forEach((s,i)=>{
+    const b=s.querySelector('.stage-body');b.style.transition='none';
+    if(data[i]===true){s.classList.add('done');b.style.maxHeight='0';b.style.opacity='0';s.querySelector('.done-label').style.display='inline';s.querySelector('.stage-checkbox').checked=true;}
+    else{s.classList.remove('done');b.style.maxHeight='2000px';b.style.opacity='1';s.querySelector('.done-label').style.display='none';s.querySelector('.stage-checkbox').checked=false;}
+    setTimeout(()=>{b.style.transition=''},100);
+  });renderProgress();
+}
+function toggleStage(h){
+  const s=h.closest('div.stage'),b=s.querySelector('.stage-body'),nd=!s.classList.contains('done');
+  if(nd){s.classList.add('done');b.style.maxHeight='0';b.style.opacity='0';s.querySelector('.done-label').style.display='inline';s.querySelector('.stage-checkbox').checked=true;}
+  else{s.classList.remove('done');b.style.maxHeight='2000px';b.style.opacity='1';s.querySelector('.done-label').style.display='none';s.querySelector('.stage-checkbox').checked=false;}
+  saveStages();
+}
+function renderProgress(){
+  const all=stages(),done=all.map((s,i)=>s.classList.contains('done')?i+1:null).filter(Boolean);
+  let t=`${done.length} / ${all.length} completed`;if(done.length)t+=` · Stage ${done.join(', ')}`;
+  document.getElementById('progressText').textContent=t;
+}
+
+window.addEventListener('DOMContentLoaded',()=>{loadItems();loadStages();applyAll();});
+</script>
 </body>
 </html>
-
