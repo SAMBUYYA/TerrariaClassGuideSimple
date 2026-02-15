@@ -466,6 +466,54 @@ footer{text-align:center;padding:24px;color:var(--muted);font-size:12px;border-t
   </div>
 </div>
 
+<!-- ═══ 8. Pre-Golem ═══ -->
+<div class="stage" data-stage="stage-golem">
+  <div class="stage-header" onclick="toggleStage(this)">
+    <span class="stage-index"></span>
+    <h2>Pre-Golem (Golem)</h2>
+    <span class="done-label" style="display:none">✓ Done</span>
+    <input type="checkbox" class="stage-checkbox" onclick="event.preventDefault()">
+  </div>
+  <div class="stage-body">
+    <div class="grid">
+      <div class="section">
+        <h3>Weapons</h3>
+        <div class="item-wrap" data-item-id="durendal" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Durendal" target="_blank"><img src="https://terraria.wiki.gg/images/Durendal.png">Durendal</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+      </div>
+      <div class="section">
+        <h3>Minions</h3>
+        <div class="item-wrap" data-item-id="abigails-flower" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Abigail%27s_Flower" target="_blank"><img src="https://terraria.wiki.gg/images/Abigail%27s_Flower.png">Abigail's Flower</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        <div class="item-wrap" data-item-id="sanguine-staff" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Sanguine_Staff" target="_blank"><img src="https://terraria.wiki.gg/images/Sanguine_Staff.png">Sanguine Staff</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        <div class="item-wrap" data-item-id="blade-staff" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Blade_Staff" target="_blank"><img src="https://terraria.wiki.gg/images/Blade_Staff.png">Blade Staff</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+      </div>
+      <div class="section">
+        <h3>Sentries</h3>
+        <div class="item-wrap" data-item-id="flameburst-cane" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Flameburst_sentry_summons" target="_blank"><img src="https://terraria.wiki.gg/images/Flameburst_Cane.png">Flameburst Cane</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        <div class="item-wrap" data-item-id="ballista-cane" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Ballista_sentry_summons" target="_blank"><img src="https://terraria.wiki.gg/images/Ballista_Cane.png">Ballista Cane</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        <div class="item-wrap" data-item-id="queen-spider-staff" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Queen_Spider_Staff" target="_blank"><img src="https://terraria.wiki.gg/images/Queen_Spider_Staff.png">Queen Spider Staff</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+      </div>
+      <div class="section">
+        <h3>Armor</h3>
+        <div class="item-wrap" data-item-id="chlorophyte-armor" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Chlorophyte_armor" target="_blank"><img src="https://terraria.wiki.gg/images/Chlorophyte_armor.png">Chlorophyte Armor + Visor</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+      </div>
+      <div class="section">
+        <h3>Accessories</h3>
+        <div class="item-wrap" data-item-id="summoner-emblem" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Summoner_Emblem" target="_blank"><img src="https://terraria.wiki.gg/images/Summoner_Emblem.png">Summoner Emblem</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        <div class="item-wrap" data-item-id="pygmy-necklace" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Pygmy_Necklace" target="_blank"><img src="https://terraria.wiki.gg/images/Pygmy_Necklace.png">Pygmy Necklace</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+      </div>
+      <div class="section">
+        <h3>Buffs</h3>
+        <div class="item-wrap" data-item-id="war-table" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/War_Table" target="_blank"><img src="https://terraria.wiki.gg/images/War_Table.png">War Table</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        <div class="item-wrap" data-item-id="bewitching-table" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Bewitching_Table" target="_blank"><img src="https://terraria.wiki.gg/images/Bewitching_Table.png">Bewitching Table</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+      </div>
+      <div class="section">
+        <h3>Potions</h3>
+        <div class="item-wrap" data-item-id="summoning-potion" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Summoning_Potion" target="_blank"><img src="https://terraria.wiki.gg/images/Summoning_Potion.png">Summoning Potion</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+      </div>
+    </div>
+  </div>
+</div>
+
 </div><!-- /container -->
 
 <footer>
@@ -555,6 +603,7 @@ window.addEventListener('DOMContentLoaded',()=>{loadItems();loadStages();applyAl
 </script>
 </body>
 </html>
+
 
 
 
