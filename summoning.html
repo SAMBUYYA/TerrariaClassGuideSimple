@@ -721,9 +721,9 @@ function openPopup(e, id) {
 
   document.getElementById('popupImg').src = getItemImg(id);
   document.getElementById('popupName').textContent = getItemName(id);
-  document.getElementById('popupUnlock').textContent = info.unlock;
-  document.getElementById('popupGet').textContent = info.get;
-  document.getElementById('popupDesc').textContent = info.desc;
+  document.getElementById('popupUnlock').innerText = info.unlock;
+  document.getElementById('popupGet').innerText = info.get;
+  document.getElementById('popupDesc').innerText = info.desc;
 
   // Posisi popup dekat tombol ℹ
   // position:fixed → koordinat viewport, JANGAN tambah scrollY
@@ -907,6 +907,7 @@ window.addEventListener('DOMContentLoaded', () => {
 </script>
 </body>
 </html>
+
 
 
 
