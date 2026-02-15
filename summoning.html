@@ -18,6 +18,8 @@
   --text: #1a2233;
   --muted: #6b7a99;
   --link: #4466cc;
+  --done-bg: #f0f0f0;
+  --done-border: #c8c8d0;
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -70,6 +72,18 @@ header p {
   box-shadow: 0 4px 20px rgba(102,51,221,0.07);
 }
 
+/* Done state */
+.stage.done {
+  background: var(--done-bg);
+  border-color: var(--done-border);
+  box-shadow: none;
+}
+
+.stage.done:hover {
+  border-color: #aaaabc;
+  box-shadow: none;
+}
+
 .stage-header {
   padding: 13px 20px;
   background: #f4f1ff;
@@ -77,6 +91,23 @@ header p {
   align-items: center;
   gap: 10px;
   border-bottom: 1.5px solid var(--border);
+  cursor: pointer;
+  user-select: none;
+  transition: background 0.2s;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.stage-header:hover {
+  background: #ede9ff;
+}
+
+.stage.done .stage-header {
+  background: #e8e8ee;
+  border-bottom-color: transparent;
+}
+
+.stage.done .stage-header:hover {
+  background: #dddde8;
 }
 
 .stage-header h2 {
@@ -84,14 +115,100 @@ header p {
   font-size: 15px;
   color: var(--text);
   letter-spacing: 0.5px;
+  flex: 1;
+  transition: color 0.2s;
 }
 
-.stage-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
+.stage.done .stage-header h2 {
+  text-decoration: line-through;
+  color: #999aaa;
+}
+
+.stage-index {
+  width: 22px;
+  height: 22px;
+  border-radius: 6px;
   background: var(--accent);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   flex-shrink: 0;
+  transition: background 0.2s;
+  font-family: 'Nunito', sans-serif;
+}
+
+.stage.done .stage-index {
+  background: #aaaabc;
+}
+
+/* Custom Checkbox */
+.stage-checkbox {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 5px;
+  border: 2px solid var(--accent);
+  background: #fff;
+  flex-shrink: 0;
+  cursor: pointer;
+  position: relative;
+  transition: background 0.15s, border-color 0.15s;
+  margin-left: auto;
+  pointer-events: none;
+}
+
+.stage-checkbox:checked {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+.stage-checkbox::after {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 5px;
+  width: 6px;
+  height: 10px;
+  border: 2px solid white;
+  border-top: none;
+  border-left: none;
+  transform: rotate(45deg) scale(0);
+  transition: transform 0.15s;
+}
+
+.stage-checkbox:checked::after {
+  transform: rotate(45deg) scale(1);
+}
+
+.stage.done .stage-checkbox {
+  border-color: #aaaabc;
+}
+
+/* Tooltip hint */
+.done-label {
+  font-size: 11px;
+  font-weight: 700;
+  color: #aaaabc;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+}
+
+/* Collapsible body */
+.stage-body {
+  overflow: hidden;
+  transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
+  max-height: 2000px;
+  opacity: 1;
+}
+
+.stage.done .stage-body {
+  max-height: 0 !important;
+  opacity: 0;
+  pointer-events: none;
 }
 
 .grid {
@@ -166,6 +283,19 @@ header p {
   line-height: 1.6;
 }
 
+/* Progress */
+.progress-info {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--muted);
+  margin-bottom: 16px;
+}
+.progress-info span:last-child {
+  color: var(--accent);
+}
+
 footer {
   text-align: center;
   padding: 24px;
@@ -187,424 +317,403 @@ footer {
 
 <div class="container">
 
-<!-- ═══ Pre-Bosses (King Slime) (Eye Of Cthulhu) ═══ -->
-<div class="stage">
-  <div class="stage-header"><div class="stage-dot"></div><h2>Pre-Bosses (King Slime) (Eye Of Cthulhu)</h2></div>
-  <div class="grid">
-    <div class="section">
-      <h3>Weapons</h3>
-
-      <a class="item" href="https://terraria.wiki.gg/wiki/Leather_Whip" target="_blank"><img src="https://terraria.wiki.gg/images/Leather_Whip.png">Leather Whip</a>
-      <a class="item" href="https://terraria.wiki.gg/wiki/Snapthorn" target="_blank"><img src="https://terraria.wiki.gg/images/Snapthorn.png">Snapthorn</a>
-
-      <h3>Meteorite Crash Site Event</h3>
-
-      <a class="item" href="https://terraria.wiki.gg/wiki/Starcrash" target="_blank"><img src="https://terraria.wiki.gg/images/Starcrash.png">Starcrash</a>
-      
-    </div>
-    <div class="section">
-      <h3>Minions</h3>
-
-      <a class="item" href="https://terraria.wiki.gg/wiki/Finch_Staff" target="_blank"><img src="https://terraria.wiki.gg/images/Finch_Staff.png">Finch Staff</a>
-      <a class="item" href="https://terraria.wiki.gg/wiki/Abigail%27s_Flower" target="_blank"><img src="https://terraria.wiki.gg/images/Abigail%27s_Flower.png">Abigail's Flower</a>
-      <a class="item" href="https://terraria.wiki.gg/wiki/Flinx_Staff" target="_blank"><img src="https://terraria.wiki.gg/images/Flinx_Staff.png">Flinx Staff</a>
-
-    </div>
-    <div class="section">
-      <h3>Armor</h3>
-
-      <a class="item" href="https://terraria.wiki.gg/wiki/Flinx_Fur_Coat" target="_blank"><img src="https://terraria.wiki.gg/images/Flinx_Fur_Coat.png">Flinx Fur Coat</a>
-    
-    </div>
-
-    <div class="section">
-      <h3>Potions</h3>
-
-      <a class="item" href="https://terraria.wiki.gg/wiki/Summoning_Potion" target="_blank"><img src="https://terraria.wiki.gg/images/Summoning_Potion.png">Summoning Potion</a>
-
-    </div>
+  <!-- Progress -->
+  <div class="progress-info">
+    <span>Progress</span>
+    <span id="progressText">0 / 0 completed</span>
   </div>
-  
-  <div class="note">💡 Use the best armor available for Helmet and Boots.</div>
 
+<!-- ═══ Pre-Bosses (King Slime) (Eye Of Cthulhu) ═══ -->
+<div class="stage" data-stage="stage-pre-bosses">
+  <div class="stage-header" onclick="toggleStage(this)">
+    <span class="stage-index"></span>
+    <h2>Pre-Bosses (King Slime) (Eye Of Cthulhu)</h2>
+    <span class="done-label" style="display:none">✓ Done</span>
+    <input type="checkbox" class="stage-checkbox" onclick="event.preventDefault()">
+  </div>
+  <div class="stage-body">
+    <div class="grid">
+      <div class="section">
+        <h3>Weapons</h3>
+        <a class="item" href="https://terraria.wiki.gg/wiki/Leather_Whip" target="_blank"><img src="https://terraria.wiki.gg/images/Leather_Whip.png">Leather Whip</a>
+        <a class="item" href="https://terraria.wiki.gg/wiki/Snapthorn" target="_blank"><img src="https://terraria.wiki.gg/images/Snapthorn.png">Snapthorn</a>
+        <h3>Meteorite Crash Site Event</h3>
+        <a class="item" href="https://terraria.wiki.gg/wiki/Starcrash" target="_blank"><img src="https://terraria.wiki.gg/images/Starcrash.png">Starcrash</a>
+      </div>
+      <div class="section">
+        <h3>Minions</h3>
+        <a class="item" href="https://terraria.wiki.gg/wiki/Finch_Staff" target="_blank"><img src="https://terraria.wiki.gg/images/Finch_Staff.png">Finch Staff</a>
+        <a class="item" href="https://terraria.wiki.gg/wiki/Abigail%27s_Flower" target="_blank"><img src="https://terraria.wiki.gg/images/Abigail%27s_Flower.png">Abigail's Flower</a>
+        <a class="item" href="https://terraria.wiki.gg/wiki/Flinx_Staff" target="_blank"><img src="https://terraria.wiki.gg/images/Flinx_Staff.png">Flinx Staff</a>
+      </div>
+      <div class="section">
+        <h3>Armor</h3>
+        <a class="item" href="https://terraria.wiki.gg/wiki/Flinx_Fur_Coat" target="_blank"><img src="https://terraria.wiki.gg/images/Flinx_Fur_Coat.png">Flinx Fur Coat</a>
+      </div>
+      <div class="section">
+        <h3>Potions</h3>
+        <a class="item" href="https://terraria.wiki.gg/wiki/Summoning_Potion" target="_blank"><img src="https://terraria.wiki.gg/images/Summoning_Potion.png">Summoning Potion</a>
+      </div>
+    </div>
+    <div class="note">💡 Use the best armor available for Helmet and Boots.</div>
+  </div>
 </div>
 
 <!-- ═══ Pre (Eater of Worlds) (Brain of Cthulhu) ═══ -->
-<div class="stage">
-  <div class="stage-header"><div class="stage-dot"></div><h2>Pre (Eater of Worlds) (Brain of Cthulhu)</h2></div>
-  <div class="grid">
-    <div class="section">
-      <h3>Weapons</h3>
-
-      <a class="item" href="https://terraria.wiki.gg/wiki/Soulscourge" target="_blank"><img src="https://terraria.wiki.gg/images/Soulscourge.png">Soulscourge</a>
-      <a class="item" href="https://terraria.wiki.gg/wiki/Vasculash" target="_blank"><img src="https://terraria.wiki.gg/images/Vasculash.png">Vasculash</a>
-      <a class="item" href="https://terraria.wiki.gg/wiki/Snapthorn" target="_blank"><img src="https://terraria.wiki.gg/images/Snapthorn.png">Snapthorn</a>
-
-      <h3>Meteorite Crash Site Event</h3>
-
-      <a class="item" href="https://terraria.wiki.gg/wiki/Starcrash" target="_blank"><img src="https://terraria.wiki.gg/images/Starcrash.png">Starcrash</a>
-      
-    </div>
-    <div class="section">
-      <h3>Minions</h3>
-
-      <a class="item" href="https://terraria.wiki.gg/wiki/Finch_Staff" target="_blank"><img src="https://terraria.wiki.gg/images/Finch_Staff.png">Finch Staff</a>
-      <a class="item" href="https://terraria.wiki.gg/wiki/Abigail%27s_Flower" target="_blank"><img src="https://terraria.wiki.gg/images/Abigail%27s_Flower.png">Abigail's Flower</a>
-      <a class="item" href="https://terraria.wiki.gg/wiki/Flinx_Staff" target="_blank"><img src="https://terraria.wiki.gg/images/Flinx_Staff.png">Flinx Staff</a>
-
-    </div>
-    <div class="section">
-      <h3>Armor</h3>
-
-      <a class="item" href="https://terraria.wiki.gg/wiki/Flinx_Fur_Coat" target="_blank"><img src="https://terraria.wiki.gg/images/Flinx_Fur_Coat.png">Flinx Fur Coat</a>
-    
-    </div>
-
-    <div class="section">
-      <h3>Potions</h3>
-
-      <a class="item" href="https://terraria.wiki.gg/wiki/Summoning_Potion" target="_blank"><img src="https://terraria.wiki.gg/images/Summoning_Potion.png">Summoning Potion</a>
-
-    </div>
+<div class="stage" data-stage="stage-eow-boc">
+  <div class="stage-header" onclick="toggleStage(this)">
+    <span class="stage-index"></span>
+    <h2>Pre (Eater of Worlds) (Brain of Cthulhu)</h2>
+    <span class="done-label" style="display:none">✓ Done</span>
+    <input type="checkbox" class="stage-checkbox" onclick="event.preventDefault()">
   </div>
-
-  <div class="note">💡 Use the best armor available for Helmet and Boots.</div>
-
+  <div class="stage-body">
+    <div class="grid">
+      <div class="section">
+        <h3>Weapons</h3>
+        <a class="item" href="https://terraria.wiki.gg/wiki/Soulscourge" target="_blank"><img src="https://terraria.wiki.gg/images/Soulscourge.png">Soulscourge</a>
+        <a class="item" href="https://terraria.wiki.gg/wiki/Vasculash" target="_blank"><img src="https://terraria.wiki.gg/images/Vasculash.png">Vasculash</a>
+        <a class="item" href="https://terraria.wiki.gg/wiki/Snapthorn" target="_blank"><img src="https://terraria.wiki.gg/images/Snapthorn.png">Snapthorn</a>
+        <h3>Meteorite Crash Site Event</h3>
+        <a class="item" href="https://terraria.wiki.gg/wiki/Starcrash" target="_blank"><img src="https://terraria.wiki.gg/images/Starcrash.png">Starcrash</a>
+      </div>
+      <div class="section">
+        <h3>Minions</h3>
+        <a class="item" href="https://terraria.wiki.gg/wiki/Finch_Staff" target="_blank"><img src="https://terraria.wiki.gg/images/Finch_Staff.png">Finch Staff</a>
+        <a class="item" href="https://terraria.wiki.gg/wiki/Abigail%27s_Flower" target="_blank"><img src="https://terraria.wiki.gg/images/Abigail%27s_Flower.png">Abigail's Flower</a>
+        <a class="item" href="https://terraria.wiki.gg/wiki/Flinx_Staff" target="_blank"><img src="https://terraria.wiki.gg/images/Flinx_Staff.png">Flinx Staff</a>
+      </div>
+      <div class="section">
+        <h3>Armor</h3>
+        <a class="item" href="https://terraria.wiki.gg/wiki/Flinx_Fur_Coat" target="_blank"><img src="https://terraria.wiki.gg/images/Flinx_Fur_Coat.png">Flinx Fur Coat</a>
+      </div>
+      <div class="section">
+        <h3>Potions</h3>
+        <a class="item" href="https://terraria.wiki.gg/wiki/Summoning_Potion" target="_blank"><img src="https://terraria.wiki.gg/images/Summoning_Potion.png">Summoning Potion</a>
+      </div>
+    </div>
+    <div class="note">💡 Use the best armor available for Helmet and Boots.</div>
+  </div>
 </div>
 
 <!-- ═══ Pre (Queen Bee) (Deerclops) ═══ -->
-<div class="stage">
-  <div class="stage-header"><div class="stage-dot"></div><h2>Pre (Queen Bee) (Deerclops)</h2></div>
-  <div class="grid">
-    <div class="section">
-      <h3>Weapons</h3>
-
-      <a class="item" href="https://terraria.wiki.gg/wiki/Soulscourge" target="_blank"><img src="https://terraria.wiki.gg/images/Soulscourge.png">Soulscourge</a>
-      <a class="item" href="https://terraria.wiki.gg/wiki/Vasculash" target="_blank"><img src="https://terraria.wiki.gg/images/Vasculash.png">Vasculash</a>
-      <a class="item" href="https://terraria.wiki.gg/wiki/Snapthorn" target="_blank"><img src="https://terraria.wiki.gg/images/Snapthorn.png">Snapthorn</a>
-
-      <h3>Meteorite Crash Site Event</h3>
-
-      <a class="item" href="https://terraria.wiki.gg/wiki/Starcrash" target="_blank"><img src="https://terraria.wiki.gg/images/Starcrash.png">Starcrash</a>
-      
-    </div>
-    <div class="section">
-      <h3>Minions</h3>
-
-      <a class="item" href="https://terraria.wiki.gg/wiki/Imp_Staff" target="_blank"><img src="https://terraria.wiki.gg/images/Imp_Staff.png">Imp Staff</a>
-      
-    </div>
-    <div class="section">
-      <h3>Sentries</h3>
-
-      <a class="item" href="https://terraria.wiki.gg/wiki/Flameburst_sentry_summons" target="_blank"><img src="https://terraria.wiki.gg/images/Flameburst_Rod.png">Flameburst Rod</a>
-      <a class="item" href="https://terraria.wiki.gg/wiki/Ballista_sentry_summons" target="_blank"><img src="https://terraria.wiki.gg/images/Ballista_Rod.png">Ballista Rod</a>
-      
-    </div>
-    <div class="section">
-      <h3>Armor</h3>
-
-      <a class="item" href="https://terraria.wiki.gg/wiki/Obsidian_armor" target="_blank"><img src="https://terraria.wiki.gg/images/Obsidian_armor.png">Obsidian Armor</a>
-    
-    </div>
-    <div class="section">
-      <h3>Buffs</h3>
-
-      <a class="item" href="https://terraria.wiki.gg/wiki/War_Table" target="_blank"><img src="https://terraria.wiki.gg/images/War_Table.png">War Table</a>
-    
-    </div>
-    <div class="section">
-      <h3>Potions</h3>
-
-      <a class="item" href="https://terraria.wiki.gg/wiki/Summoning_Potion" target="_blank"><img src="https://terraria.wiki.gg/images/Summoning_Potion.png">Summoning Potion</a>
-
+<div class="stage" data-stage="stage-qb-deer">
+  <div class="stage-header" onclick="toggleStage(this)">
+    <span class="stage-index"></span>
+    <h2>Pre (Queen Bee) (Deerclops)</h2>
+    <span class="done-label" style="display:none">✓ Done</span>
+    <input type="checkbox" class="stage-checkbox" onclick="event.preventDefault()">
+  </div>
+  <div class="stage-body">
+    <div class="grid">
+      <div class="section">
+        <h3>Weapons</h3>
+        <a class="item" href="https://terraria.wiki.gg/wiki/Soulscourge" target="_blank"><img src="https://terraria.wiki.gg/images/Soulscourge.png">Soulscourge</a>
+        <a class="item" href="https://terraria.wiki.gg/wiki/Vasculash" target="_blank"><img src="https://terraria.wiki.gg/images/Vasculash.png">Vasculash</a>
+        <a class="item" href="https://terraria.wiki.gg/wiki/Snapthorn" target="_blank"><img src="https://terraria.wiki.gg/images/Snapthorn.png">Snapthorn</a>
+        <h3>Meteorite Crash Site Event</h3>
+        <a class="item" href="https://terraria.wiki.gg/wiki/Starcrash" target="_blank"><img src="https://terraria.wiki.gg/images/Starcrash.png">Starcrash</a>
+      </div>
+      <div class="section">
+        <h3>Minions</h3>
+        <a class="item" href="https://terraria.wiki.gg/wiki/Imp_Staff" target="_blank"><img src="https://terraria.wiki.gg/images/Imp_Staff.png">Imp Staff</a>
+      </div>
+      <div class="section">
+        <h3>Sentries</h3>
+        <a class="item" href="https://terraria.wiki.gg/wiki/Flameburst_sentry_summons" target="_blank"><img src="https://terraria.wiki.gg/images/Flameburst_Rod.png">Flameburst Rod</a>
+        <a class="item" href="https://terraria.wiki.gg/wiki/Ballista_sentry_summons" target="_blank"><img src="https://terraria.wiki.gg/images/Ballista_Rod.png">Ballista Rod</a>
+      </div>
+      <div class="section">
+        <h3>Armor</h3>
+        <a class="item" href="https://terraria.wiki.gg/wiki/Obsidian_armor" target="_blank"><img src="https://terraria.wiki.gg/images/Obsidian_armor.png">Obsidian Armor</a>
+      </div>
+      <div class="section">
+        <h3>Buffs</h3>
+        <a class="item" href="https://terraria.wiki.gg/wiki/War_Table" target="_blank"><img src="https://terraria.wiki.gg/images/War_Table.png">War Table</a>
+      </div>
+      <div class="section">
+        <h3>Potions</h3>
+        <a class="item" href="https://terraria.wiki.gg/wiki/Summoning_Potion" target="_blank"><img src="https://terraria.wiki.gg/images/Summoning_Potion.png">Summoning Potion</a>
+      </div>
     </div>
   </div>
 </div>
 
 <!-- ═══ Pre (Skeletron) ═══ -->
-<div class="stage">
-  <div class="stage-header"><div class="stage-dot"></div><h2>Pre (Skeletron)</h2></div>
-  <div class="grid">
-    <div class="section">
-      <h3>Weapons</h3>
-
-      <a class="item" href="https://terraria.wiki.gg/wiki/Soulscourge" target="_blank"><img src="https://terraria.wiki.gg/images/Soulscourge.png">Soulscourge</a>
-      <a class="item" href="https://terraria.wiki.gg/wiki/Vasculash" target="_blank"><img src="https://terraria.wiki.gg/images/Vasculash.png">Vasculash</a>
-      <a class="item" href="https://terraria.wiki.gg/wiki/Snapthorn" target="_blank"><img src="https://terraria.wiki.gg/images/Snapthorn.png">Snapthorn</a>
-
-      <h3>Meteorite Crash Site Event</h3>
-
-      <a class="item" href="https://terraria.wiki.gg/wiki/Starcrash" target="_blank"><img src="https://terraria.wiki.gg/images/Starcrash.png">Starcrash</a>
-      
-    </div>
-    <div class="section">
-      <h3>Minions</h3>
-
-      <a class="item" href="https://terraria.wiki.gg/wiki/Imp_Staff" target="_blank"><img src="https://terraria.wiki.gg/images/Imp_Staff.png">Imp Staff</a>
-      
-    </div>
-    <div class="section">
-      <h3>Sentries</h3>
-
-      <a class="item" href="https://terraria.wiki.gg/wiki/Flameburst_sentry_summons" target="_blank"><img src="https://terraria.wiki.gg/images/Flameburst_Rod.png">Flameburst Rod</a>
-      <a class="item" href="https://terraria.wiki.gg/wiki/Ballista_sentry_summons" target="_blank"><img src="https://terraria.wiki.gg/images/Ballista_Rod.png">Ballista Rod</a>
-      
-    </div>
-    <div class="section">
-      <h3>Armor</h3>
-
-      <a class="item" href="https://terraria.wiki.gg/wiki/Bee_armor" target="_blank"><img src="https://terraria.wiki.gg/images/Bee_armor.png">Bee Armor</a>
-      <a class="item" href="https://terraria.wiki.gg/wiki/Obsidian_armor" target="_blank"><img src="https://terraria.wiki.gg/images/Obsidian_armor.png">Obsidian Armor</a>
-    
-    </div>
-
-    <div class="section">
-      <h3>Accessories</h3>
-
-      <a class="item" href="https://terraria.wiki.gg/wiki/Pygmy_Necklace" target="_blank"><img src="https://terraria.wiki.gg/images/Pygmy_Necklace.png">Pygmy Necklace</a>
-    
-    </div>
-
-    <div class="section">
-      <h3>Buffs</h3>
-
-      <a class="item" href="https://terraria.wiki.gg/wiki/War_Table" target="_blank"><img src="https://terraria.wiki.gg/images/War_Table.png">War Table</a>
-    
-    </div>
-
-    <div class="section">
-      <h3>Potions</h3>
-
-      <a class="item" href="https://terraria.wiki.gg/wiki/Summoning_Potion" target="_blank"><img src="https://terraria.wiki.gg/images/Summoning_Potion.png">Summoning Potion</a>
-
+<div class="stage" data-stage="stage-skeletron">
+  <div class="stage-header" onclick="toggleStage(this)">
+    <span class="stage-index"></span>
+    <h2>Pre (Skeletron)</h2>
+    <span class="done-label" style="display:none">✓ Done</span>
+    <input type="checkbox" class="stage-checkbox" onclick="event.preventDefault()">
+  </div>
+  <div class="stage-body">
+    <div class="grid">
+      <div class="section">
+        <h3>Weapons</h3>
+        <a class="item" href="https://terraria.wiki.gg/wiki/Soulscourge" target="_blank"><img src="https://terraria.wiki.gg/images/Soulscourge.png">Soulscourge</a>
+        <a class="item" href="https://terraria.wiki.gg/wiki/Vasculash" target="_blank"><img src="https://terraria.wiki.gg/images/Vasculash.png">Vasculash</a>
+        <a class="item" href="https://terraria.wiki.gg/wiki/Snapthorn" target="_blank"><img src="https://terraria.wiki.gg/images/Snapthorn.png">Snapthorn</a>
+        <h3>Meteorite Crash Site Event</h3>
+        <a class="item" href="https://terraria.wiki.gg/wiki/Starcrash" target="_blank"><img src="https://terraria.wiki.gg/images/Starcrash.png">Starcrash</a>
+      </div>
+      <div class="section">
+        <h3>Minions</h3>
+        <a class="item" href="https://terraria.wiki.gg/wiki/Imp_Staff" target="_blank"><img src="https://terraria.wiki.gg/images/Imp_Staff.png">Imp Staff</a>
+      </div>
+      <div class="section">
+        <h3>Sentries</h3>
+        <a class="item" href="https://terraria.wiki.gg/wiki/Flameburst_sentry_summons" target="_blank"><img src="https://terraria.wiki.gg/images/Flameburst_Rod.png">Flameburst Rod</a>
+        <a class="item" href="https://terraria.wiki.gg/wiki/Ballista_sentry_summons" target="_blank"><img src="https://terraria.wiki.gg/images/Ballista_Rod.png">Ballista Rod</a>
+      </div>
+      <div class="section">
+        <h3>Armor</h3>
+        <a class="item" href="https://terraria.wiki.gg/wiki/Bee_armor" target="_blank"><img src="https://terraria.wiki.gg/images/Bee_armor.png">Bee Armor</a>
+        <a class="item" href="https://terraria.wiki.gg/wiki/Obsidian_armor" target="_blank"><img src="https://terraria.wiki.gg/images/Obsidian_armor.png">Obsidian Armor</a>
+      </div>
+      <div class="section">
+        <h3>Accessories</h3>
+        <a class="item" href="https://terraria.wiki.gg/wiki/Pygmy_Necklace" target="_blank"><img src="https://terraria.wiki.gg/images/Pygmy_Necklace.png">Pygmy Necklace</a>
+      </div>
+      <div class="section">
+        <h3>Buffs</h3>
+        <a class="item" href="https://terraria.wiki.gg/wiki/War_Table" target="_blank"><img src="https://terraria.wiki.gg/images/War_Table.png">War Table</a>
+      </div>
+      <div class="section">
+        <h3>Potions</h3>
+        <a class="item" href="https://terraria.wiki.gg/wiki/Summoning_Potion" target="_blank"><img src="https://terraria.wiki.gg/images/Summoning_Potion.png">Summoning Potion</a>
+      </div>
     </div>
   </div>
 </div>
 
 <!-- ═══ Pre (Wall of Flesh) ═══ -->
-<div class="stage">
-  <div class="stage-header"><div class="stage-dot"></div><h2>Pre (Wall of Flesh)</h2></div>
-  <div class="grid">
-    <div class="section">
-      <h3>Weapons</h3>
-
-      <a class="item" href="https://terraria.wiki.gg/wiki/Spinal_Tap" target="_blank"><img src="https://terraria.wiki.gg/images/Spinal_Tap.png">Spinal Tap</a>
-
-    </div>
-    <div class="section">
-      <h3>Minions</h3>
-
-      <a class="item" href="https://terraria.wiki.gg/wiki/Imp_Staff" target="_blank"><img src="https://terraria.wiki.gg/images/Imp_Staff.png">Imp Staff</a>
-      
-    </div>
-    <div class="section">
-      <h3>Sentries</h3>
-
-      <a class="item" href="https://terraria.wiki.gg/wiki/Flameburst_sentry_summons" target="_blank"><img src="https://terraria.wiki.gg/images/Flameburst_Rod.png">Flameburst Rod</a>
-      <a class="item" href="https://terraria.wiki.gg/wiki/Ballista_sentry_summons" target="_blank"><img src="https://terraria.wiki.gg/images/Ballista_Rod.png">Ballista Rod</a>
-      
-    </div>
-    <div class="section">
-      <h3>Armor</h3>
-
-      <a class="item" href="https://terraria.wiki.gg/wiki/Bee_armor" target="_blank"><img src="https://terraria.wiki.gg/images/Bee_armor.png">Bee Armor</a>
-      <a class="item" href="https://terraria.wiki.gg/wiki/Obsidian_armor" target="_blank"><img src="https://terraria.wiki.gg/images/Obsidian_armor.png">Obsidian Armor</a>
-    
-    </div>
-
-    <div class="section">
-      <h3>Accessories</h3>
-
-      <a class="item" href="https://terraria.wiki.gg/wiki/Pygmy_Necklace" target="_blank"><img src="https://terraria.wiki.gg/images/Pygmy_Necklace.png">Pygmy Necklace</a>
-    
-    </div>
-
-    <div class="section">
-      <h3>Buffs</h3>
-
-      <a class="item" href="https://terraria.wiki.gg/wiki/War_Table" target="_blank"><img src="https://terraria.wiki.gg/images/War_Table.png">War Table</a>
-      <a class="item" href="https://terraria.wiki.gg/wiki/Bewitching_Table" target="_blank"><img src="https://terraria.wiki.gg/images/Bewitching_Table.png">Bewitching Table</a>
-    
-    </div>
-
-    <div class="section">
-      <h3>Potions</h3>
-
-      <a class="item" href="https://terraria.wiki.gg/wiki/Summoning_Potion" target="_blank"><img src="https://terraria.wiki.gg/images/Summoning_Potion.png">Summoning Potion</a>
-
-    </div>
+<div class="stage" data-stage="stage-wof">
+  <div class="stage-header" onclick="toggleStage(this)">
+    <span class="stage-index"></span>
+    <h2>Pre (Wall of Flesh)</h2>
+    <span class="done-label" style="display:none">✓ Done</span>
+    <input type="checkbox" class="stage-checkbox" onclick="event.preventDefault()">
   </div>
-
-  <div class="note">💡 Health must have reached 400.</div>
-
-</div>
-
-
-<!-- ═══ Pre-Mechanical (Mechanical Eye) (Mechanical Worm) (Mechanical Skull) ═══ -->
-<div class="stage">
-  <div class="stage-header"><div class="stage-dot"></div><h2>Pre-Mechanical (Mechanical Eye) (Mechanical Worm) (Mechanical Skull)</h2></div>
-  <div class="grid">
-    <div class="section">
-      <h3>Weapons</h3>
-
-      <a class="item" href="https://terraria.wiki.gg/wiki/Firecracker" target="_blank"><img src="https://terraria.wiki.gg/images/Firecracker.png">Firecracker</a>
-      <a class="item" href="https://terraria.wiki.gg/wiki/Cool_Whip" target="_blank"><img src="https://terraria.wiki.gg/images/Cool_Whip.png">Cool Whip</a>
-
-      <h3>After mechanical boss has been defeated</h3>
-      
-      <a class="item" href="https://terraria.wiki.gg/wiki/Durendal" target="_blank"><img src="https://terraria.wiki.gg/images/Durendal.png">Durendal</a>
-      
+  <div class="stage-body">
+    <div class="grid">
+      <div class="section">
+        <h3>Weapons</h3>
+        <a class="item" href="https://terraria.wiki.gg/wiki/Spinal_Tap" target="_blank"><img src="https://terraria.wiki.gg/images/Spinal_Tap.png">Spinal Tap</a>
+      </div>
+      <div class="section">
+        <h3>Minions</h3>
+        <a class="item" href="https://terraria.wiki.gg/wiki/Imp_Staff" target="_blank"><img src="https://terraria.wiki.gg/images/Imp_Staff.png">Imp Staff</a>
+      </div>
+      <div class="section">
+        <h3>Sentries</h3>
+        <a class="item" href="https://terraria.wiki.gg/wiki/Flameburst_sentry_summons" target="_blank"><img src="https://terraria.wiki.gg/images/Flameburst_Rod.png">Flameburst Rod</a>
+        <a class="item" href="https://terraria.wiki.gg/wiki/Ballista_sentry_summons" target="_blank"><img src="https://terraria.wiki.gg/images/Ballista_Rod.png">Ballista Rod</a>
+      </div>
+      <div class="section">
+        <h3>Armor</h3>
+        <a class="item" href="https://terraria.wiki.gg/wiki/Bee_armor" target="_blank"><img src="https://terraria.wiki.gg/images/Bee_armor.png">Bee Armor</a>
+        <a class="item" href="https://terraria.wiki.gg/wiki/Obsidian_armor" target="_blank"><img src="https://terraria.wiki.gg/images/Obsidian_armor.png">Obsidian Armor</a>
+      </div>
+      <div class="section">
+        <h3>Accessories</h3>
+        <a class="item" href="https://terraria.wiki.gg/wiki/Pygmy_Necklace" target="_blank"><img src="https://terraria.wiki.gg/images/Pygmy_Necklace.png">Pygmy Necklace</a>
+      </div>
+      <div class="section">
+        <h3>Buffs</h3>
+        <a class="item" href="https://terraria.wiki.gg/wiki/War_Table" target="_blank"><img src="https://terraria.wiki.gg/images/War_Table.png">War Table</a>
+        <a class="item" href="https://terraria.wiki.gg/wiki/Bewitching_Table" target="_blank"><img src="https://terraria.wiki.gg/images/Bewitching_Table.png">Bewitching Table</a>
+      </div>
+      <div class="section">
+        <h3>Potions</h3>
+        <a class="item" href="https://terraria.wiki.gg/wiki/Summoning_Potion" target="_blank"><img src="https://terraria.wiki.gg/images/Summoning_Potion.png">Summoning Potion</a>
+      </div>
     </div>
-    <div class="section">
-      <h3>Minions</h3>
-
-      <a class="item" href="https://terraria.wiki.gg/wiki/Abigail%27s_Flower" target="_blank"><img src="https://terraria.wiki.gg/images/Abigail%27s_Flower.png">Abigail's Flower</a>
-      <a class="item" href="https://terraria.wiki.gg/wiki/Sanguine_Staff" target="_blank"><img src="https://terraria.wiki.gg/images/Sanguine_Staff.png">Sanguine Staff</a>
-      <a class="item" href="https://terraria.wiki.gg/wiki/Blade_Staff" target="_blank"><img src="https://terraria.wiki.gg/images/Blade_Staff.png">Blade Staff</a>
-      
-    </div>
-    <div class="section">
-      <h3>Sentries</h3>
-
-      <a class="item" href="https://terraria.wiki.gg/wiki/Flameburst_sentry_summons" target="_blank"><img src="https://terraria.wiki.gg/images/Flameburst_Rod.png">Flameburst Rod</a>
-      <a class="item" href="https://terraria.wiki.gg/wiki/Ballista_sentry_summons" target="_blank"><img src="https://terraria.wiki.gg/images/Ballista_Rod.png">Ballista Rod</a>
-
-      <h3>After at least one mechanical boss has been defeated</h3>
-
-      <a class="item" href="https://terraria.wiki.gg/wiki/Flameburst_sentry_summons" target="_blank"><img src="https://terraria.wiki.gg/images/Flameburst_Cane.png">Flameburst Cane</a>
-      <a class="item" href="https://terraria.wiki.gg/wiki/Ballista_sentry_summons" target="_blank"><img src="https://terraria.wiki.gg/images/Ballista_Cane.png">Ballista Cane</a>
-      
-    </div>
-    <div class="section">
-      <h3>Armor</h3>
-
-      <a class="item" href="https://terraria.wiki.gg/wiki/Spider_armor" target="_blank"><img src="https://terraria.wiki.gg/images/Spider_armor.png">Spider armor</a>
-
-      <h3>After mechanical boss has been defeated</h3>
-      
-      <a class="item" href="https://terraria.wiki.gg/wiki/Hallowed_armor" target="_blank"><img src="https://terraria.wiki.gg/images/Hallowed_armor.png">Hallowed Armor + Hallowed Hood</a>
-      
-    </div>
-
-    <div class="section">
-      <h3>Accessories</h3>
-
-      <a class="item" href="https://terraria.wiki.gg/wiki/Summoner_Emblem" target="_blank"><img src="https://terraria.wiki.gg/images/Summoner_Emblem.png">Summoner Emblem</a>
-      <a class="item" href="https://terraria.wiki.gg/wiki/Pygmy_Necklace" target="_blank"><img src="https://terraria.wiki.gg/images/Pygmy_Necklace.png">Pygmy Necklace</a>
-    
-    </div>
-
-    <div class="section">
-      <h3>Buffs</h3>
-
-      <a class="item" href="https://terraria.wiki.gg/wiki/War_Table" target="_blank"><img src="https://terraria.wiki.gg/images/War_Table.png">War Table</a>
-      <a class="item" href="https://terraria.wiki.gg/wiki/Bewitching_Table" target="_blank"><img src="https://terraria.wiki.gg/images/Bewitching_Table.png">Bewitching Table</a>
-    
-    </div>
-
-    <div class="section">
-      <h3>Potions</h3>
-
-      <a class="item" href="https://terraria.wiki.gg/wiki/Summoning_Potion" target="_blank"><img src="https://terraria.wiki.gg/images/Summoning_Potion.png">Summoning Potion</a>
-
-    </div>
+    <div class="note">💡 Health must have reached 400.</div>
   </div>
 </div>
-  
 
-<!-- ═══ Pre-Plantera (Plantera) ═══ -->
-<div class="stage">
-  <div class="stage-header"><div class="stage-dot"></div><h2>Pre-Plantera (Plantera)</h2></div>
-  <div class="grid">
-    <div class="section">
-      <h3>Weapons</h3>
-
-      <a class="item" href="https://terraria.wiki.gg/wiki/Durendal" target="_blank"><img src="https://terraria.wiki.gg/images/Durendal.png">Durendal</a>
-      
-    </div>
-    <div class="section">
-      <h3>Minions</h3>
-
-      <a class="item" href="https://terraria.wiki.gg/wiki/Abigail%27s_Flower" target="_blank"><img src="https://terraria.wiki.gg/images/Abigail%27s_Flower.png">Abigail's Flower</a>
-      <a class="item" href="https://terraria.wiki.gg/wiki/Sanguine_Staff" target="_blank"><img src="https://terraria.wiki.gg/images/Sanguine_Staff.png">Sanguine Staff</a>
-      <a class="item" href="https://terraria.wiki.gg/wiki/Blade_Staff" target="_blank"><img src="https://terraria.wiki.gg/images/Blade_Staff.png">Blade Staff</a>
-      
-    </div>
-    <div class="section">
-      <h3>Sentries</h3>
-
-      <a class="item" href="https://terraria.wiki.gg/wiki/Flameburst_sentry_summons" target="_blank"><img src="https://terraria.wiki.gg/images/Flameburst_Cane.png">Flameburst Cane</a>
-      <a class="item" href="https://terraria.wiki.gg/wiki/Ballista_sentry_summons" target="_blank"><img src="https://terraria.wiki.gg/images/Ballista_Cane.png">Ballista Cane</a>
-      <a class="item" href="https://terraria.wiki.gg/wiki/Queen_Spider_Staff" target="_blank"><img src="https://terraria.wiki.gg/images/Queen_Spider_Staff.png">Queen Spider Staff</a>
-      
-    </div>
-    <div class="section">
-      <h3>Armor</h3>
-
-      <a class="item" href="https://terraria.wiki.gg/wiki/Chlorophyte_armor" target="_blank"><img src="https://terraria.wiki.gg/images/Chlorophyte_armor.png">Chlorophyte Armor + Chlorophyte Visor</a>
-    
-    </div>
-
-    <div class="section">
-      <h3>Accessories</h3>
-
-      <a class="item" href="https://terraria.wiki.gg/wiki/Summoner_Emblem" target="_blank"><img src="https://terraria.wiki.gg/images/Summoner_Emblem.png">Summoner Emblem</a>
-      <a class="item" href="https://terraria.wiki.gg/wiki/Pygmy_Necklace" target="_blank"><img src="https://terraria.wiki.gg/images/Pygmy_Necklace.png">Pygmy Necklace</a>
-    
-    </div>
-
-    <div class="section">
-      <h3>Buffs</h3>
-
-      <a class="item" href="https://terraria.wiki.gg/wiki/War_Table" target="_blank"><img src="https://terraria.wiki.gg/images/War_Table.png">War Table</a>
-      <a class="item" href="https://terraria.wiki.gg/wiki/Bewitching_Table" target="_blank"><img src="https://terraria.wiki.gg/images/Bewitching_Table.png">Bewitching Table</a>
-    
-    </div>
-
-    <div class="section">
-      <h3>Potions</h3>
-
-      <a class="item" href="https://terraria.wiki.gg/wiki/Summoning_Potion" target="_blank"><img src="https://terraria.wiki.gg/images/Summoning_Potion.png">Summoning Potion</a>
-
+<!-- ═══ Pre-Mechanical Bosses ═══ -->
+<div class="stage" data-stage="stage-mech">
+  <div class="stage-header" onclick="toggleStage(this)">
+    <span class="stage-index"></span>
+    <h2>Pre-Mechanical (Mechanical Eye) (Mechanical Worm) (Mechanical Skull)</h2>
+    <span class="done-label" style="display:none">✓ Done</span>
+    <input type="checkbox" class="stage-checkbox" onclick="event.preventDefault()">
+  </div>
+  <div class="stage-body">
+    <div class="grid">
+      <div class="section">
+        <h3>Weapons</h3>
+        <a class="item" href="https://terraria.wiki.gg/wiki/Firecracker" target="_blank"><img src="https://terraria.wiki.gg/images/Firecracker.png">Firecracker</a>
+        <a class="item" href="https://terraria.wiki.gg/wiki/Cool_Whip" target="_blank"><img src="https://terraria.wiki.gg/images/Cool_Whip.png">Cool Whip</a>
+        <h3>After mechanical boss has been defeated</h3>
+        <a class="item" href="https://terraria.wiki.gg/wiki/Durendal" target="_blank"><img src="https://terraria.wiki.gg/images/Durendal.png">Durendal</a>
+      </div>
+      <div class="section">
+        <h3>Minions</h3>
+        <a class="item" href="https://terraria.wiki.gg/wiki/Abigail%27s_Flower" target="_blank"><img src="https://terraria.wiki.gg/images/Abigail%27s_Flower.png">Abigail's Flower</a>
+        <a class="item" href="https://terraria.wiki.gg/wiki/Sanguine_Staff" target="_blank"><img src="https://terraria.wiki.gg/images/Sanguine_Staff.png">Sanguine Staff</a>
+        <a class="item" href="https://terraria.wiki.gg/wiki/Blade_Staff" target="_blank"><img src="https://terraria.wiki.gg/images/Blade_Staff.png">Blade Staff</a>
+      </div>
+      <div class="section">
+        <h3>Sentries</h3>
+        <a class="item" href="https://terraria.wiki.gg/wiki/Flameburst_sentry_summons" target="_blank"><img src="https://terraria.wiki.gg/images/Flameburst_Rod.png">Flameburst Rod</a>
+        <a class="item" href="https://terraria.wiki.gg/wiki/Ballista_sentry_summons" target="_blank"><img src="https://terraria.wiki.gg/images/Ballista_Rod.png">Ballista Rod</a>
+        <h3>After at least one mechanical boss has been defeated</h3>
+        <a class="item" href="https://terraria.wiki.gg/wiki/Flameburst_sentry_summons" target="_blank"><img src="https://terraria.wiki.gg/images/Flameburst_Cane.png">Flameburst Cane</a>
+        <a class="item" href="https://terraria.wiki.gg/wiki/Ballista_sentry_summons" target="_blank"><img src="https://terraria.wiki.gg/images/Ballista_Cane.png">Ballista Cane</a>
+      </div>
+      <div class="section">
+        <h3>Armor</h3>
+        <a class="item" href="https://terraria.wiki.gg/wiki/Spider_armor" target="_blank"><img src="https://terraria.wiki.gg/images/Spider_armor.png">Spider armor</a>
+        <h3>After mechanical boss has been defeated</h3>
+        <a class="item" href="https://terraria.wiki.gg/wiki/Hallowed_armor" target="_blank"><img src="https://terraria.wiki.gg/images/Hallowed_armor.png">Hallowed Armor + Hallowed Hood</a>
+      </div>
+      <div class="section">
+        <h3>Accessories</h3>
+        <a class="item" href="https://terraria.wiki.gg/wiki/Summoner_Emblem" target="_blank"><img src="https://terraria.wiki.gg/images/Summoner_Emblem.png">Summoner Emblem</a>
+        <a class="item" href="https://terraria.wiki.gg/wiki/Pygmy_Necklace" target="_blank"><img src="https://terraria.wiki.gg/images/Pygmy_Necklace.png">Pygmy Necklace</a>
+      </div>
+      <div class="section">
+        <h3>Buffs</h3>
+        <a class="item" href="https://terraria.wiki.gg/wiki/War_Table" target="_blank"><img src="https://terraria.wiki.gg/images/War_Table.png">War Table</a>
+        <a class="item" href="https://terraria.wiki.gg/wiki/Bewitching_Table" target="_blank"><img src="https://terraria.wiki.gg/images/Bewitching_Table.png">Bewitching Table</a>
+      </div>
+      <div class="section">
+        <h3>Potions</h3>
+        <a class="item" href="https://terraria.wiki.gg/wiki/Summoning_Potion" target="_blank"><img src="https://terraria.wiki.gg/images/Summoning_Potion.png">Summoning Potion</a>
+      </div>
     </div>
   </div>
 </div>
 
-
-
-
+<!-- ═══ Pre-Plantera ═══ -->
+<div class="stage" data-stage="stage-plantera">
+  <div class="stage-header" onclick="toggleStage(this)">
+    <span class="stage-index"></span>
+    <h2>Pre-Plantera (Plantera)</h2>
+    <span class="done-label" style="display:none">✓ Done</span>
+    <input type="checkbox" class="stage-checkbox" onclick="event.preventDefault()">
+  </div>
+  <div class="stage-body">
+    <div class="grid">
+      <div class="section">
+        <h3>Weapons</h3>
+        <a class="item" href="https://terraria.wiki.gg/wiki/Durendal" target="_blank"><img src="https://terraria.wiki.gg/images/Durendal.png">Durendal</a>
+      </div>
+      <div class="section">
+        <h3>Minions</h3>
+        <a class="item" href="https://terraria.wiki.gg/wiki/Abigail%27s_Flower" target="_blank"><img src="https://terraria.wiki.gg/images/Abigail%27s_Flower.png">Abigail's Flower</a>
+        <a class="item" href="https://terraria.wiki.gg/wiki/Sanguine_Staff" target="_blank"><img src="https://terraria.wiki.gg/images/Sanguine_Staff.png">Sanguine Staff</a>
+        <a class="item" href="https://terraria.wiki.gg/wiki/Blade_Staff" target="_blank"><img src="https://terraria.wiki.gg/images/Blade_Staff.png">Blade Staff</a>
+      </div>
+      <div class="section">
+        <h3>Sentries</h3>
+        <a class="item" href="https://terraria.wiki.gg/wiki/Flameburst_sentry_summons" target="_blank"><img src="https://terraria.wiki.gg/images/Flameburst_Cane.png">Flameburst Cane</a>
+        <a class="item" href="https://terraria.wiki.gg/wiki/Ballista_sentry_summons" target="_blank"><img src="https://terraria.wiki.gg/images/Ballista_Cane.png">Ballista Cane</a>
+        <a class="item" href="https://terraria.wiki.gg/wiki/Queen_Spider_Staff" target="_blank"><img src="https://terraria.wiki.gg/images/Queen_Spider_Staff.png">Queen Spider Staff</a>
+      </div>
+      <div class="section">
+        <h3>Armor</h3>
+        <a class="item" href="https://terraria.wiki.gg/wiki/Chlorophyte_armor" target="_blank"><img src="https://terraria.wiki.gg/images/Chlorophyte_armor.png">Chlorophyte Armor + Chlorophyte Visor</a>
+      </div>
+      <div class="section">
+        <h3>Accessories</h3>
+        <a class="item" href="https://terraria.wiki.gg/wiki/Summoner_Emblem" target="_blank"><img src="https://terraria.wiki.gg/images/Summoner_Emblem.png">Summoner Emblem</a>
+        <a class="item" href="https://terraria.wiki.gg/wiki/Pygmy_Necklace" target="_blank"><img src="https://terraria.wiki.gg/images/Pygmy_Necklace.png">Pygmy Necklace</a>
+      </div>
+      <div class="section">
+        <h3>Buffs</h3>
+        <a class="item" href="https://terraria.wiki.gg/wiki/War_Table" target="_blank"><img src="https://terraria.wiki.gg/images/War_Table.png">War Table</a>
+        <a class="item" href="https://terraria.wiki.gg/wiki/Bewitching_Table" target="_blank"><img src="https://terraria.wiki.gg/images/Bewitching_Table.png">Bewitching Table</a>
+      </div>
+      <div class="section">
+        <h3>Potions</h3>
+        <a class="item" href="https://terraria.wiki.gg/wiki/Summoning_Potion" target="_blank"><img src="https://terraria.wiki.gg/images/Summoning_Potion.png">Summoning Potion</a>
+      </div>
+    </div>
+  </div>
 </div>
+
+</div><!-- /container -->
 
 <footer>
   Data diadaptasi dari Terraria Wiki · Class Setup Guide
   <p>Join My Community: <a href="https://discord.gg/hSqjzEp5u7">Discord</a></p>
 </footer>
 
+<script>
+  const KEY = 'terraria-summoning';
+
+  function stages() {
+    return Array.from(document.querySelectorAll('div.stage'));
+  }
+
+  function save() {
+    localStorage.setItem(KEY, JSON.stringify(stages().map(s => s.classList.contains('done'))));
+    render();
+  }
+
+  function load() {
+    stages().forEach((s, i) => {
+      s.querySelector('.stage-index').textContent = i + 1;
+    });
+    let data = [];
+    try { data = JSON.parse(localStorage.getItem(KEY) || '[]'); } catch(e) {}
+    stages().forEach((s, i) => {
+      const body = s.querySelector('.stage-body');
+      body.style.transition = 'none';
+      if (data[i] === true) {
+        s.classList.add('done');
+        body.style.maxHeight = '0';
+        body.style.opacity = '0';
+        s.querySelector('.done-label').style.display = 'inline';
+        s.querySelector('.stage-checkbox').checked = true;
+      } else {
+        s.classList.remove('done');
+        body.style.maxHeight = '2000px';
+        body.style.opacity = '1';
+        s.querySelector('.done-label').style.display = 'none';
+        s.querySelector('.stage-checkbox').checked = false;
+      }
+      setTimeout(() => { body.style.transition = ''; }, 100);
+    });
+    render();
+  }
+
+  function toggleStage(header) {
+    const s = header.closest('div.stage');
+    const body = s.querySelector('.stage-body');
+    const nowDone = !s.classList.contains('done');
+
+    if (nowDone) {
+      s.classList.add('done');
+      body.style.maxHeight = '0';
+      body.style.opacity = '0';
+      s.querySelector('.done-label').style.display = 'inline';
+      s.querySelector('.stage-checkbox').checked = true;
+    } else {
+      s.classList.remove('done');
+      body.style.maxHeight = '2000px';
+      body.style.opacity = '1';
+      s.querySelector('.done-label').style.display = 'none';
+      s.querySelector('.stage-checkbox').checked = false;
+    }
+
+    save();
+  }
+
+  function render() {
+    const all = stages();
+    const doneNums = all.map((s, i) => s.classList.contains('done') ? i + 1 : null).filter(Boolean);
+    let text = `${doneNums.length} / ${all.length} completed`;
+    if (doneNums.length > 0) text += ` · Stage ${doneNums.join(', ')}`;
+    document.getElementById('progressText').textContent = text;
+  }
+
+  window.addEventListener('DOMContentLoaded', load);
+</script>
+
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
