@@ -139,17 +139,17 @@ footer{text-align:center;padding:24px;color:var(--muted);font-size:12px;border-t
 
   <div class="legend">
     <span style="margin-right:2px">Item:</span>
-    <div class="legend-item"><div class="ld"></div>Belum</div>
-    <div class="legend-item"><div class="ld owned"></div>✓ Dimiliki <span style="font-weight:400;color:#aaa">(klik 1×)</span></div>
-    <div class="legend-item"><div class="ld skip"></div>✗ Skip <span style="font-weight:400;color:#aaa">(klik 2×)</span></div>
-    <div class="legend-item" style="color:#bbb;font-weight:400">(klik 3× = reset)</div>
+    <div class="legend-item"><div class="ld"></div>Not yet</div>
+    <div class="legend-item"><div class="ld owned"></div>✓ Owned <span style="font-weight:400;color:#aaa">(Click 1×)</span></div>
+    <div class="legend-item"><div class="ld skip"></div>✗ Skip <span style="font-weight:400;color:#aaa">(Click 2×)</span></div>
+    <div class="legend-item" style="color:#bbb;font-weight:400">(Click 3× = reset)</div>
   </div>
 
   <div class="summary">
-    <span>🎒 Dimiliki: <b id="ownedCount">0</b></span>
+    <span>🎒 Owned: <b id="ownedCount">0</b></span>
     <span>⛔ Skip: <span class="sc" id="skipCount">0</span></span>
-    <span id="ownedNames">— belum ada item yang ditandai</span>
-    <button class="reset-btn" onclick="resetAll()">Reset semua</button>
+    <span id="ownedNames">— no items marked yet</span>
+    <button class="reset-btn" onclick="resetAll()">Reset everything</button>
   </div>
 
 <!-- ═══ 1. Pre-Bosses ═══ -->
@@ -555,6 +555,7 @@ window.addEventListener('DOMContentLoaded',()=>{loadItems();loadStages();applyAl
 </script>
 </body>
 </html>
+
 
 
 
