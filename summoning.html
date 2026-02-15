@@ -694,7 +694,24 @@ footer{text-align:center;padding:24px;color:var(--muted);font-size:12px;border-t
 // Format: { unlock, get, desc }
 // Ganti [write on here] dengan teks kamu sendiri!
 const ITEM_INFO = {
-  'summoning-potion': { unlock: 'Fishing', get: 'Crafting on Placed Bottle: \n\n Moonglow ×1\n Bottled Water ×1\n Variegated Lardfish ×1)', desc: '- Moonglow:\n Can get on block Jungle Grass \n\n - Variegated Lardfish:\n Can get fish on biome Underground Jungle' },
+    'summoning-potion': {
+    unlock: 'Fishing',
+    get: 'Crafting on Placed Bottle: \n\n Moonglow ×1\n Bottled Water ×1\n Variegated Lardfish ×1',
+    desc: `- Moonglow:
+    Can get on block Jungle Grass 
+    
+    ->Glass:
+    Craft Any Sand Block ×2 on Furnace
+    Craft Any Glass Platfrom ×2 By Hand
+    Craft Glass Wall ×4 on Work Bench
+
+    ->Bottle:
+    Craft Glass on Furnace
+
+    - Bottled Water:
+    Craft Bottle on Water
+    
+    - Variegated Lardfish:\n Can get fish on biome Underground Jungle` },
   'firecracker': { unlock: 'After Defeated Boss Wall of Flesh', get: '25% Chance of Dropped Boss', desc: '' },
 };
 
@@ -907,6 +924,7 @@ window.addEventListener('DOMContentLoaded', () => {
 </script>
 </body>
 </html>
+
 
 
 
