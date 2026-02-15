@@ -98,6 +98,107 @@ header p{margin-top:6px;color:var(--muted);font-size:14px;font-weight:600}
 /* none → empty */
 .item-btn[data-s="none"]::before,.item-btn[data-s="none"]::after{display:none}
 
+/* ── TOOLTIP POPUP ── */
+.tooltip-btn{
+  width:16px;height:16px;border-radius:50%;
+  border:1.5px solid #b0b8d0;background:#f0f2f8;
+  color:#7a88aa;font-size:10px;font-weight:700;
+  cursor:pointer;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
+  margin-left:2px;margin-right:2px;
+  transition:background .15s,border-color .15s,color .15s;
+  position:relative;z-index:1;
+  font-family:'Nunito',sans-serif;
+  padding:0;outline:none;
+}
+.tooltip-btn:hover{background:var(--accent);border-color:var(--accent);color:#fff}
+
+/* Popup overlay */
+.item-popup{
+  display:none;
+  position:fixed;
+  z-index:9999;
+  width:280px;
+  background:#1a1d2e;
+  border:1px solid rgba(102,51,221,.4);
+  border-radius:12px;
+  box-shadow:0 8px 32px rgba(0,0,0,.45);
+  overflow:hidden;
+  pointer-events:none;
+}
+.item-popup.visible{
+  display:block;
+  pointer-events:auto;
+  animation:popupIn .18s cubic-bezier(.34,1.56,.64,1) both;
+}
+@keyframes popupIn{
+  from{opacity:0;transform:scale(.88) translateY(6px)}
+  to{opacity:1;transform:scale(1) translateY(0)}
+}
+.popup-header{
+  padding:10px 12px 8px;
+  background:rgba(102,51,221,.18);
+  border-bottom:1px solid rgba(102,51,221,.2);
+  display:flex;align-items:center;gap:8px;
+}
+.popup-header img{
+  width:28px;height:28px;
+  image-rendering:pixelated;
+  object-fit:contain;
+  flex-shrink:0;
+}
+.popup-header-name{
+  font-family:'Cinzel',serif;
+  font-size:12px;
+  color:#e0d8ff;
+  font-weight:700;
+  letter-spacing:.3px;
+}
+.popup-close{
+  margin-left:auto;
+  width:20px;height:20px;
+  border-radius:50%;
+  border:none;
+  background:rgba(255,255,255,.1);
+  color:#aaa;
+  font-size:13px;
+  cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;
+  transition:background .15s,color .15s;
+  padding:0;
+}
+.popup-close:hover{background:rgba(204,51,51,.5);color:#fff}
+.popup-scroll{
+  max-height:220px;
+  overflow-y:auto;
+  padding:12px;
+  scrollbar-width:thin;
+  scrollbar-color:rgba(102,51,221,.4) transparent;
+}
+.popup-scroll::-webkit-scrollbar{width:4px}
+.popup-scroll::-webkit-scrollbar-track{background:transparent}
+.popup-scroll::-webkit-scrollbar-thumb{background:rgba(102,51,221,.4);border-radius:2px}
+.popup-section{margin-bottom:12px}
+.popup-section:last-child{margin-bottom:0}
+.popup-section-label{
+  font-size:9.5px;font-weight:700;
+  text-transform:uppercase;letter-spacing:1.2px;
+  color:#7b6fb5;
+  margin-bottom:4px;
+  display:flex;align-items:center;gap:5px;
+}
+.popup-section-label .licon{font-size:11px}
+.popup-section-text{
+  font-size:12px;font-weight:600;
+  color:#c8c0e8;
+  line-height:1.55;
+}
+.popup-divider{
+  height:1px;background:rgba(102,51,221,.15);
+  margin:0 12px;
+}
+
 /* Note */
 .note{margin:0 16px 16px;padding:10px 14px;background:#fffbea;border-left:3px solid var(--gold);border-radius:0 8px 8px 0;font-size:12.5px;color:#7a5c00;line-height:1.6}
 
@@ -131,6 +232,32 @@ footer{text-align:center;padding:24px;color:var(--muted);font-size:12px;border-t
   </div>
 </header>
 
+<!-- Global Popup Element (singleton) -->
+<div class="item-popup" id="itemPopup">
+  <div class="popup-header">
+    <img id="popupImg" src="" alt="">
+    <span class="popup-header-name" id="popupName"></span>
+    <button class="popup-close" onclick="closePopup()">✕</button>
+  </div>
+  <div class="popup-divider"></div>
+  <div class="popup-scroll">
+    <div class="popup-section" id="psUnlock">
+      <div class="popup-section-label"><span class="licon">🔓</span> How to Unlock</div>
+      <div class="popup-section-text" id="popupUnlock"></div>
+    </div>
+    <div class="popup-divider" style="margin:8px 0"></div>
+    <div class="popup-section" id="psGet">
+      <div class="popup-section-label"><span class="licon">⚒️</span> How to Get</div>
+      <div class="popup-section-text" id="popupGet"></div>
+    </div>
+    <div class="popup-divider" style="margin:8px 0"></div>
+    <div class="popup-section" id="psDesc">
+      <div class="popup-section-label"><span class="licon">📖</span> Description</div>
+      <div class="popup-section-text" id="popupDesc"></div>
+    </div>
+  </div>
+</div>
+
 <div class="container">
   <div class="progress-info">
     <span>Stage Progress</span>
@@ -143,6 +270,7 @@ footer{text-align:center;padding:24px;color:var(--muted);font-size:12px;border-t
     <div class="legend-item"><div class="ld owned"></div>✓ Owned <span style="font-weight:400;color:#aaa">(Click 1×)</span></div>
     <div class="legend-item"><div class="ld skip"></div>✗ Skip <span style="font-weight:400;color:#aaa">(Click 2×)</span></div>
     <div class="legend-item" style="color:#bbb;font-weight:400">(Click 3× = reset)</div>
+    <div class="legend-item" style="color:#aaa;font-weight:400;margin-left:6px">· <span style="background:#1a1d2e;color:#c8c0e8;font-size:10px;padding:1px 5px;border-radius:4px;font-weight:700">ℹ</span> = Info popup</div>
   </div>
 
   <div class="summary">
@@ -164,24 +292,52 @@ footer{text-align:center;padding:24px;color:var(--muted);font-size:12px;border-t
     <div class="grid">
       <div class="section">
         <h3>Weapons</h3>
-        <div class="item-wrap" data-item-id="leather-whip" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Leather_Whip" target="_blank"><img src="https://terraria.wiki.gg/images/Leather_Whip.png">Leather Whip</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
-        <div class="item-wrap" data-item-id="snapthorn" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Snapthorn" target="_blank"><img src="https://terraria.wiki.gg/images/Snapthorn.png">Snapthorn</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        <div class="item-wrap" data-item-id="leather-whip" data-state="none">
+          <a class="item" href="https://terraria.wiki.gg/wiki/Leather_Whip" target="_blank"><img src="https://terraria.wiki.gg/images/Leather_Whip.png">Leather Whip</a>
+          <button class="tooltip-btn" onclick="openPopup(event,'leather-whip')">ℹ</button>
+          <button class="item-btn" data-s="none" onclick="cycleItem(this)"></button>
+        </div>
+        <div class="item-wrap" data-item-id="snapthorn" data-state="none">
+          <a class="item" href="https://terraria.wiki.gg/wiki/Snapthorn" target="_blank"><img src="https://terraria.wiki.gg/images/Snapthorn.png">Snapthorn</a>
+          <button class="tooltip-btn" onclick="openPopup(event,'snapthorn')">ℹ</button>
+          <button class="item-btn" data-s="none" onclick="cycleItem(this)"></button>
+        </div>
       </div>
       <div class="section">
         <h3>Minions</h3>
         <h3 style="margin-top:8px">Blood Moon Event</h3>
-        <div class="item-wrap" data-item-id="vampire-frog-staff" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Vampire_Frog_Staff" target="_blank"><img src="https://terraria.wiki.gg/images/Vampire_Frog_Staff.png">Vampire Frog Staff</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        <div class="item-wrap" data-item-id="vampire-frog-staff" data-state="none">
+          <a class="item" href="https://terraria.wiki.gg/wiki/Vampire_Frog_Staff" target="_blank"><img src="https://terraria.wiki.gg/images/Vampire_Frog_Staff.png">Vampire Frog Staff</a>
+          <button class="tooltip-btn" onclick="openPopup(event,'vampire-frog-staff')">ℹ</button>
+          <button class="item-btn" data-s="none" onclick="cycleItem(this)"></button>
+        </div>
         <h3 style="margin-top:8px"></h3>
-        <div class="item-wrap" data-item-id="abigails-flower" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Abigail%27s_Flower" target="_blank"><img src="https://terraria.wiki.gg/images/Abigail%27s_Flower.png">Abigail's Flower</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
-        <div class="item-wrap" data-item-id="flinx-staff" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Flinx_Staff" target="_blank"><img src="https://terraria.wiki.gg/images/Flinx_Staff.png">Flinx Staff</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        <div class="item-wrap" data-item-id="abigails-flower" data-state="none">
+          <a class="item" href="https://terraria.wiki.gg/wiki/Abigail%27s_Flower" target="_blank"><img src="https://terraria.wiki.gg/images/Abigail%27s_Flower.png">Abigail's Flower</a>
+          <button class="tooltip-btn" onclick="openPopup(event,'abigails-flower')">ℹ</button>
+          <button class="item-btn" data-s="none" onclick="cycleItem(this)"></button>
+        </div>
+        <div class="item-wrap" data-item-id="flinx-staff" data-state="none">
+          <a class="item" href="https://terraria.wiki.gg/wiki/Flinx_Staff" target="_blank"><img src="https://terraria.wiki.gg/images/Flinx_Staff.png">Flinx Staff</a>
+          <button class="tooltip-btn" onclick="openPopup(event,'flinx-staff')">ℹ</button>
+          <button class="item-btn" data-s="none" onclick="cycleItem(this)"></button>
+        </div>
       </div>
       <div class="section">
         <h3>Armor</h3>
-        <div class="item-wrap" data-item-id="flinx-fur-coat" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Flinx_Fur_Coat" target="_blank"><img src="https://terraria.wiki.gg/images/Flinx_Fur_Coat.png">Flinx Fur Coat</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        <div class="item-wrap" data-item-id="flinx-fur-coat" data-state="none">
+          <a class="item" href="https://terraria.wiki.gg/wiki/Flinx_Fur_Coat" target="_blank"><img src="https://terraria.wiki.gg/images/Flinx_Fur_Coat.png">Flinx Fur Coat</a>
+          <button class="tooltip-btn" onclick="openPopup(event,'flinx-fur-coat')">ℹ</button>
+          <button class="item-btn" data-s="none" onclick="cycleItem(this)"></button>
+        </div>
       </div>
       <div class="section">
         <h3>Potions</h3>
-        <div class="item-wrap" data-item-id="summoning-potion" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Summoning_Potion" target="_blank"><img src="https://terraria.wiki.gg/images/Summoning_Potion.png">Summoning Potion</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        <div class="item-wrap" data-item-id="summoning-potion" data-state="none">
+          <a class="item" href="https://terraria.wiki.gg/wiki/Summoning_Potion" target="_blank"><img src="https://terraria.wiki.gg/images/Summoning_Potion.png">Summoning Potion</a>
+          <button class="tooltip-btn" onclick="openPopup(event,'summoning-potion')">ℹ</button>
+          <button class="item-btn" data-s="none" onclick="cycleItem(this)"></button>
+        </div>
       </div>
     </div>
     <div class="note">💡 Use the best armor available for Helmet and Boots.</div>
@@ -200,26 +356,26 @@ footer{text-align:center;padding:24px;color:var(--muted);font-size:12px;border-t
     <div class="grid">
       <div class="section">
         <h3>Weapons</h3>
-        <div class="item-wrap" data-item-id="soulscourge" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Soulscourge" target="_blank"><img src="https://terraria.wiki.gg/images/Soulscourge.png">Soulscourge</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
-        <div class="item-wrap" data-item-id="vasculash" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Vasculash" target="_blank"><img src="https://terraria.wiki.gg/images/Vasculash.png">Vasculash</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
-        <div class="item-wrap" data-item-id="snapthorn" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Snapthorn" target="_blank"><img src="https://terraria.wiki.gg/images/Snapthorn.png">Snapthorn</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        <div class="item-wrap" data-item-id="soulscourge" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Soulscourge" target="_blank"><img src="https://terraria.wiki.gg/images/Soulscourge.png">Soulscourge</a><button class="tooltip-btn" onclick="openPopup(event,'soulscourge')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        <div class="item-wrap" data-item-id="vasculash" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Vasculash" target="_blank"><img src="https://terraria.wiki.gg/images/Vasculash.png">Vasculash</a><button class="tooltip-btn" onclick="openPopup(event,'vasculash')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        <div class="item-wrap" data-item-id="snapthorn" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Snapthorn" target="_blank"><img src="https://terraria.wiki.gg/images/Snapthorn.png">Snapthorn</a><button class="tooltip-btn" onclick="openPopup(event,'snapthorn')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
       </div>
       <div class="section">
         <h3>Minions</h3>
         <h3 style="margin-top:8px">Blood Moon Event</h3>
-        <div class="item-wrap" data-item-id="vampire-frog-staff" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Vampire_Frog_Staff" target="_blank"><img src="https://terraria.wiki.gg/images/Vampire_Frog_Staff.png">Vampire Frog Staff</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        <div class="item-wrap" data-item-id="vampire-frog-staff" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Vampire_Frog_Staff" target="_blank"><img src="https://terraria.wiki.gg/images/Vampire_Frog_Staff.png">Vampire Frog Staff</a><button class="tooltip-btn" onclick="openPopup(event,'vampire-frog-staff')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
         <h3 style="margin-top:8px"></h3>
-        <div class="item-wrap" data-item-id="finch-staff" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Finch_Staff" target="_blank"><img src="https://terraria.wiki.gg/images/Finch_Staff.png">Finch Staff</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
-        <div class="item-wrap" data-item-id="abigails-flower" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Abigail%27s_Flower" target="_blank"><img src="https://terraria.wiki.gg/images/Abigail%27s_Flower.png">Abigail's Flower</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
-        <div class="item-wrap" data-item-id="flinx-staff" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Flinx_Staff" target="_blank"><img src="https://terraria.wiki.gg/images/Flinx_Staff.png">Flinx Staff</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        <div class="item-wrap" data-item-id="finch-staff" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Finch_Staff" target="_blank"><img src="https://terraria.wiki.gg/images/Finch_Staff.png">Finch Staff</a><button class="tooltip-btn" onclick="openPopup(event,'finch-staff')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        <div class="item-wrap" data-item-id="abigails-flower" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Abigail%27s_Flower" target="_blank"><img src="https://terraria.wiki.gg/images/Abigail%27s_Flower.png">Abigail's Flower</a><button class="tooltip-btn" onclick="openPopup(event,'abigails-flower')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        <div class="item-wrap" data-item-id="flinx-staff" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Flinx_Staff" target="_blank"><img src="https://terraria.wiki.gg/images/Flinx_Staff.png">Flinx Staff</a><button class="tooltip-btn" onclick="openPopup(event,'flinx-staff')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
       </div>
       <div class="section">
         <h3>Armor</h3>
-        <div class="item-wrap" data-item-id="flinx-fur-coat" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Flinx_Fur_Coat" target="_blank"><img src="https://terraria.wiki.gg/images/Flinx_Fur_Coat.png">Flinx Fur Coat</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        <div class="item-wrap" data-item-id="flinx-fur-coat" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Flinx_Fur_Coat" target="_blank"><img src="https://terraria.wiki.gg/images/Flinx_Fur_Coat.png">Flinx Fur Coat</a><button class="tooltip-btn" onclick="openPopup(event,'flinx-fur-coat')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
       </div>
       <div class="section">
         <h3>Potions</h3>
-        <div class="item-wrap" data-item-id="summoning-potion" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Summoning_Potion" target="_blank"><img src="https://terraria.wiki.gg/images/Summoning_Potion.png">Summoning Potion</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        <div class="item-wrap" data-item-id="summoning-potion" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Summoning_Potion" target="_blank"><img src="https://terraria.wiki.gg/images/Summoning_Potion.png">Summoning Potion</a><button class="tooltip-btn" onclick="openPopup(event,'summoning-potion')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
       </div>
     </div>
     <div class="note">💡 Use the best armor available for Helmet and Boots.</div>
@@ -238,36 +394,36 @@ footer{text-align:center;padding:24px;color:var(--muted);font-size:12px;border-t
     <div class="grid">
       <div class="section">
         <h3>Weapons</h3>
-        <div class="item-wrap" data-item-id="soulscourge" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Soulscourge" target="_blank"><img src="https://terraria.wiki.gg/images/Soulscourge.png">Soulscourge</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
-        <div class="item-wrap" data-item-id="vasculash" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Vasculash" target="_blank"><img src="https://terraria.wiki.gg/images/Vasculash.png">Vasculash</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
-        <div class="item-wrap" data-item-id="snapthorn" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Snapthorn" target="_blank"><img src="https://terraria.wiki.gg/images/Snapthorn.png">Snapthorn</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        <div class="item-wrap" data-item-id="soulscourge" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Soulscourge" target="_blank"><img src="https://terraria.wiki.gg/images/Soulscourge.png">Soulscourge</a><button class="tooltip-btn" onclick="openPopup(event,'soulscourge')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        <div class="item-wrap" data-item-id="vasculash" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Vasculash" target="_blank"><img src="https://terraria.wiki.gg/images/Vasculash.png">Vasculash</a><button class="tooltip-btn" onclick="openPopup(event,'vasculash')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        <div class="item-wrap" data-item-id="snapthorn" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Snapthorn" target="_blank"><img src="https://terraria.wiki.gg/images/Snapthorn.png">Snapthorn</a><button class="tooltip-btn" onclick="openPopup(event,'snapthorn')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
         <h3>Meteorite Crash Site Event</h3>
-        <div class="item-wrap" data-item-id="starcrash" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Starcrash" target="_blank"><img src="https://terraria.wiki.gg/images/Starcrash.png">Starcrash</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        <div class="item-wrap" data-item-id="starcrash" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Starcrash" target="_blank"><img src="https://terraria.wiki.gg/images/Starcrash.png">Starcrash</a><button class="tooltip-btn" onclick="openPopup(event,'starcrash')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
       </div>
       <div class="section">
         <h3>Minions</h3>
-        <div class="item-wrap" data-item-id="imp-staff" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Imp_Staff" target="_blank"><img src="https://terraria.wiki.gg/images/Imp_Staff.png">Imp Staff</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        <div class="item-wrap" data-item-id="imp-staff" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Imp_Staff" target="_blank"><img src="https://terraria.wiki.gg/images/Imp_Staff.png">Imp Staff</a><button class="tooltip-btn" onclick="openPopup(event,'imp-staff')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
       </div>
       <div class="section">
         <h3>Sentries</h3>
-        <div class="item-wrap" data-item-id="flameburst-rod" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Flameburst_sentry_summons" target="_blank"><img src="https://terraria.wiki.gg/images/Flameburst_Rod.png">Flameburst Rod</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
-        <div class="item-wrap" data-item-id="ballista-rod" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Ballista_sentry_summons" target="_blank"><img src="https://terraria.wiki.gg/images/Ballista_Rod.png">Ballista Rod</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        <div class="item-wrap" data-item-id="flameburst-rod" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Flameburst_sentry_summons" target="_blank"><img src="https://terraria.wiki.gg/images/Flameburst_Rod.png">Flameburst Rod</a><button class="tooltip-btn" onclick="openPopup(event,'flameburst-rod')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        <div class="item-wrap" data-item-id="ballista-rod" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Ballista_sentry_summons" target="_blank"><img src="https://terraria.wiki.gg/images/Ballista_Rod.png">Ballista Rod</a><button class="tooltip-btn" onclick="openPopup(event,'ballista-rod')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
       </div>
       <div class="section">
         <h3>Armor</h3>
-        <div class="item-wrap" data-item-id="obsidian-armor" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Obsidian_armor" target="_blank"><img src="https://terraria.wiki.gg/images/Obsidian_armor.png">Obsidian Armor</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        <div class="item-wrap" data-item-id="obsidian-armor" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Obsidian_armor" target="_blank"><img src="https://terraria.wiki.gg/images/Obsidian_armor.png">Obsidian Armor</a><button class="tooltip-btn" onclick="openPopup(event,'obsidian-armor')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
       </div>
       <div class="section">
         <h3>Accessories</h3>
-        <div class="item-wrap" data-item-id="apprentices-scarf" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Apprentice%27s_Scarf" target="_blank"><img src="https://terraria.wiki.gg/images/Apprentice%27s_Scarf.png">Apprentice's Scarf</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        <div class="item-wrap" data-item-id="apprentices-scarf" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Apprentice%27s_Scarf" target="_blank"><img src="https://terraria.wiki.gg/images/Apprentice%27s_Scarf.png">Apprentice's Scarf</a><button class="tooltip-btn" onclick="openPopup(event,'apprentices-scarf')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
       </div>
       <div class="section">
         <h3>Buffs</h3>
-        <div class="item-wrap" data-item-id="war-table" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/War_Table" target="_blank"><img src="https://terraria.wiki.gg/images/War_Table.png">War Table</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        <div class="item-wrap" data-item-id="war-table" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/War_Table" target="_blank"><img src="https://terraria.wiki.gg/images/War_Table.png">War Table</a><button class="tooltip-btn" onclick="openPopup(event,'war-table')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
       </div>
       <div class="section">
         <h3>Potions</h3>
-        <div class="item-wrap" data-item-id="summoning-potion" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Summoning_Potion" target="_blank"><img src="https://terraria.wiki.gg/images/Summoning_Potion.png">Summoning Potion</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        <div class="item-wrap" data-item-id="summoning-potion" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Summoning_Potion" target="_blank"><img src="https://terraria.wiki.gg/images/Summoning_Potion.png">Summoning Potion</a><button class="tooltip-btn" onclick="openPopup(event,'summoning-potion')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
       </div>
     </div>
   </div>
@@ -285,38 +441,38 @@ footer{text-align:center;padding:24px;color:var(--muted);font-size:12px;border-t
     <div class="grid">
       <div class="section">
         <h3>Weapons</h3>
-        <div class="item-wrap" data-item-id="soulscourge" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Soulscourge" target="_blank"><img src="https://terraria.wiki.gg/images/Soulscourge.png">Soulscourge</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
-        <div class="item-wrap" data-item-id="vasculash" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Vasculash" target="_blank"><img src="https://terraria.wiki.gg/images/Vasculash.png">Vasculash</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
-        <div class="item-wrap" data-item-id="snapthorn" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Snapthorn" target="_blank"><img src="https://terraria.wiki.gg/images/Snapthorn.png">Snapthorn</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        <div class="item-wrap" data-item-id="soulscourge" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Soulscourge" target="_blank"><img src="https://terraria.wiki.gg/images/Soulscourge.png">Soulscourge</a><button class="tooltip-btn" onclick="openPopup(event,'soulscourge')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        <div class="item-wrap" data-item-id="vasculash" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Vasculash" target="_blank"><img src="https://terraria.wiki.gg/images/Vasculash.png">Vasculash</a><button class="tooltip-btn" onclick="openPopup(event,'vasculash')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        <div class="item-wrap" data-item-id="snapthorn" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Snapthorn" target="_blank"><img src="https://terraria.wiki.gg/images/Snapthorn.png">Snapthorn</a><button class="tooltip-btn" onclick="openPopup(event,'snapthorn')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
         <h3>Meteorite Crash Site Event</h3>
-        <div class="item-wrap" data-item-id="starcrash" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Starcrash" target="_blank"><img src="https://terraria.wiki.gg/images/Starcrash.png">Starcrash</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        <div class="item-wrap" data-item-id="starcrash" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Starcrash" target="_blank"><img src="https://terraria.wiki.gg/images/Starcrash.png">Starcrash</a><button class="tooltip-btn" onclick="openPopup(event,'starcrash')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
       </div>
       <div class="section">
         <h3>Minions</h3>
-        <div class="item-wrap" data-item-id="imp-staff" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Imp_Staff" target="_blank"><img src="https://terraria.wiki.gg/images/Imp_Staff.png">Imp Staff</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        <div class="item-wrap" data-item-id="imp-staff" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Imp_Staff" target="_blank"><img src="https://terraria.wiki.gg/images/Imp_Staff.png">Imp Staff</a><button class="tooltip-btn" onclick="openPopup(event,'imp-staff')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
       </div>
       <div class="section">
         <h3>Sentries</h3>
-        <div class="item-wrap" data-item-id="flameburst-rod" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Flameburst_sentry_summons" target="_blank"><img src="https://terraria.wiki.gg/images/Flameburst_Rod.png">Flameburst Rod</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
-        <div class="item-wrap" data-item-id="ballista-rod" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Ballista_sentry_summons" target="_blank"><img src="https://terraria.wiki.gg/images/Ballista_Rod.png">Ballista Rod</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        <div class="item-wrap" data-item-id="flameburst-rod" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Flameburst_sentry_summons" target="_blank"><img src="https://terraria.wiki.gg/images/Flameburst_Rod.png">Flameburst Rod</a><button class="tooltip-btn" onclick="openPopup(event,'flameburst-rod')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        <div class="item-wrap" data-item-id="ballista-rod" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Ballista_sentry_summons" target="_blank"><img src="https://terraria.wiki.gg/images/Ballista_Rod.png">Ballista Rod</a><button class="tooltip-btn" onclick="openPopup(event,'ballista-rod')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
       </div>
       <div class="section">
         <h3>Armor</h3>
-        <div class="item-wrap" data-item-id="bee-armor" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Bee_armor" target="_blank"><img src="https://terraria.wiki.gg/images/Bee_armor.png">Bee Armor</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
-        <div class="item-wrap" data-item-id="obsidian-armor" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Obsidian_armor" target="_blank"><img src="https://terraria.wiki.gg/images/Obsidian_armor.png">Obsidian Armor</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        <div class="item-wrap" data-item-id="bee-armor" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Bee_armor" target="_blank"><img src="https://terraria.wiki.gg/images/Bee_armor.png">Bee Armor</a><button class="tooltip-btn" onclick="openPopup(event,'bee-armor')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        <div class="item-wrap" data-item-id="obsidian-armor" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Obsidian_armor" target="_blank"><img src="https://terraria.wiki.gg/images/Obsidian_armor.png">Obsidian Armor</a><button class="tooltip-btn" onclick="openPopup(event,'obsidian-armor')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
       </div>
       <div class="section">
         <h3>Accessories</h3>
-        <div class="item-wrap" data-item-id="pygmy-necklace" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Pygmy_Necklace" target="_blank"><img src="https://terraria.wiki.gg/images/Pygmy_Necklace.png">Pygmy Necklace</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
-        <div class="item-wrap" data-item-id="apprentices-scarf" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Apprentice%27s_Scarf" target="_blank"><img src="https://terraria.wiki.gg/images/Apprentice%27s_Scarf.png">Apprentice's Scarf</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        <div class="item-wrap" data-item-id="pygmy-necklace" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Pygmy_Necklace" target="_blank"><img src="https://terraria.wiki.gg/images/Pygmy_Necklace.png">Pygmy Necklace</a><button class="tooltip-btn" onclick="openPopup(event,'pygmy-necklace')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        <div class="item-wrap" data-item-id="apprentices-scarf" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Apprentice%27s_Scarf" target="_blank"><img src="https://terraria.wiki.gg/images/Apprentice%27s_Scarf.png">Apprentice's Scarf</a><button class="tooltip-btn" onclick="openPopup(event,'apprentices-scarf')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
       </div>
       <div class="section">
         <h3>Buffs</h3>
-        <div class="item-wrap" data-item-id="war-table" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/War_Table" target="_blank"><img src="https://terraria.wiki.gg/images/War_Table.png">War Table</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        <div class="item-wrap" data-item-id="war-table" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/War_Table" target="_blank"><img src="https://terraria.wiki.gg/images/War_Table.png">War Table</a><button class="tooltip-btn" onclick="openPopup(event,'war-table')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
       </div>
       <div class="section">
         <h3>Potions</h3>
-        <div class="item-wrap" data-item-id="summoning-potion" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Summoning_Potion" target="_blank"><img src="https://terraria.wiki.gg/images/Summoning_Potion.png">Summoning Potion</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        <div class="item-wrap" data-item-id="summoning-potion" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Summoning_Potion" target="_blank"><img src="https://terraria.wiki.gg/images/Summoning_Potion.png">Summoning Potion</a><button class="tooltip-btn" onclick="openPopup(event,'summoning-potion')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
       </div>
     </div>
   </div>
@@ -334,35 +490,35 @@ footer{text-align:center;padding:24px;color:var(--muted);font-size:12px;border-t
     <div class="grid">
       <div class="section">
         <h3>Weapons</h3>
-        <div class="item-wrap" data-item-id="spinal-tap" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Spinal_Tap" target="_blank"><img src="https://terraria.wiki.gg/images/Spinal_Tap.png">Spinal Tap</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        <div class="item-wrap" data-item-id="spinal-tap" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Spinal_Tap" target="_blank"><img src="https://terraria.wiki.gg/images/Spinal_Tap.png">Spinal Tap</a><button class="tooltip-btn" onclick="openPopup(event,'spinal-tap')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
       </div>
       <div class="section">
         <h3>Minions</h3>
-        <div class="item-wrap" data-item-id="imp-staff" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Imp_Staff" target="_blank"><img src="https://terraria.wiki.gg/images/Imp_Staff.png">Imp Staff</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        <div class="item-wrap" data-item-id="imp-staff" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Imp_Staff" target="_blank"><img src="https://terraria.wiki.gg/images/Imp_Staff.png">Imp Staff</a><button class="tooltip-btn" onclick="openPopup(event,'imp-staff')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
       </div>
       <div class="section">
         <h3>Sentries</h3>
-        <div class="item-wrap" data-item-id="flameburst-rod" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Flameburst_sentry_summons" target="_blank"><img src="https://terraria.wiki.gg/images/Flameburst_Rod.png">Flameburst Rod</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
-        <div class="item-wrap" data-item-id="ballista-rod" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Ballista_sentry_summons" target="_blank"><img src="https://terraria.wiki.gg/images/Ballista_Rod.png">Ballista Rod</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        <div class="item-wrap" data-item-id="flameburst-rod" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Flameburst_sentry_summons" target="_blank"><img src="https://terraria.wiki.gg/images/Flameburst_Rod.png">Flameburst Rod</a><button class="tooltip-btn" onclick="openPopup(event,'flameburst-rod')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        <div class="item-wrap" data-item-id="ballista-rod" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Ballista_sentry_summons" target="_blank"><img src="https://terraria.wiki.gg/images/Ballista_Rod.png">Ballista Rod</a><button class="tooltip-btn" onclick="openPopup(event,'ballista-rod')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
       </div>
       <div class="section">
         <h3>Armor</h3>
-        <div class="item-wrap" data-item-id="bee-armor" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Bee_armor" target="_blank"><img src="https://terraria.wiki.gg/images/Bee_armor.png">Bee Armor</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
-        <div class="item-wrap" data-item-id="obsidian-armor" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Obsidian_armor" target="_blank"><img src="https://terraria.wiki.gg/images/Obsidian_armor.png">Obsidian Armor</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        <div class="item-wrap" data-item-id="bee-armor" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Bee_armor" target="_blank"><img src="https://terraria.wiki.gg/images/Bee_armor.png">Bee Armor</a><button class="tooltip-btn" onclick="openPopup(event,'bee-armor')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        <div class="item-wrap" data-item-id="obsidian-armor" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Obsidian_armor" target="_blank"><img src="https://terraria.wiki.gg/images/Obsidian_armor.png">Obsidian Armor</a><button class="tooltip-btn" onclick="openPopup(event,'obsidian-armor')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
       </div>
       <div class="section">
         <h3>Accessories</h3>
-        <div class="item-wrap" data-item-id="pygmy-necklace" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Pygmy_Necklace" target="_blank"><img src="https://terraria.wiki.gg/images/Pygmy_Necklace.png">Pygmy Necklace</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
-        <div class="item-wrap" data-item-id="apprentices-scarf" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Apprentice%27s_Scarf" target="_blank"><img src="https://terraria.wiki.gg/images/Apprentice%27s_Scarf.png">Apprentice's Scarf</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        <div class="item-wrap" data-item-id="pygmy-necklace" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Pygmy_Necklace" target="_blank"><img src="https://terraria.wiki.gg/images/Pygmy_Necklace.png">Pygmy Necklace</a><button class="tooltip-btn" onclick="openPopup(event,'pygmy-necklace')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        <div class="item-wrap" data-item-id="apprentices-scarf" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Apprentice%27s_Scarf" target="_blank"><img src="https://terraria.wiki.gg/images/Apprentice%27s_Scarf.png">Apprentice's Scarf</a><button class="tooltip-btn" onclick="openPopup(event,'apprentices-scarf')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
       </div>
       <div class="section">
         <h3>Buffs</h3>
-        <div class="item-wrap" data-item-id="war-table" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/War_Table" target="_blank"><img src="https://terraria.wiki.gg/images/War_Table.png">War Table</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
-        <div class="item-wrap" data-item-id="bewitching-table" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Bewitching_Table" target="_blank"><img src="https://terraria.wiki.gg/images/Bewitching_Table.png">Bewitching Table</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        <div class="item-wrap" data-item-id="war-table" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/War_Table" target="_blank"><img src="https://terraria.wiki.gg/images/War_Table.png">War Table</a><button class="tooltip-btn" onclick="openPopup(event,'war-table')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        <div class="item-wrap" data-item-id="bewitching-table" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Bewitching_Table" target="_blank"><img src="https://terraria.wiki.gg/images/Bewitching_Table.png">Bewitching Table</a><button class="tooltip-btn" onclick="openPopup(event,'bewitching-table')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
       </div>
       <div class="section">
         <h3>Potions</h3>
-        <div class="item-wrap" data-item-id="summoning-potion" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Summoning_Potion" target="_blank"><img src="https://terraria.wiki.gg/images/Summoning_Potion.png">Summoning Potion</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        <div class="item-wrap" data-item-id="summoning-potion" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Summoning_Potion" target="_blank"><img src="https://terraria.wiki.gg/images/Summoning_Potion.png">Summoning Potion</a><button class="tooltip-btn" onclick="openPopup(event,'summoning-potion')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
       </div>
     </div>
     <div class="note">💡 Health must have reached 400.</div>
@@ -381,45 +537,45 @@ footer{text-align:center;padding:24px;color:var(--muted);font-size:12px;border-t
     <div class="grid">
       <div class="section">
         <h3>Weapons</h3>
-        <div class="item-wrap" data-item-id="firecracker" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Firecracker" target="_blank"><img src="https://terraria.wiki.gg/images/Firecracker.png">Firecracker</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
-        <div class="item-wrap" data-item-id="cool-whip" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Cool_Whip" target="_blank"><img src="https://terraria.wiki.gg/images/Cool_Whip.png">Cool Whip</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        <div class="item-wrap" data-item-id="firecracker" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Firecracker" target="_blank"><img src="https://terraria.wiki.gg/images/Firecracker.png">Firecracker</a><button class="tooltip-btn" onclick="openPopup(event,'firecracker')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        <div class="item-wrap" data-item-id="cool-whip" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Cool_Whip" target="_blank"><img src="https://terraria.wiki.gg/images/Cool_Whip.png">Cool Whip</a><button class="tooltip-btn" onclick="openPopup(event,'cool-whip')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
         <h3>After mechanical boss defeated</h3>
-        <div class="item-wrap" data-item-id="durendal" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Durendal" target="_blank"><img src="https://terraria.wiki.gg/images/Durendal.png">Durendal</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        <div class="item-wrap" data-item-id="durendal" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Durendal" target="_blank"><img src="https://terraria.wiki.gg/images/Durendal.png">Durendal</a><button class="tooltip-btn" onclick="openPopup(event,'durendal')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
       </div>
       <div class="section">
         <h3>Minions</h3>
-        <div class="item-wrap" data-item-id="abigails-flower" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Abigail%27s_Flower" target="_blank"><img src="https://terraria.wiki.gg/images/Abigail%27s_Flower.png">Abigail's Flower</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
-        <div class="item-wrap" data-item-id="sanguine-staff" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Sanguine_Staff" target="_blank"><img src="https://terraria.wiki.gg/images/Sanguine_Staff.png">Sanguine Staff</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
-        <div class="item-wrap" data-item-id="blade-staff" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Blade_Staff" target="_blank"><img src="https://terraria.wiki.gg/images/Blade_Staff.png">Blade Staff</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        <div class="item-wrap" data-item-id="abigails-flower" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Abigail%27s_Flower" target="_blank"><img src="https://terraria.wiki.gg/images/Abigail%27s_Flower.png">Abigail's Flower</a><button class="tooltip-btn" onclick="openPopup(event,'abigails-flower')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        <div class="item-wrap" data-item-id="sanguine-staff" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Sanguine_Staff" target="_blank"><img src="https://terraria.wiki.gg/images/Sanguine_Staff.png">Sanguine Staff</a><button class="tooltip-btn" onclick="openPopup(event,'sanguine-staff')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        <div class="item-wrap" data-item-id="blade-staff" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Blade_Staff" target="_blank"><img src="https://terraria.wiki.gg/images/Blade_Staff.png">Blade Staff</a><button class="tooltip-btn" onclick="openPopup(event,'blade-staff')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
       </div>
       <div class="section">
         <h3>Sentries</h3>
-        <div class="item-wrap" data-item-id="flameburst-rod" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Flameburst_sentry_summons" target="_blank"><img src="https://terraria.wiki.gg/images/Flameburst_Rod.png">Flameburst Rod</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
-        <div class="item-wrap" data-item-id="ballista-rod" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Ballista_sentry_summons" target="_blank"><img src="https://terraria.wiki.gg/images/Ballista_Rod.png">Ballista Rod</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        <div class="item-wrap" data-item-id="flameburst-rod" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Flameburst_sentry_summons" target="_blank"><img src="https://terraria.wiki.gg/images/Flameburst_Rod.png">Flameburst Rod</a><button class="tooltip-btn" onclick="openPopup(event,'flameburst-rod')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        <div class="item-wrap" data-item-id="ballista-rod" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Ballista_sentry_summons" target="_blank"><img src="https://terraria.wiki.gg/images/Ballista_Rod.png">Ballista Rod</a><button class="tooltip-btn" onclick="openPopup(event,'ballista-rod')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
         <h3>After 1 mech boss defeated</h3>
-        <div class="item-wrap" data-item-id="flameburst-cane" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Flameburst_sentry_summons" target="_blank"><img src="https://terraria.wiki.gg/images/Flameburst_Cane.png">Flameburst Cane</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
-        <div class="item-wrap" data-item-id="ballista-cane" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Ballista_sentry_summons" target="_blank"><img src="https://terraria.wiki.gg/images/Ballista_Cane.png">Ballista Cane</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        <div class="item-wrap" data-item-id="flameburst-cane" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Flameburst_sentry_summons" target="_blank"><img src="https://terraria.wiki.gg/images/Flameburst_Cane.png">Flameburst Cane</a><button class="tooltip-btn" onclick="openPopup(event,'flameburst-cane')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        <div class="item-wrap" data-item-id="ballista-cane" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Ballista_sentry_summons" target="_blank"><img src="https://terraria.wiki.gg/images/Ballista_Cane.png">Ballista Cane</a><button class="tooltip-btn" onclick="openPopup(event,'ballista-cane')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
       </div>
       <div class="section">
         <h3>Armor</h3>
-        <div class="item-wrap" data-item-id="spider-armor" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Spider_armor" target="_blank"><img src="https://terraria.wiki.gg/images/Spider_armor.png">Spider armor</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        <div class="item-wrap" data-item-id="spider-armor" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Spider_armor" target="_blank"><img src="https://terraria.wiki.gg/images/Spider_armor.png">Spider armor</a><button class="tooltip-btn" onclick="openPopup(event,'spider-armor')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
         <h3>After mechanical boss defeated</h3>
-        <div class="item-wrap" data-item-id="hallowed-armor" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Hallowed_armor" target="_blank"><img src="https://terraria.wiki.gg/images/Hallowed_armor.png">Hallowed Armor + Hood</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        <div class="item-wrap" data-item-id="hallowed-armor" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Hallowed_armor" target="_blank"><img src="https://terraria.wiki.gg/images/Hallowed_armor.png">Hallowed Armor + Hood</a><button class="tooltip-btn" onclick="openPopup(event,'hallowed-armor')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
       </div>
       <div class="section">
         <h3>Accessories</h3>
-        <div class="item-wrap" data-item-id="summoner-emblem" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Summoner_Emblem" target="_blank"><img src="https://terraria.wiki.gg/images/Summoner_Emblem.png">Summoner Emblem</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
-        <div class="item-wrap" data-item-id="pygmy-necklace" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Pygmy_Necklace" target="_blank"><img src="https://terraria.wiki.gg/images/Pygmy_Necklace.png">Pygmy Necklace</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
-        <div class="item-wrap" data-item-id="apprentices-scarf" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Apprentice%27s_Scarf" target="_blank"><img src="https://terraria.wiki.gg/images/Apprentice%27s_Scarf.png">Apprentice's Scarf</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        <div class="item-wrap" data-item-id="summoner-emblem" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Summoner_Emblem" target="_blank"><img src="https://terraria.wiki.gg/images/Summoner_Emblem.png">Summoner Emblem</a><button class="tooltip-btn" onclick="openPopup(event,'summoner-emblem')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        <div class="item-wrap" data-item-id="pygmy-necklace" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Pygmy_Necklace" target="_blank"><img src="https://terraria.wiki.gg/images/Pygmy_Necklace.png">Pygmy Necklace</a><button class="tooltip-btn" onclick="openPopup(event,'pygmy-necklace')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        <div class="item-wrap" data-item-id="apprentices-scarf" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Apprentice%27s_Scarf" target="_blank"><img src="https://terraria.wiki.gg/images/Apprentice%27s_Scarf.png">Apprentice's Scarf</a><button class="tooltip-btn" onclick="openPopup(event,'apprentices-scarf')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
       </div>
       <div class="section">
         <h3>Buffs</h3>
-        <div class="item-wrap" data-item-id="war-table" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/War_Table" target="_blank"><img src="https://terraria.wiki.gg/images/War_Table.png">War Table</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
-        <div class="item-wrap" data-item-id="bewitching-table" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Bewitching_Table" target="_blank"><img src="https://terraria.wiki.gg/images/Bewitching_Table.png">Bewitching Table</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        <div class="item-wrap" data-item-id="war-table" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/War_Table" target="_blank"><img src="https://terraria.wiki.gg/images/War_Table.png">War Table</a><button class="tooltip-btn" onclick="openPopup(event,'war-table')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        <div class="item-wrap" data-item-id="bewitching-table" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Bewitching_Table" target="_blank"><img src="https://terraria.wiki.gg/images/Bewitching_Table.png">Bewitching Table</a><button class="tooltip-btn" onclick="openPopup(event,'bewitching-table')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
       </div>
       <div class="section">
         <h3>Potions</h3>
-        <div class="item-wrap" data-item-id="summoning-potion" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Summoning_Potion" target="_blank"><img src="https://terraria.wiki.gg/images/Summoning_Potion.png">Summoning Potion</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        <div class="item-wrap" data-item-id="summoning-potion" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Summoning_Potion" target="_blank"><img src="https://terraria.wiki.gg/images/Summoning_Potion.png">Summoning Potion</a><button class="tooltip-btn" onclick="openPopup(event,'summoning-potion')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
       </div>
     </div>
   </div>
@@ -437,38 +593,38 @@ footer{text-align:center;padding:24px;color:var(--muted);font-size:12px;border-t
     <div class="grid">
       <div class="section">
         <h3>Weapons</h3>
-        <div class="item-wrap" data-item-id="durendal" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Durendal" target="_blank"><img src="https://terraria.wiki.gg/images/Durendal.png">Durendal</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        <div class="item-wrap" data-item-id="durendal" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Durendal" target="_blank"><img src="https://terraria.wiki.gg/images/Durendal.png">Durendal</a><button class="tooltip-btn" onclick="openPopup(event,'durendal')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
       </div>
       <div class="section">
         <h3>Minions</h3>
-        <div class="item-wrap" data-item-id="abigails-flower" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Abigail%27s_Flower" target="_blank"><img src="https://terraria.wiki.gg/images/Abigail%27s_Flower.png">Abigail's Flower</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
-        <div class="item-wrap" data-item-id="sanguine-staff" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Sanguine_Staff" target="_blank"><img src="https://terraria.wiki.gg/images/Sanguine_Staff.png">Sanguine Staff</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
-        <div class="item-wrap" data-item-id="blade-staff" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Blade_Staff" target="_blank"><img src="https://terraria.wiki.gg/images/Blade_Staff.png">Blade Staff</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        <div class="item-wrap" data-item-id="abigails-flower" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Abigail%27s_Flower" target="_blank"><img src="https://terraria.wiki.gg/images/Abigail%27s_Flower.png">Abigail's Flower</a><button class="tooltip-btn" onclick="openPopup(event,'abigails-flower')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        <div class="item-wrap" data-item-id="sanguine-staff" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Sanguine_Staff" target="_blank"><img src="https://terraria.wiki.gg/images/Sanguine_Staff.png">Sanguine Staff</a><button class="tooltip-btn" onclick="openPopup(event,'sanguine-staff')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        <div class="item-wrap" data-item-id="blade-staff" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Blade_Staff" target="_blank"><img src="https://terraria.wiki.gg/images/Blade_Staff.png">Blade Staff</a><button class="tooltip-btn" onclick="openPopup(event,'blade-staff')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
       </div>
       <div class="section">
         <h3>Sentries</h3>
-        <div class="item-wrap" data-item-id="flameburst-cane" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Flameburst_sentry_summons" target="_blank"><img src="https://terraria.wiki.gg/images/Flameburst_Cane.png">Flameburst Cane</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
-        <div class="item-wrap" data-item-id="ballista-cane" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Ballista_sentry_summons" target="_blank"><img src="https://terraria.wiki.gg/images/Ballista_Cane.png">Ballista Cane</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
-        <div class="item-wrap" data-item-id="queen-spider-staff" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Queen_Spider_Staff" target="_blank"><img src="https://terraria.wiki.gg/images/Queen_Spider_Staff.png">Queen Spider Staff</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        <div class="item-wrap" data-item-id="flameburst-cane" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Flameburst_sentry_summons" target="_blank"><img src="https://terraria.wiki.gg/images/Flameburst_Cane.png">Flameburst Cane</a><button class="tooltip-btn" onclick="openPopup(event,'flameburst-cane')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        <div class="item-wrap" data-item-id="ballista-cane" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Ballista_sentry_summons" target="_blank"><img src="https://terraria.wiki.gg/images/Ballista_Cane.png">Ballista Cane</a><button class="tooltip-btn" onclick="openPopup(event,'ballista-cane')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        <div class="item-wrap" data-item-id="queen-spider-staff" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Queen_Spider_Staff" target="_blank"><img src="https://terraria.wiki.gg/images/Queen_Spider_Staff.png">Queen Spider Staff</a><button class="tooltip-btn" onclick="openPopup(event,'queen-spider-staff')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
       </div>
       <div class="section">
         <h3>Armor</h3>
-        <div class="item-wrap" data-item-id="chlorophyte-armor" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Chlorophyte_armor" target="_blank"><img src="https://terraria.wiki.gg/images/Chlorophyte_armor.png">Chlorophyte Armor + Visor</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        <div class="item-wrap" data-item-id="chlorophyte-armor" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Chlorophyte_armor" target="_blank"><img src="https://terraria.wiki.gg/images/Chlorophyte_armor.png">Chlorophyte Armor + Visor</a><button class="tooltip-btn" onclick="openPopup(event,'chlorophyte-armor')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
       </div>
       <div class="section">
         <h3>Accessories</h3>
-        <div class="item-wrap" data-item-id="summoner-emblem" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Summoner_Emblem" target="_blank"><img src="https://terraria.wiki.gg/images/Summoner_Emblem.png">Summoner Emblem</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
-        <div class="item-wrap" data-item-id="pygmy-necklace" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Pygmy_Necklace" target="_blank"><img src="https://terraria.wiki.gg/images/Pygmy_Necklace.png">Pygmy Necklace</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
-        <div class="item-wrap" data-item-id="apprentices-scarf" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Apprentice%27s_Scarf" target="_blank"><img src="https://terraria.wiki.gg/images/Apprentice%27s_Scarf.png">Apprentice's Scarf</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        <div class="item-wrap" data-item-id="summoner-emblem" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Summoner_Emblem" target="_blank"><img src="https://terraria.wiki.gg/images/Summoner_Emblem.png">Summoner Emblem</a><button class="tooltip-btn" onclick="openPopup(event,'summoner-emblem')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        <div class="item-wrap" data-item-id="pygmy-necklace" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Pygmy_Necklace" target="_blank"><img src="https://terraria.wiki.gg/images/Pygmy_Necklace.png">Pygmy Necklace</a><button class="tooltip-btn" onclick="openPopup(event,'pygmy-necklace')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        <div class="item-wrap" data-item-id="apprentices-scarf" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Apprentice%27s_Scarf" target="_blank"><img src="https://terraria.wiki.gg/images/Apprentice%27s_Scarf.png">Apprentice's Scarf</a><button class="tooltip-btn" onclick="openPopup(event,'apprentices-scarf')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
       </div>
       <div class="section">
         <h3>Buffs</h3>
-        <div class="item-wrap" data-item-id="war-table" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/War_Table" target="_blank"><img src="https://terraria.wiki.gg/images/War_Table.png">War Table</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
-        <div class="item-wrap" data-item-id="bewitching-table" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Bewitching_Table" target="_blank"><img src="https://terraria.wiki.gg/images/Bewitching_Table.png">Bewitching Table</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        <div class="item-wrap" data-item-id="war-table" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/War_Table" target="_blank"><img src="https://terraria.wiki.gg/images/War_Table.png">War Table</a><button class="tooltip-btn" onclick="openPopup(event,'war-table')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        <div class="item-wrap" data-item-id="bewitching-table" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Bewitching_Table" target="_blank"><img src="https://terraria.wiki.gg/images/Bewitching_Table.png">Bewitching Table</a><button class="tooltip-btn" onclick="openPopup(event,'bewitching-table')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
       </div>
       <div class="section">
         <h3>Potions</h3>
-        <div class="item-wrap" data-item-id="summoning-potion" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Summoning_Potion" target="_blank"><img src="https://terraria.wiki.gg/images/Summoning_Potion.png">Summoning Potion</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        <div class="item-wrap" data-item-id="summoning-potion" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Summoning_Potion" target="_blank"><img src="https://terraria.wiki.gg/images/Summoning_Potion.png">Summoning Potion</a><button class="tooltip-btn" onclick="openPopup(event,'summoning-potion')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
       </div>
     </div>
   </div>
@@ -486,40 +642,40 @@ footer{text-align:center;padding:24px;color:var(--muted);font-size:12px;border-t
     <div class="grid">
       <div class="section">
         <h3>Weapons</h3>
-        <div class="item-wrap" data-item-id="vulgar-display-of-flower" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Vulgar_Display_of_Flower" target="_blank"><img src="https://terraria.wiki.gg/images/Vulgar_Display_of_Flower.png">Vulgar Display of Flower</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
-        <div class="item-wrap" data-item-id="morning-star" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Morning_Star" target="_blank"><img src="https://terraria.wiki.gg/images/Morning_Star.png">Morning Star</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        <div class="item-wrap" data-item-id="vulgar-display-of-flower" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Vulgar_Display_of_Flower" target="_blank"><img src="https://terraria.wiki.gg/images/Vulgar_Display_of_Flower.png">Vulgar Display of Flower</a><button class="tooltip-btn" onclick="openPopup(event,'vulgar-display-of-flower')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        <div class="item-wrap" data-item-id="morning-star" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Morning_Star" target="_blank"><img src="https://terraria.wiki.gg/images/Morning_Star.png">Morning Star</a><button class="tooltip-btn" onclick="openPopup(event,'morning-star')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
       </div>
       <div class="section">
         <h3>Minions</h3>
-        <div class="item-wrap" data-item-id="blade-staff" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Blade_Staff" target="_blank"><img src="https://terraria.wiki.gg/images/Blade_Staff.png">Blade Staff</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        <div class="item-wrap" data-item-id="blade-staff" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Blade_Staff" target="_blank"><img src="https://terraria.wiki.gg/images/Blade_Staff.png">Blade Staff</a><button class="tooltip-btn" onclick="openPopup(event,'blade-staff')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
         <h3>Solar Eclipse Event</h3>
-        <div class="item-wrap" data-item-id="deadly-sphere-staff" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Deadly_Sphere_Staff" target="_blank"><img src="https://terraria.wiki.gg/images/Deadly_Sphere_Staff.png">Deadly Sphere Staff</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        <div class="item-wrap" data-item-id="deadly-sphere-staff" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Deadly_Sphere_Staff" target="_blank"><img src="https://terraria.wiki.gg/images/Deadly_Sphere_Staff.png">Deadly Sphere Staff</a><button class="tooltip-btn" onclick="openPopup(event,'deadly-sphere-staff')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
         <h3></h3>
-        <div class="item-wrap" data-item-id="desert-tiger-staff" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Desert_Tiger_Staff" target="_blank"><img src="https://terraria.wiki.gg/images/Desert_Tiger_Staff.png">Desert Tiger Staff</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        <div class="item-wrap" data-item-id="desert-tiger-staff" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Desert_Tiger_Staff" target="_blank"><img src="https://terraria.wiki.gg/images/Desert_Tiger_Staff.png">Desert Tiger Staff</a><button class="tooltip-btn" onclick="openPopup(event,'desert-tiger-staff')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
       </div>
       <div class="section">
         <h3>Sentries</h3>
-        <div class="item-wrap" data-item-id="flameburst-cane" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Flameburst_sentry_summons" target="_blank"><img src="https://terraria.wiki.gg/images/Flameburst_Cane.png">Flameburst Cane</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
-        <div class="item-wrap" data-item-id="ballista-cane" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Ballista_sentry_summons" target="_blank"><img src="https://terraria.wiki.gg/images/Ballista_Cane.png">Ballista Cane</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
-        <div class="item-wrap" data-item-id="queen-spider-staff" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Queen_Spider_Staff" target="_blank"><img src="https://terraria.wiki.gg/images/Queen_Spider_Staff.png">Queen Spider Staff</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        <div class="item-wrap" data-item-id="flameburst-cane" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Flameburst_sentry_summons" target="_blank"><img src="https://terraria.wiki.gg/images/Flameburst_Cane.png">Flameburst Cane</a><button class="tooltip-btn" onclick="openPopup(event,'flameburst-cane')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        <div class="item-wrap" data-item-id="ballista-cane" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Ballista_sentry_summons" target="_blank"><img src="https://terraria.wiki.gg/images/Ballista_Cane.png">Ballista Cane</a><button class="tooltip-btn" onclick="openPopup(event,'ballista-cane')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        <div class="item-wrap" data-item-id="queen-spider-staff" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Queen_Spider_Staff" target="_blank"><img src="https://terraria.wiki.gg/images/Queen_Spider_Staff.png">Queen Spider Staff</a><button class="tooltip-btn" onclick="openPopup(event,'queen-spider-staff')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
       </div>
       <div class="section">
         <h3>Armor</h3>
-        <div class="item-wrap" data-item-id="chlorophyte-armor" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Chlorophyte_armor" target="_blank"><img src="https://terraria.wiki.gg/images/Chlorophyte_armor.png">Chlorophyte Armor + Visor</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        <div class="item-wrap" data-item-id="chlorophyte-armor" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Chlorophyte_armor" target="_blank"><img src="https://terraria.wiki.gg/images/Chlorophyte_armor.png">Chlorophyte Armor + Visor</a><button class="tooltip-btn" onclick="openPopup(event,'chlorophyte-armor')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
       </div>
       <div class="section">
         <h3>Accessories</h3>
-        <div class="item-wrap" data-item-id="summoner-emblem" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Summoner_Emblem" target="_blank"><img src="https://terraria.wiki.gg/images/Summoner_Emblem.png">Summoner Emblem</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
-        <div class="item-wrap" data-item-id="pygmy-necklace" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Pygmy_Necklace" target="_blank"><img src="https://terraria.wiki.gg/images/Pygmy_Necklace.png">Pygmy Necklace</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        <div class="item-wrap" data-item-id="summoner-emblem" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Summoner_Emblem" target="_blank"><img src="https://terraria.wiki.gg/images/Summoner_Emblem.png">Summoner Emblem</a><button class="tooltip-btn" onclick="openPopup(event,'summoner-emblem')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        <div class="item-wrap" data-item-id="pygmy-necklace" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Pygmy_Necklace" target="_blank"><img src="https://terraria.wiki.gg/images/Pygmy_Necklace.png">Pygmy Necklace</a><button class="tooltip-btn" onclick="openPopup(event,'pygmy-necklace')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
       </div>
       <div class="section">
         <h3>Buffs</h3>
-        <div class="item-wrap" data-item-id="war-table" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/War_Table" target="_blank"><img src="https://terraria.wiki.gg/images/War_Table.png">War Table</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
-        <div class="item-wrap" data-item-id="bewitching-table" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Bewitching_Table" target="_blank"><img src="https://terraria.wiki.gg/images/Bewitching_Table.png">Bewitching Table</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        <div class="item-wrap" data-item-id="war-table" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/War_Table" target="_blank"><img src="https://terraria.wiki.gg/images/War_Table.png">War Table</a><button class="tooltip-btn" onclick="openPopup(event,'war-table')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        <div class="item-wrap" data-item-id="bewitching-table" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Bewitching_Table" target="_blank"><img src="https://terraria.wiki.gg/images/Bewitching_Table.png">Bewitching Table</a><button class="tooltip-btn" onclick="openPopup(event,'bewitching-table')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
       </div>
       <div class="section">
         <h3>Potions</h3>
-        <div class="item-wrap" data-item-id="summoning-potion" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Summoning_Potion" target="_blank"><img src="https://terraria.wiki.gg/images/Summoning_Potion.png">Summoning Potion</a><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        <div class="item-wrap" data-item-id="summoning-potion" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Summoning_Potion" target="_blank"><img src="https://terraria.wiki.gg/images/Summoning_Potion.png">Summoning Potion</a><button class="tooltip-btn" onclick="openPopup(event,'summoning-potion')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
       </div>
     </div>
   </div>
@@ -534,92 +690,264 @@ footer{text-align:center;padding:24px;color:var(--muted);font-size:12px;border-t
 </footer>
 
 <script>
-const STAGE_KEY='terraria-summoning';
-const ITEMS_KEY='terraria-summoning-items-v3';
-const CYCLE=['none','owned','skip'];
-let itemStates={};
+// ═══ ITEM INFO DATABASE ═══
+// Format: { unlock, get, desc }
+// Ganti [isi_disini] dengan teks kamu sendiri!
+const ITEM_INFO = {
+  'leather-whip': {
+    unlock: 'Tersedia sejak awal permainan, tidak perlu boss apapun untuk membukanya.',
+    get: 'Dibeli dari Merchant dengan harga 2 Gold Coin. Merchant muncul setelah kamu punya setidaknya 50 Silver Coin.',
+    desc: 'Whip paling dasar untuk Summoner. Memberikan tag damage ke musuh sehingga minion-mu menyerang lebih kuat. Cocok untuk fase awal sebelum dapat whip yang lebih baik.'
+  },
+  'vampire-frog-staff': {
+    unlock: 'Bisa drop saat Blood Moon event aktif. Blood Moon mulai terjadi secara acak di malam hari setelah player punya lebih dari 120 HP.',
+    get: 'Drop dari Blood Zombie dan Dripplers saat Blood Moon dengan drop rate ~1%. Siapkan arena di atas tanah agar mudah farming.',
+    desc: 'Salah satu minion terkuat di Pre-Hardmode! Vampire Frog menyerang musuh dengan cepat dan bisa melompat-lompat. Sangat direkomendasikan untuk melawan boss awal.'
+  },
+  // Sisanya pakai template kosong — isi sendiri!
+  'snapthorn': { unlock: '[isi_disini]', get: '[isi_disini]', desc: '[isi_disini]' },
+  'abigails-flower': { unlock: '[isi_disini]', get: '[isi_disini]', desc: '[isi_disini]' },
+  'flinx-staff': { unlock: '[isi_disini]', get: '[isi_disini]', desc: '[isi_disini]' },
+  'flinx-fur-coat': { unlock: '[isi_disini]', get: '[isi_disini]', desc: '[isi_disini]' },
+  'summoning-potion': { unlock: '[isi_disini]', get: '[isi_disini]', desc: '[isi_disini]' },
+  'soulscourge': { unlock: '[isi_disini]', get: '[isi_disini]', desc: '[isi_disini]' },
+  'vasculash': { unlock: '[isi_disini]', get: '[isi_disini]', desc: '[isi_disini]' },
+  'finch-staff': { unlock: '[isi_disini]', get: '[isi_disini]', desc: '[isi_disini]' },
+  'imp-staff': { unlock: '[isi_disini]', get: '[isi_disini]', desc: '[isi_disini]' },
+  'flameburst-rod': { unlock: '[isi_disini]', get: '[isi_disini]', desc: '[isi_disini]' },
+  'ballista-rod': { unlock: '[isi_disini]', get: '[isi_disini]', desc: '[isi_disini]' },
+  'obsidian-armor': { unlock: '[isi_disini]', get: '[isi_disini]', desc: '[isi_disini]' },
+  'apprentices-scarf': { unlock: '[isi_disini]', get: '[isi_disini]', desc: '[isi_disini]' },
+  'war-table': { unlock: '[isi_disini]', get: '[isi_disini]', desc: '[isi_disini]' },
+  'starcrash': { unlock: '[isi_disini]', get: '[isi_disini]', desc: '[isi_disini]' },
+  'bee-armor': { unlock: '[isi_disini]', get: '[isi_disini]', desc: '[isi_disini]' },
+  'pygmy-necklace': { unlock: '[isi_disini]', get: '[isi_disini]', desc: '[isi_disini]' },
+  'spinal-tap': { unlock: '[isi_disini]', get: '[isi_disini]', desc: '[isi_disini]' },
+  'bewitching-table': { unlock: '[isi_disini]', get: '[isi_disini]', desc: '[isi_disini]' },
+  'firecracker': { unlock: '[isi_disini]', get: '[isi_disini]', desc: '[isi_disini]' },
+  'cool-whip': { unlock: '[isi_disini]', get: '[isi_disini]', desc: '[isi_disini]' },
+  'durendal': { unlock: '[isi_disini]', get: '[isi_disini]', desc: '[isi_disini]' },
+  'sanguine-staff': { unlock: '[isi_disini]', get: '[isi_disini]', desc: '[isi_disini]' },
+  'blade-staff': { unlock: '[isi_disini]', get: '[isi_disini]', desc: '[isi_disini]' },
+  'flameburst-cane': { unlock: '[isi_disini]', get: '[isi_disini]', desc: '[isi_disini]' },
+  'ballista-cane': { unlock: '[isi_disini]', get: '[isi_disini]', desc: '[isi_disini]' },
+  'spider-armor': { unlock: '[isi_disini]', get: '[isi_disini]', desc: '[isi_disini]' },
+  'hallowed-armor': { unlock: '[isi_disini]', get: '[isi_disini]', desc: '[isi_disini]' },
+  'summoner-emblem': { unlock: '[isi_disini]', get: '[isi_disini]', desc: '[isi_disini]' },
+  'queen-spider-staff': { unlock: '[isi_disini]', get: '[isi_disini]', desc: '[isi_disini]' },
+  'chlorophyte-armor': { unlock: '[isi_disini]', get: '[isi_disini]', desc: '[isi_disini]' },
+  'vulgar-display-of-flower': { unlock: '[isi_disini]', get: '[isi_disini]', desc: '[isi_disini]' },
+  'morning-star': { unlock: '[isi_disini]', get: '[isi_disini]', desc: '[isi_disini]' },
+  'deadly-sphere-staff': { unlock: '[isi_disini]', get: '[isi_disini]', desc: '[isi_disini]' },
+  'desert-tiger-staff': { unlock: '[isi_disini]', get: '[isi_disini]', desc: '[isi_disini]' },
+};
 
-function loadItems(){try{itemStates=JSON.parse(localStorage.getItem(ITEMS_KEY)||'{}')}catch(e){itemStates={}}}
-function saveItems(){localStorage.setItem(ITEMS_KEY,JSON.stringify(itemStates))}
+// ═══ POPUP LOGIC ═══
+let activePopupId = null;
 
-function applyItemId(id){
-  const s=itemStates[id]||'none';
-  document.querySelectorAll(`.item-wrap[data-item-id="${id}"]`).forEach(w=>{
-    w.dataset.state=s;
-    w.querySelector('.item-btn').dataset.s=s;
+function getItemImg(id) {
+  // Cari img src dari DOM item yang ada
+  const wrap = document.querySelector(`.item-wrap[data-item-id="${id}"]`);
+  if (!wrap) return '';
+  const img = wrap.querySelector('.item img');
+  return img ? img.src : '';
+}
+function getItemName(id) {
+  const wrap = document.querySelector(`.item-wrap[data-item-id="${id}"]`);
+  if (!wrap) return id;
+  return wrap.querySelector('.item').textContent.trim();
+}
+
+function openPopup(e, id) {
+  e.stopPropagation();
+  const popup = document.getElementById('itemPopup');
+  const info = ITEM_INFO[id] || { unlock: '—', get: '—', desc: '—' };
+
+  document.getElementById('popupImg').src = getItemImg(id);
+  document.getElementById('popupName').textContent = getItemName(id);
+  document.getElementById('popupUnlock').textContent = info.unlock;
+  document.getElementById('popupGet').textContent = info.get;
+  document.getElementById('popupDesc').textContent = info.desc;
+
+  // Posisi popup dekat tombol ℹ
+  // position:fixed → koordinat viewport, JANGAN tambah scrollY
+  const btn = e.currentTarget;
+  const rect = btn.getBoundingClientRect();
+  const pw = 280;
+  const ph = 300; // estimated max height
+  const margin = 8;
+  let left = rect.right + margin;
+  let top = rect.top;
+
+  // Jangan keluar layar kanan → tampilkan di kiri tombol
+  if (left + pw > window.innerWidth - margin) {
+    left = rect.left - pw - margin;
+  }
+  // Jangan keluar layar kiri
+  if (left < margin) left = margin;
+
+  // Jangan keluar layar bawah
+  if (top + ph > window.innerHeight - margin) {
+    top = window.innerHeight - ph - margin;
+  }
+  // Jangan keluar layar atas
+  if (top < margin) top = margin;
+
+  popup.style.left = Math.max(margin, left) + 'px';
+  popup.style.top = top + 'px';
+  popup.classList.remove('visible');
+  void popup.offsetWidth; // force reflow for animation
+  popup.classList.add('visible');
+  activePopupId = id;
+}
+
+function closePopup() {
+  document.getElementById('itemPopup').classList.remove('visible');
+  activePopupId = null;
+}
+
+// Klik di luar popup → tutup
+document.addEventListener('click', function(e) {
+  const popup = document.getElementById('itemPopup');
+  if (popup.classList.contains('visible') && !popup.contains(e.target)) {
+    closePopup();
+  }
+});
+
+// ═══ ITEM STATE LOGIC ═══
+const STAGE_KEY = 'terraria-summoning';
+const ITEMS_KEY = 'terraria-summoning-items';
+const CYCLE = ['none', 'owned', 'skip'];
+let itemStates = {};
+
+function loadItems() {
+  try { itemStates = JSON.parse(localStorage.getItem(ITEMS_KEY) || '{}'); }
+  catch(e) { itemStates = {}; }
+}
+function saveItems() { localStorage.setItem(ITEMS_KEY, JSON.stringify(itemStates)); }
+
+function applyItemId(id) {
+  const s = itemStates[id] || 'none';
+  document.querySelectorAll(`.item-wrap[data-item-id="${id}"]`).forEach(w => {
+    w.dataset.state = s;
+    w.querySelector('.item-btn').dataset.s = s;
   });
 }
 
-function applyAll(){
-  const seen=new Set();
-  document.querySelectorAll('.item-wrap[data-item-id]').forEach(w=>{
-    const id=w.dataset.itemId;
-    if(!seen.has(id)){seen.add(id);applyItemId(id);}
+function applyAll() {
+  const seen = new Set();
+  document.querySelectorAll('.item-wrap[data-item-id]').forEach(w => {
+    const id = w.dataset.itemId;
+    if (!seen.has(id)) { seen.add(id); applyItemId(id); }
   });
   updateSummary();
 }
 
-function cycleItem(btn){
-  const id=btn.closest('.item-wrap').dataset.itemId;
-  const cur=itemStates[id]||'none';
-  const next=CYCLE[(CYCLE.indexOf(cur)+1)%CYCLE.length];
-  if(next==='none')delete itemStates[id];else itemStates[id]=next;
-  saveItems();applyItemId(id);updateSummary();
+function cycleItem(btn) {
+  const id = btn.closest('.item-wrap').dataset.itemId;
+  const cur = itemStates[id] || 'none';
+  const next = CYCLE[(CYCLE.indexOf(cur) + 1) % CYCLE.length];
+  if (next === 'none') delete itemStates[id]; else itemStates[id] = next;
+  saveItems();
+  applyItemId(id);
+  updateSummary();
 }
 
-function updateSummary(){
-  let owned=0,skip=0;const names=[];
-  const seen=new Set();
-  document.querySelectorAll('.item-wrap[data-item-id]').forEach(w=>{
-    const id=w.dataset.itemId;if(seen.has(id))return;seen.add(id);
-    const s=itemStates[id];
-    if(s==='owned'){owned++;names.push(w.querySelector('.item').textContent.trim());}
-    if(s==='skip')skip++;
+function updateSummary() {
+  let owned = 0, skip = 0;
+  const names = [];
+  const seen = new Set();
+  document.querySelectorAll('.item-wrap[data-item-id]').forEach(w => {
+    const id = w.dataset.itemId;
+    if (seen.has(id)) return;
+    seen.add(id);
+    const s = itemStates[id];
+    if (s === 'owned') { owned++; names.push(w.querySelector('.item').textContent.trim()); }
+    if (s === 'skip') skip++;
   });
-  document.getElementById('ownedCount').textContent=owned;
-  document.getElementById('skipCount').textContent=skip;
-  const el=document.getElementById('ownedNames');
-  if(owned===0&&skip===0)el.textContent='— belum ada item yang ditandai';
-  else el.textContent=owned>0?'✓ '+names.join(', '):(skip>0?skip+' item di-skip':'');
+  document.getElementById('ownedCount').textContent = owned;
+  document.getElementById('skipCount').textContent = skip;
+  const el = document.getElementById('ownedNames');
+  if (owned === 0 && skip === 0) el.textContent = '— no items marked yet';
+  else el.textContent = owned > 0 ? '✓ ' + names.join(', ') : (skip > 0 ? skip + ' item di-skip' : '');
 }
 
-function resetAll(){itemStates={};saveItems();applyAll();}
-
-/* Stage logic */
-function stages(){return Array.from(document.querySelectorAll('div.stage'))}
-function saveStages(){localStorage.setItem(STAGE_KEY,JSON.stringify(stages().map(s=>s.classList.contains('done'))));renderProgress();}
-function loadStages(){
-  stages().forEach((s,i)=>{s.querySelector('.stage-index').textContent=i+1;});
-  let data=[];try{data=JSON.parse(localStorage.getItem(STAGE_KEY)||'[]')}catch(e){}
-  stages().forEach((s,i)=>{
-    const b=s.querySelector('.stage-body');b.style.transition='none';
-    if(data[i]===true){s.classList.add('done');b.style.maxHeight='0';b.style.opacity='0';s.querySelector('.done-label').style.display='inline';s.querySelector('.stage-checkbox').checked=true;}
-    else{s.classList.remove('done');b.style.maxHeight='2000px';b.style.opacity='1';s.querySelector('.done-label').style.display='none';s.querySelector('.stage-checkbox').checked=false;}
-    setTimeout(()=>{b.style.transition=''},100);
-  });renderProgress();
+// ═══ RESET ALL (item + stage) ═══
+function resetAll() {
+  // Reset items
+  itemStates = {};
+  saveItems();
+  applyAll();
+  // Reset stages
+  localStorage.removeItem(STAGE_KEY);
+  loadStages();
+  // Tutup popup kalau terbuka
+  closePopup();
 }
-function toggleStage(h){
-  const s=h.closest('div.stage'),b=s.querySelector('.stage-body'),nd=!s.classList.contains('done');
-  if(nd){s.classList.add('done');b.style.maxHeight='0';b.style.opacity='0';s.querySelector('.done-label').style.display='inline';s.querySelector('.stage-checkbox').checked=true;}
-  else{s.classList.remove('done');b.style.maxHeight='2000px';b.style.opacity='1';s.querySelector('.done-label').style.display='none';s.querySelector('.stage-checkbox').checked=false;}
+
+// ═══ STAGE LOGIC ═══
+function stages() { return Array.from(document.querySelectorAll('div.stage')); }
+
+function saveStages() {
+  localStorage.setItem(STAGE_KEY, JSON.stringify(stages().map(s => s.classList.contains('done'))));
+  renderProgress();
+}
+
+function loadStages() {
+  stages().forEach((s, i) => { s.querySelector('.stage-index').textContent = i + 1; });
+  let data = [];
+  try { data = JSON.parse(localStorage.getItem(STAGE_KEY) || '[]'); } catch(e) {}
+  stages().forEach((s, i) => {
+    const b = s.querySelector('.stage-body');
+    b.style.transition = 'none';
+    if (data[i] === true) {
+      s.classList.add('done');
+      b.style.maxHeight = '0';
+      b.style.opacity = '0';
+      s.querySelector('.done-label').style.display = 'inline';
+      s.querySelector('.stage-checkbox').checked = true;
+    } else {
+      s.classList.remove('done');
+      b.style.maxHeight = '2000px';
+      b.style.opacity = '1';
+      s.querySelector('.done-label').style.display = 'none';
+      s.querySelector('.stage-checkbox').checked = false;
+    }
+    setTimeout(() => { b.style.transition = ''; }, 100);
+  });
+  renderProgress();
+}
+
+function toggleStage(h) {
+  const s = h.closest('div.stage'), b = s.querySelector('.stage-body');
+  const nd = !s.classList.contains('done');
+  if (nd) {
+    s.classList.add('done');
+    b.style.maxHeight = '0'; b.style.opacity = '0';
+    s.querySelector('.done-label').style.display = 'inline';
+    s.querySelector('.stage-checkbox').checked = true;
+  } else {
+    s.classList.remove('done');
+    b.style.maxHeight = '2000px'; b.style.opacity = '1';
+    s.querySelector('.done-label').style.display = 'none';
+    s.querySelector('.stage-checkbox').checked = false;
+  }
   saveStages();
 }
-function renderProgress(){
-  const all=stages(),done=all.map((s,i)=>s.classList.contains('done')?i+1:null).filter(Boolean);
-  let t=`${done.length} / ${all.length} completed`;if(done.length)t+=` · Stage ${done.join(', ')}`;
-  document.getElementById('progressText').textContent=t;
+
+function renderProgress() {
+  const all = stages();
+  const done = all.map((s, i) => s.classList.contains('done') ? i + 1 : null).filter(Boolean);
+  let t = `${done.length} / ${all.length} completed`;
+  if (done.length) t += ` · Stage ${done.join(', ')}`;
+  document.getElementById('progressText').textContent = t;
 }
 
-window.addEventListener('DOMContentLoaded',()=>{loadItems();loadStages();applyAll();});
+window.addEventListener('DOMContentLoaded', () => {
+  loadItems();
+  loadStages();
+  applyAll();
+});
 </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
