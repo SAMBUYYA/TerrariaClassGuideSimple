@@ -1342,7 +1342,8 @@ const ITEM_INFO = {
     Craft Bottle on Water
     
     - Variegated Lardfish:\n Can get fish on biome Underground Jungle` },
-  'firecracker': { unlock: 'After Defeated Boss Wall of Flesh', get: '25% Chance of Dropped Boss', desc: '' },
+  'firecracker': { unlock: 'After Defeated Boss Wall of Flesh', get: '25% Chance of Dropped Boss', desc: '—' },
+  'terraprisma': { unlock: 'After Defeated Boss Empress of Light', get: 'Must be 100% Damage on Daytime', desc: '—' },
 };
 
 // ═══ POPUP LOGIC ═══
@@ -1364,13 +1365,29 @@ function getItemName(id) {
 function openPopup(e, id) {
   e.stopPropagation();
   const popup = document.getElementById('itemPopup');
-  const info = ITEM_INFO[id] || { unlock: '—', get: '—', desc: '—' };
+  const info = ITEM_INFO[id] || {};
 
   document.getElementById('popupImg').src = getItemImg(id);
   document.getElementById('popupName').textContent = getItemName(id);
-  document.getElementById('popupUnlock').innerText = info.unlock;
-  document.getElementById('popupGet').innerText = info.get;
-  document.getElementById('popupDesc').innerText = info.desc;
+
+  const sections = [
+    { sectionId: 'psUnlock', textId: 'popupUnlock', val: info.unlock },
+    { sectionId: 'psGet',    textId: 'popupGet',    val: info.get },
+    { sectionId: 'psDesc',   textId: 'popupDesc',   val: info.desc },
+  ];
+
+  sections.forEach(({ sectionId, textId, val }) => {
+    const sec = document.getElementById(sectionId);
+    const divider = sec.nextElementSibling; // .popup-divider setelah section
+    if (!val || val === '—') {
+      sec.style.display = 'none';
+      if (divider && divider.classList.contains('popup-divider')) divider.style.display = 'none';
+    } else {
+      sec.style.display = '';
+      if (divider && divider.classList.contains('popup-divider')) divider.style.display = '';
+      document.getElementById(textId).innerText = val;
+    }
+  });
 
   // Posisi popup dekat tombol ℹ
   // position:fixed → koordinat viewport, JANGAN tambah scrollY
@@ -1550,6 +1567,14 @@ window.addEventListener('DOMContentLoaded', () => {
   loadItems();
   loadStages();
   applyAll();
+
+  document.querySelectorAll('.item-wrap[data-item-id]').forEach(w => {
+    const id = w.dataset.itemId;
+    if (!ITEM_INFO[id]) {
+      const btn = w.querySelector('.tooltip-btn');
+      if (btn) btn.style.display = 'none';
+    }
+  });
 });
 </script>
 </body>
