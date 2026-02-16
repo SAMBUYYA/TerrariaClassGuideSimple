@@ -556,11 +556,11 @@ footer{text-align:center;padding:24px;color:var(--muted);font-size:12px;border-t
   </div>
 </div>
 
-<!-- ═══ 5. Pre Wall of Flesh -> Queen Slime ═══ -->
+<!-- ═══ 5. Pre Wall of Flesh ═══ -->
 <div class="stage" data-stage="stage-wof">
   <div class="stage-header" onclick="toggleStage(this)">
     <span class="stage-index"></span>
-    <h2>Pre (Wall of Flesh) -> (Queen Slime)</h2>
+    <h2>Pre (Wall of Flesh)</h2>
     <span class="done-label" style="display:none">✓ Done</span>
     <input type="checkbox" class="stage-checkbox" onclick="event.preventDefault()">
   </div>
@@ -613,7 +613,66 @@ footer{text-align:center;padding:24px;color:var(--muted);font-size:12px;border-t
   </div>
 </div>
 
-<!-- ═══ 6. Pre-Mechanical Bosses ═══ -->
+<!-- ═══ 6.  Queen Slime ═══ -->
+<div class="stage" data-stage="stage-wof">
+  <div class="stage-header" onclick="toggleStage(this)">
+    <span class="stage-index"></span>
+    <h2>Pre (Optional Queen Slime)</h2>
+    <span class="done-label" style="display:none">✓ Done</span>
+    <input type="checkbox" class="stage-checkbox" onclick="event.preventDefault()">
+  </div>
+  <div class="stage-body">
+    <div class="grid">
+      <div class="section">
+        <h3>Weapons</h3>
+        <div class="item-wrap" data-item-id="firecracker" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Firecracker" target="_blank"><img src="https://terraria.wiki.gg/images/Firecracker.png">Firecracker</a><button class="tooltip-btn" onclick="openPopup(event,'firecracker')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        <div class="item-wrap" data-item-id="cool-whip" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Cool_Whip" target="_blank"><img src="https://terraria.wiki.gg/images/Cool_Whip.png">Cool Whip</a><button class="tooltip-btn" onclick="openPopup(event,'cool-whip')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+      </div>
+      <div class="section">
+        <h3>Minions</h3>
+        <div class="item-wrap" data-item-id="imp-staff" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Imp_Staff" target="_blank"><img src="https://terraria.wiki.gg/images/Imp_Staff.png">Imp Staff</a><button class="tooltip-btn" onclick="openPopup(event,'imp-staff')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        <div class="item-wrap" data-item-id="spider-staff" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Spider_Staff" target="_blank"><img src="https://terraria.wiki.gg/images/Spider_Staff.png">Spider Staff</a><button class="tooltip-btn" onclick="openPopup(event,'spider-staff')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+      </div>
+      <div class="section">
+        <h3>Sentries</h3>
+        <div class="item-wrap" data-item-id="queen-spider-staff" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Queen_Spider_Staff" target="_blank"><img src="https://terraria.wiki.gg/images/Queen_Spider_Staff.png">Queen Spider Staff</a><button class="tooltip-btn" onclick="openPopup(event,'queen-spider-staff')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        <div class="item-wrap" data-item-id="flameburst-rod" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Flameburst_sentry_summons" target="_blank"><img src="https://terraria.wiki.gg/images/Flameburst_Rod.png">Flameburst Rod</a><button class="tooltip-btn" onclick="openPopup(event,'flameburst-rod')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        <div class="item-wrap" data-item-id="ballista-rod" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Ballista_sentry_summons" target="_blank"><img src="https://terraria.wiki.gg/images/Ballista_Rod.png">Ballista Rod</a><button class="tooltip-btn" onclick="openPopup(event,'ballista-rod')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+      </div>
+      <div class="section">
+        <h3>Armor</h3>
+        <div class="item-wrap" data-item-id="spider-armor" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Spider_armor" target="_blank"><img src="https://terraria.wiki.gg/images/Spider_armor.png">Spider armor</a><button class="tooltip-btn" onclick="openPopup(event,'spider-armor')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+      </div>
+      <div class="section">
+        <h3>Accessories</h3>
+        <div class="item-wrap" data-item-id="pygmy-necklace" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Pygmy_Necklace" target="_blank"><img src="https://terraria.wiki.gg/images/Pygmy_Necklace.png">Pygmy Necklace</a><button class="tooltip-btn" onclick="openPopup(event,'pygmy-necklace')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        <div class="sub-group">
+          <h4>Old One's Army Event</h4>
+          <div class="sub-group">
+            <div class="item-wrap" data-item-id="apprentices-scarf" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Apprentice%27s_Scarf" target="_blank"><img src="https://terraria.wiki.gg/images/Apprentice%27s_Scarf.png">Apprentice's Scarf</a><button class="tooltip-btn" onclick="openPopup(event,'apprentices-scarf')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+            <h5>or</h5>
+            <div class="item-wrap" data-item-id="squires-shield" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Squire%27s_Shield" target="_blank"><img src="https://terraria.wiki.gg/images/Squire%27s_Shield.png">Squire's Shield</a><button class="tooltip-btn" onclick="openPopup(event,'squires-shield')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+          </div>
+        </div>
+      </div>
+      <div class="section">
+        <h3>Buffs</h3>
+        <div class="sub-group">
+          <h4>Old One's Army Event</h4>
+          <div class="item-wrap" data-item-id="war-table" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/War_Table" target="_blank"><img src="https://terraria.wiki.gg/images/War_Table.png">War Table</a><button class="tooltip-btn" onclick="openPopup(event,'war-table')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        </div>
+        <div class="item-wrap" data-item-id="bewitching-table" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Bewitching_Table" target="_blank"><img src="https://terraria.wiki.gg/images/Bewitching_Table.png">Bewitching Table</a><button class="tooltip-btn" onclick="openPopup(event,'bewitching-table')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+      </div>
+      <div class="section">
+        <h3>Potions</h3>
+        <div class="item-wrap" data-item-id="summoning-potion" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Summoning_Potion" target="_blank"><img src="https://terraria.wiki.gg/images/Summoning_Potion.png">Summoning Potion</a><button class="tooltip-btn" onclick="openPopup(event,'summoning-potion')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+      </div>
+    </div>
+    <div class="note">💡 Health must have reached 400.</div>
+  </div>
+</div>
+
+<!-- ═══ 7. Pre-Mechanical Bosses ═══ -->
 <div class="stage" data-stage="stage-mech">
   <div class="stage-header" onclick="toggleStage(this)">
     <span class="stage-index"></span>
@@ -635,10 +694,9 @@ footer{text-align:center;padding:24px;color:var(--muted);font-size:12px;border-t
       </div>
       <div class="section">
         <h3>Minions</h3>
-        <div class="item-wrap" data-item-id="abigails-flower" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Abigail%27s_Flower" target="_blank"><img src="https://terraria.wiki.gg/images/Abigail%27s_Flower.png">Abigail's Flower</a><button class="tooltip-btn" onclick="openPopup(event,'abigails-flower')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
         <div class="item-wrap" data-item-id="blade-staff" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Blade_Staff" target="_blank"><img src="https://terraria.wiki.gg/images/Blade_Staff.png">Blade Staff</a><button class="tooltip-btn" onclick="openPopup(event,'blade-staff')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
         <div class="sub-group">
-          <h4>Old One's Army Event</h4>
+          <h4>Blood Moon Event</h4>
           <div class="item-wrap" data-item-id="sanguine-staff" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Sanguine_Staff" target="_blank"><img src="https://terraria.wiki.gg/images/Sanguine_Staff.png">Sanguine Staff</a><button class="tooltip-btn" onclick="openPopup(event,'sanguine-staff')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
         </div>
       </div>
@@ -698,7 +756,7 @@ footer{text-align:center;padding:24px;color:var(--muted);font-size:12px;border-t
   </div>
 </div>
 
-<!-- ═══ 7. Pre-Plantera ═══ -->
+<!-- ═══ 8. Pre-Plantera ═══ -->
 <div class="stage" data-stage="stage-plantera">
   <div class="stage-header" onclick="toggleStage(this)">
     <span class="stage-index"></span>
@@ -714,10 +772,9 @@ footer{text-align:center;padding:24px;color:var(--muted);font-size:12px;border-t
       </div>
       <div class="section">
         <h3>Minions</h3>
-        <div class="item-wrap" data-item-id="abigails-flower" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Abigail%27s_Flower" target="_blank"><img src="https://terraria.wiki.gg/images/Abigail%27s_Flower.png">Abigail's Flower</a><button class="tooltip-btn" onclick="openPopup(event,'abigails-flower')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
         <div class="item-wrap" data-item-id="blade-staff" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Blade_Staff" target="_blank"><img src="https://terraria.wiki.gg/images/Blade_Staff.png">Blade Staff</a><button class="tooltip-btn" onclick="openPopup(event,'blade-staff')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
         <div class="sub-group">
-          <h4>Old One's Army Event</h4>
+          <h4>Blood Moon Event</h4>
           <div class="item-wrap" data-item-id="sanguine-staff" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Sanguine_Staff" target="_blank"><img src="https://terraria.wiki.gg/images/Sanguine_Staff.png">Sanguine Staff</a><button class="tooltip-btn" onclick="openPopup(event,'sanguine-staff')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
         </div>
       </div>
@@ -762,7 +819,7 @@ footer{text-align:center;padding:24px;color:var(--muted);font-size:12px;border-t
   </div>
 </div>
 
-<!-- ═══ 8. Pre-Golem ═══ -->
+<!-- ═══ 9. Pre-Golem ═══ -->
 <div class="stage" data-stage="stage-golem">
   <div class="stage-header" onclick="toggleStage(this)">
     <span class="stage-index"></span>
@@ -785,7 +842,7 @@ footer{text-align:center;padding:24px;color:var(--muted);font-size:12px;border-t
         <h3>Minions</h3>
         <div class="item-wrap" data-item-id="blade-staff" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Blade_Staff" target="_blank"><img src="https://terraria.wiki.gg/images/Blade_Staff.png">Blade Staff</a><button class="tooltip-btn" onclick="openPopup(event,'blade-staff')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
         <div class="sub-group">
-          <h4>Old One's Army Event</h4>
+          <h4>Blood Moon Event</h4>
           <div class="item-wrap" data-item-id="sanguine-staff" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Sanguine_Staff" target="_blank"><img src="https://terraria.wiki.gg/images/Sanguine_Staff.png">Sanguine Staff</a><button class="tooltip-btn" onclick="openPopup(event,'sanguine-staff')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
         </div>
         <div class="sub-group">
@@ -846,7 +903,7 @@ footer{text-align:center;padding:24px;color:var(--muted);font-size:12px;border-t
   </div>
 </div>
 
-<!-- ═══ 9. Pre Optional Duke Fishron ═══ -->
+<!-- ═══ 10. Pre Optional Duke Fishron ═══ -->
 <div class="stage" data-stage="stage-duke-fishron">
   <div class="stage-header" onclick="toggleStage(this)">
     <span class="stage-index"></span>
@@ -869,7 +926,7 @@ footer{text-align:center;padding:24px;color:var(--muted);font-size:12px;border-t
         <h3>Minions</h3>
         <div class="item-wrap" data-item-id="blade-staff" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Blade_Staff" target="_blank"><img src="https://terraria.wiki.gg/images/Blade_Staff.png">Blade Staff</a><button class="tooltip-btn" onclick="openPopup(event,'blade-staff')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
         <div class="sub-group">
-          <h4>Old One's Army Event</h4>
+          <h4>Blood Moon Event</h4>
           <div class="item-wrap" data-item-id="sanguine-staff" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Sanguine_Staff" target="_blank"><img src="https://terraria.wiki.gg/images/Sanguine_Staff.png">Sanguine Staff</a><button class="tooltip-btn" onclick="openPopup(event,'sanguine-staff')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
         </div>
         <div class="sub-group">
@@ -934,7 +991,7 @@ footer{text-align:center;padding:24px;color:var(--muted);font-size:12px;border-t
   </div>
 </div>
 
-<!-- ═══ 10. Pre Optional Empress of Light ═══ -->
+<!-- ═══ 11. Pre Optional Empress of Light ═══ -->
 <div class="stage" data-stage="stage-empress-of-light">
   <div class="stage-header" onclick="toggleStage(this)">
     <span class="stage-index"></span>
@@ -959,7 +1016,7 @@ footer{text-align:center;padding:24px;color:var(--muted);font-size:12px;border-t
         <div class="item-wrap" data-item-id="tempest-staff" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Tempest_Staff" target="_blank"><img src="https://terraria.wiki.gg/images/Tempest_Staff.png">Tempest Staff</a><button class="tooltip-btn" onclick="openPopup(event,'tempest-staff')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
         <div class="item-wrap" data-item-id="blade-staff" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Blade_Staff" target="_blank"><img src="https://terraria.wiki.gg/images/Blade_Staff.png">Blade Staff</a><button class="tooltip-btn" onclick="openPopup(event,'blade-staff')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
         <div class="sub-group">
-          <h4>Old One's Army Event</h4>
+          <h4>Blood Moon Event</h4>
           <div class="item-wrap" data-item-id="sanguine-staff" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Sanguine_Staff" target="_blank"><img src="https://terraria.wiki.gg/images/Sanguine_Staff.png">Sanguine Staff</a><button class="tooltip-btn" onclick="openPopup(event,'sanguine-staff')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
         </div>
         <div class="sub-group">
@@ -1024,7 +1081,7 @@ footer{text-align:center;padding:24px;color:var(--muted);font-size:12px;border-t
   </div>
 </div>
 
-<!-- ═══ 11. Pre Lunatic Cultist  ═══ -->
+<!-- ═══ 12. Pre Lunatic Cultist  ═══ -->
 <div class="stage" data-stage="stage-lunatic-cultist">
   <div class="stage-header" onclick="toggleStage(this)">
     <span class="stage-index"></span>
@@ -1105,7 +1162,7 @@ footer{text-align:center;padding:24px;color:var(--muted);font-size:12px;border-t
   </div>
 </div>
 
-<!-- ═══ 12. Pre Moon Lord  ═══ -->
+<!-- ═══ 13. Pre Moon Lord  ═══ -->
 <div class="stage" data-stage="stage-moon-lord">
   <div class="stage-header" onclick="toggleStage(this)">
     <span class="stage-index"></span>
@@ -1189,7 +1246,7 @@ footer{text-align:center;padding:24px;color:var(--muted);font-size:12px;border-t
   </div>
 </div>
 
-<!-- ═══ 13. End Game  ═══ -->
+<!-- ═══ 14. End Game  ═══ -->
 <div class="stage" data-stage="stage-moon-lord">
   <div class="stage-header" onclick="toggleStage(this)">
     <span class="stage-index"></span>
