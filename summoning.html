@@ -61,6 +61,26 @@ header p{margin-top:6px;color:var(--muted);font-size:14px;font-weight:600}
   padding: 4px 10px;
   margin: 0;
 }
+.sub-group h5 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #9b8fc0;
+  padding: 4px 10px;
+  margin: 0;
+}
+
+.sub-group h5::before,
+.sub-group h5::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: rgba(102, 51, 221, .25);
+}
 
 /* Item row */
 .item-wrap{display:flex;align-items:center;border-radius:6px;margin-bottom:2px;transition:background .15s;position:relative}
@@ -302,7 +322,7 @@ footer{text-align:center;padding:24px;color:var(--muted);font-size:12px;border-t
 <div class="stage" data-stage="stage-pre-bosses">
   <div class="stage-header" onclick="toggleStage(this)">
     <span class="stage-index"></span>
-    <h2>Pre-Bosses (King Slime) (Eye Of Cthulhu)</h2>
+    <h2>Pre-Bosses (King Slime) -> (Eye Of Cthulhu)</h2>
     <span class="done-label" style="display:none">✓ Done</span>
     <input type="checkbox" class="stage-checkbox" onclick="event.preventDefault()">
   </div>
@@ -368,7 +388,7 @@ footer{text-align:center;padding:24px;color:var(--muted);font-size:12px;border-t
 <div class="stage" data-stage="stage-eow-boc">
   <div class="stage-header" onclick="toggleStage(this)">
     <span class="stage-index"></span>
-    <h2>Pre (Eater of Worlds) (Brain of Cthulhu)</h2>
+    <h2>Pre (Eater of Worlds) / (Brain of Cthulhu)</h2>
     <span class="done-label" style="display:none">✓ Done</span>
     <input type="checkbox" class="stage-checkbox" onclick="event.preventDefault()">
   </div>
@@ -376,8 +396,11 @@ footer{text-align:center;padding:24px;color:var(--muted);font-size:12px;border-t
     <div class="grid">
       <div class="section">
         <h3>Weapons</h3>
-        <div class="item-wrap" data-item-id="soulscourge" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Soulscourge" target="_blank"><img src="https://terraria.wiki.gg/images/Soulscourge.png">Soulscourge</a><button class="tooltip-btn" onclick="openPopup(event,'soulscourge')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
-        <div class="item-wrap" data-item-id="vasculash" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Vasculash" target="_blank"><img src="https://terraria.wiki.gg/images/Vasculash.png">Vasculash</a><button class="tooltip-btn" onclick="openPopup(event,'vasculash')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        <div class="sub-group">
+          <div class="item-wrap" data-item-id="soulscourge" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Soulscourge" target="_blank"><img src="https://terraria.wiki.gg/images/Soulscourge.png">Soulscourge</a><button class="tooltip-btn" onclick="openPopup(event,'soulscourge')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+          <h5>or</h5>
+          <div class="item-wrap" data-item-id="vasculash" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Vasculash" target="_blank"><img src="https://terraria.wiki.gg/images/Vasculash.png">Vasculash</a><button class="tooltip-btn" onclick="openPopup(event,'vasculash')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        </div>
         <div class="item-wrap" data-item-id="snapthorn" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Snapthorn" target="_blank"><img src="https://terraria.wiki.gg/images/Snapthorn.png">Snapthorn</a><button class="tooltip-btn" onclick="openPopup(event,'snapthorn')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
       </div>
       <div class="section">
@@ -407,11 +430,11 @@ footer{text-align:center;padding:24px;color:var(--muted);font-size:12px;border-t
   </div>
 </div>
 
-<!-- ═══ 3. Pre Queen Bee / Deerclops ═══ -->
+<!-- ═══ 3. Pre Queen Bee / Optional Deerclops ═══ -->
 <div class="stage" data-stage="stage-qb-deer">
   <div class="stage-header" onclick="toggleStage(this)">
     <span class="stage-index"></span>
-    <h2>Pre (Queen Bee) (Deerclops)</h2>
+    <h2>Pre (Queen Bee) -> (Optional Deerclops)</h2>
     <span class="done-label" style="display:none">✓ Done</span>
     <input type="checkbox" class="stage-checkbox" onclick="event.preventDefault()">
   </div>
@@ -419,8 +442,11 @@ footer{text-align:center;padding:24px;color:var(--muted);font-size:12px;border-t
     <div class="grid">
       <div class="section">
         <h3>Weapons</h3>
-        <div class="item-wrap" data-item-id="soulscourge" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Soulscourge" target="_blank"><img src="https://terraria.wiki.gg/images/Soulscourge.png">Soulscourge</a><button class="tooltip-btn" onclick="openPopup(event,'soulscourge')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
-        <div class="item-wrap" data-item-id="vasculash" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Vasculash" target="_blank"><img src="https://terraria.wiki.gg/images/Vasculash.png">Vasculash</a><button class="tooltip-btn" onclick="openPopup(event,'vasculash')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        <div class="sub-group">
+          <div class="item-wrap" data-item-id="soulscourge" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Soulscourge" target="_blank"><img src="https://terraria.wiki.gg/images/Soulscourge.png">Soulscourge</a><button class="tooltip-btn" onclick="openPopup(event,'soulscourge')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+          <h5>or</h5>
+          <div class="item-wrap" data-item-id="vasculash" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Vasculash" target="_blank"><img src="https://terraria.wiki.gg/images/Vasculash.png">Vasculash</a><button class="tooltip-btn" onclick="openPopup(event,'vasculash')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        </div>
         <div class="item-wrap" data-item-id="snapthorn" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Snapthorn" target="_blank"><img src="https://terraria.wiki.gg/images/Snapthorn.png">Snapthorn</a><button class="tooltip-btn" onclick="openPopup(event,'snapthorn')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
         <div class="sub-group">
           <h4>Meteorite Crash Site Event</h4>
@@ -444,7 +470,11 @@ footer{text-align:center;padding:24px;color:var(--muted);font-size:12px;border-t
         <h3>Accessories</h3>
         <div class="sub-group">
           <h4>Old One's Army Event</h4>
-          <div class="item-wrap" data-item-id="apprentices-scarf" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Apprentice%27s_Scarf" target="_blank"><img src="https://terraria.wiki.gg/images/Apprentice%27s_Scarf.png">Apprentice's Scarf</a><button class="tooltip-btn" onclick="openPopup(event,'apprentices-scarf')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+          <div class="sub-group">
+            <div class="item-wrap" data-item-id="apprentices-scarf" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Apprentice%27s_Scarf" target="_blank"><img src="https://terraria.wiki.gg/images/Apprentice%27s_Scarf.png">Apprentice's Scarf</a><button class="tooltip-btn" onclick="openPopup(event,'apprentices-scarf')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+            <h5>or</h5>
+            <div class="item-wrap" data-item-id="squires-shield" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Squire%27s_Shield" target="_blank"><img src="https://terraria.wiki.gg/images/Squire%27s_Shield.png">Squire's Shield</a><button class="tooltip-btn" onclick="openPopup(event,'squires-shield')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+          </div>
         </div>
       </div>
       <div class="section">
@@ -474,8 +504,11 @@ footer{text-align:center;padding:24px;color:var(--muted);font-size:12px;border-t
     <div class="grid">
       <div class="section">
         <h3>Weapons</h3>
-        <div class="item-wrap" data-item-id="soulscourge" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Soulscourge" target="_blank"><img src="https://terraria.wiki.gg/images/Soulscourge.png">Soulscourge</a><button class="tooltip-btn" onclick="openPopup(event,'soulscourge')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
-        <div class="item-wrap" data-item-id="vasculash" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Vasculash" target="_blank"><img src="https://terraria.wiki.gg/images/Vasculash.png">Vasculash</a><button class="tooltip-btn" onclick="openPopup(event,'vasculash')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        <div class="sub-group">
+          <div class="item-wrap" data-item-id="soulscourge" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Soulscourge" target="_blank"><img src="https://terraria.wiki.gg/images/Soulscourge.png">Soulscourge</a><button class="tooltip-btn" onclick="openPopup(event,'soulscourge')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+          <h5>or</h5>
+          <div class="item-wrap" data-item-id="vasculash" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Vasculash" target="_blank"><img src="https://terraria.wiki.gg/images/Vasculash.png">Vasculash</a><button class="tooltip-btn" onclick="openPopup(event,'vasculash')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        </div>
         <div class="item-wrap" data-item-id="snapthorn" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Snapthorn" target="_blank"><img src="https://terraria.wiki.gg/images/Snapthorn.png">Snapthorn</a><button class="tooltip-btn" onclick="openPopup(event,'snapthorn')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
         <div class="sub-group">
           <h4>Meteorite Crash Site Event</h4>
@@ -501,7 +534,11 @@ footer{text-align:center;padding:24px;color:var(--muted);font-size:12px;border-t
         <div class="item-wrap" data-item-id="pygmy-necklace" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Pygmy_Necklace" target="_blank"><img src="https://terraria.wiki.gg/images/Pygmy_Necklace.png">Pygmy Necklace</a><button class="tooltip-btn" onclick="openPopup(event,'pygmy-necklace')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
         <div class="sub-group">
           <h4>Old One's Army Event</h4>
-          <div class="item-wrap" data-item-id="apprentices-scarf" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Apprentice%27s_Scarf" target="_blank"><img src="https://terraria.wiki.gg/images/Apprentice%27s_Scarf.png">Apprentice's Scarf</a><button class="tooltip-btn" onclick="openPopup(event,'apprentices-scarf')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+          <div class="sub-group">
+            <div class="item-wrap" data-item-id="apprentices-scarf" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Apprentice%27s_Scarf" target="_blank"><img src="https://terraria.wiki.gg/images/Apprentice%27s_Scarf.png">Apprentice's Scarf</a><button class="tooltip-btn" onclick="openPopup(event,'apprentices-scarf')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+            <h5>or</h5>
+            <div class="item-wrap" data-item-id="squires-shield" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Squire%27s_Shield" target="_blank"><img src="https://terraria.wiki.gg/images/Squire%27s_Shield.png">Squire's Shield</a><button class="tooltip-btn" onclick="openPopup(event,'squires-shield')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+          </div>
         </div>
       </div>
       <div class="section">
@@ -519,11 +556,11 @@ footer{text-align:center;padding:24px;color:var(--muted);font-size:12px;border-t
   </div>
 </div>
 
-<!-- ═══ 5. Pre Wall of Flesh ═══ -->
+<!-- ═══ 5. Pre Wall of Flesh -> Queen Slime ═══ -->
 <div class="stage" data-stage="stage-wof">
   <div class="stage-header" onclick="toggleStage(this)">
     <span class="stage-index"></span>
-    <h2>Pre (Wall of Flesh)</h2>
+    <h2>Pre (Wall of Flesh) -> (Queen Slime)</h2>
     <span class="done-label" style="display:none">✓ Done</span>
     <input type="checkbox" class="stage-checkbox" onclick="event.preventDefault()">
   </div>
@@ -552,7 +589,11 @@ footer{text-align:center;padding:24px;color:var(--muted);font-size:12px;border-t
         <div class="item-wrap" data-item-id="pygmy-necklace" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Pygmy_Necklace" target="_blank"><img src="https://terraria.wiki.gg/images/Pygmy_Necklace.png">Pygmy Necklace</a><button class="tooltip-btn" onclick="openPopup(event,'pygmy-necklace')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
         <div class="sub-group">
           <h4>Old One's Army Event</h4>
-          <div class="item-wrap" data-item-id="apprentices-scarf" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Apprentice%27s_Scarf" target="_blank"><img src="https://terraria.wiki.gg/images/Apprentice%27s_Scarf.png">Apprentice's Scarf</a><button class="tooltip-btn" onclick="openPopup(event,'apprentices-scarf')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+          <div class="sub-group">
+            <div class="item-wrap" data-item-id="apprentices-scarf" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Apprentice%27s_Scarf" target="_blank"><img src="https://terraria.wiki.gg/images/Apprentice%27s_Scarf.png">Apprentice's Scarf</a><button class="tooltip-btn" onclick="openPopup(event,'apprentices-scarf')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+            <h5>or</h5>
+            <div class="item-wrap" data-item-id="squires-shield" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Squire%27s_Shield" target="_blank"><img src="https://terraria.wiki.gg/images/Squire%27s_Shield.png">Squire's Shield</a><button class="tooltip-btn" onclick="openPopup(event,'squires-shield')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+          </div>
         </div>
       </div>
       <div class="section">
@@ -595,11 +636,15 @@ footer{text-align:center;padding:24px;color:var(--muted);font-size:12px;border-t
       <div class="section">
         <h3>Minions</h3>
         <div class="item-wrap" data-item-id="abigails-flower" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Abigail%27s_Flower" target="_blank"><img src="https://terraria.wiki.gg/images/Abigail%27s_Flower.png">Abigail's Flower</a><button class="tooltip-btn" onclick="openPopup(event,'abigails-flower')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
-        <div class="item-wrap" data-item-id="sanguine-staff" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Sanguine_Staff" target="_blank"><img src="https://terraria.wiki.gg/images/Sanguine_Staff.png">Sanguine Staff</a><button class="tooltip-btn" onclick="openPopup(event,'sanguine-staff')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
         <div class="item-wrap" data-item-id="blade-staff" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Blade_Staff" target="_blank"><img src="https://terraria.wiki.gg/images/Blade_Staff.png">Blade Staff</a><button class="tooltip-btn" onclick="openPopup(event,'blade-staff')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        <div class="sub-group">
+          <h4>Old One's Army Event</h4>
+          <div class="item-wrap" data-item-id="sanguine-staff" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Sanguine_Staff" target="_blank"><img src="https://terraria.wiki.gg/images/Sanguine_Staff.png">Sanguine Staff</a><button class="tooltip-btn" onclick="openPopup(event,'sanguine-staff')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        </div>
       </div>
       <div class="section">
         <h3>Sentries</h3>
+        <div class="item-wrap" data-item-id="queen-spider-staff" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Queen_Spider_Staff" target="_blank"><img src="https://terraria.wiki.gg/images/Queen_Spider_Staff.png">Queen Spider Staff</a><button class="tooltip-btn" onclick="openPopup(event,'queen-spider-staff')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
         <div class="item-wrap" data-item-id="flameburst-rod" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Flameburst_sentry_summons" target="_blank"><img src="https://terraria.wiki.gg/images/Flameburst_Rod.png">Flameburst Rod</a><button class="tooltip-btn" onclick="openPopup(event,'flameburst-rod')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
         <div class="item-wrap" data-item-id="ballista-rod" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Ballista_sentry_summons" target="_blank"><img src="https://terraria.wiki.gg/images/Ballista_Rod.png">Ballista Rod</a><button class="tooltip-btn" onclick="openPopup(event,'ballista-rod')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
         <div class="sub-group">
@@ -622,7 +667,11 @@ footer{text-align:center;padding:24px;color:var(--muted);font-size:12px;border-t
         <div class="item-wrap" data-item-id="pygmy-necklace" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Pygmy_Necklace" target="_blank"><img src="https://terraria.wiki.gg/images/Pygmy_Necklace.png">Pygmy Necklace</a><button class="tooltip-btn" onclick="openPopup(event,'pygmy-necklace')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
         <div class="sub-group">
           <h4>Old One's Army Event</h4>
-          <div class="item-wrap" data-item-id="apprentices-scarf" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Apprentice%27s_Scarf" target="_blank"><img src="https://terraria.wiki.gg/images/Apprentice%27s_Scarf.png">Apprentice's Scarf</a><button class="tooltip-btn" onclick="openPopup(event,'apprentices-scarf')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+          <div class="sub-group">
+            <div class="item-wrap" data-item-id="apprentices-scarf" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Apprentice%27s_Scarf" target="_blank"><img src="https://terraria.wiki.gg/images/Apprentice%27s_Scarf.png">Apprentice's Scarf</a><button class="tooltip-btn" onclick="openPopup(event,'apprentices-scarf')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+            <h5>or</h5>
+            <div class="item-wrap" data-item-id="squires-shield" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Squire%27s_Shield" target="_blank"><img src="https://terraria.wiki.gg/images/Squire%27s_Shield.png">Squire's Shield</a><button class="tooltip-btn" onclick="openPopup(event,'squires-shield')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+          </div>
         </div>
       </div>
       <div class="section">
@@ -658,14 +707,16 @@ footer{text-align:center;padding:24px;color:var(--muted);font-size:12px;border-t
       <div class="section">
         <h3>Minions</h3>
         <div class="item-wrap" data-item-id="abigails-flower" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Abigail%27s_Flower" target="_blank"><img src="https://terraria.wiki.gg/images/Abigail%27s_Flower.png">Abigail's Flower</a><button class="tooltip-btn" onclick="openPopup(event,'abigails-flower')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
-        <div class="item-wrap" data-item-id="sanguine-staff" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Sanguine_Staff" target="_blank"><img src="https://terraria.wiki.gg/images/Sanguine_Staff.png">Sanguine Staff</a><button class="tooltip-btn" onclick="openPopup(event,'sanguine-staff')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
         <div class="item-wrap" data-item-id="blade-staff" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Blade_Staff" target="_blank"><img src="https://terraria.wiki.gg/images/Blade_Staff.png">Blade Staff</a><button class="tooltip-btn" onclick="openPopup(event,'blade-staff')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        <div class="sub-group">
+          <h4>Old One's Army Event</h4>
+          <div class="item-wrap" data-item-id="sanguine-staff" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Sanguine_Staff" target="_blank"><img src="https://terraria.wiki.gg/images/Sanguine_Staff.png">Sanguine Staff</a><button class="tooltip-btn" onclick="openPopup(event,'sanguine-staff')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        </div>
       </div>
       <div class="section">
         <h3>Sentries</h3>
         <div class="item-wrap" data-item-id="flameburst-cane" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Flameburst_sentry_summons" target="_blank"><img src="https://terraria.wiki.gg/images/Flameburst_Cane.png">Flameburst Cane</a><button class="tooltip-btn" onclick="openPopup(event,'flameburst-cane')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
         <div class="item-wrap" data-item-id="ballista-cane" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Ballista_sentry_summons" target="_blank"><img src="https://terraria.wiki.gg/images/Ballista_Cane.png">Ballista Cane</a><button class="tooltip-btn" onclick="openPopup(event,'ballista-cane')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
-        <div class="item-wrap" data-item-id="queen-spider-staff" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Queen_Spider_Staff" target="_blank"><img src="https://terraria.wiki.gg/images/Queen_Spider_Staff.png">Queen Spider Staff</a><button class="tooltip-btn" onclick="openPopup(event,'queen-spider-staff')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
       </div>
       <div class="section">
         <h3>Armor</h3>
@@ -677,7 +728,11 @@ footer{text-align:center;padding:24px;color:var(--muted);font-size:12px;border-t
         <div class="item-wrap" data-item-id="pygmy-necklace" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Pygmy_Necklace" target="_blank"><img src="https://terraria.wiki.gg/images/Pygmy_Necklace.png">Pygmy Necklace</a><button class="tooltip-btn" onclick="openPopup(event,'pygmy-necklace')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
         <div class="sub-group">
           <h4>Old One's Army Event</h4>
-          <div class="item-wrap" data-item-id="apprentices-scarf" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Apprentice%27s_Scarf" target="_blank"><img src="https://terraria.wiki.gg/images/Apprentice%27s_Scarf.png">Apprentice's Scarf</a><button class="tooltip-btn" onclick="openPopup(event,'apprentices-scarf')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+          <div class="sub-group">
+            <div class="item-wrap" data-item-id="apprentices-scarf" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Apprentice%27s_Scarf" target="_blank"><img src="https://terraria.wiki.gg/images/Apprentice%27s_Scarf.png">Apprentice's Scarf</a><button class="tooltip-btn" onclick="openPopup(event,'apprentices-scarf')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+            <h5>or</h5>
+            <div class="item-wrap" data-item-id="squires-shield" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Squire%27s_Shield" target="_blank"><img src="https://terraria.wiki.gg/images/Squire%27s_Shield.png">Squire's Shield</a><button class="tooltip-btn" onclick="openPopup(event,'squires-shield')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+          </div>
         </div>
       </div>
       <div class="section">
@@ -700,7 +755,7 @@ footer{text-align:center;padding:24px;color:var(--muted);font-size:12px;border-t
 <div class="stage" data-stage="stage-golem">
   <div class="stage-header" onclick="toggleStage(this)">
     <span class="stage-index"></span>
-    <h2>Pre-Golem (Golem)</h2>
+    <h2>Pre-Golem (Golem) -> (Optional Duke Fishron) -> (Optional Empress of Light)</h2>
     <span class="done-label" style="display:none">✓ Done</span>
     <input type="checkbox" class="stage-checkbox" onclick="event.preventDefault()">
   </div>
@@ -709,11 +764,19 @@ footer{text-align:center;padding:24px;color:var(--muted);font-size:12px;border-t
       <div class="section">
         <h3>Weapons</h3>
         <div class="item-wrap" data-item-id="vulgar-display-of-flower" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Vulgar_Display_of_Flower" target="_blank"><img src="https://terraria.wiki.gg/images/Vulgar_Display_of_Flower.png">Vulgar Display of Flower</a><button class="tooltip-btn" onclick="openPopup(event,'vulgar-display-of-flower')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        <div class="sub-group">
+          <h4>Pumpkin Moon Event</h4>
+          <div class="item-wrap" data-item-id="dark-harvest" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Dark_Harvest" target="_blank"><img src="https://terraria.wiki.gg/images/Dark_Harvest.png">Dark Harvest</a><button class="tooltip-btn" onclick="openPopup(event,'dark-harvest')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        </div>
         <div class="item-wrap" data-item-id="morning-star" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Morning_Star" target="_blank"><img src="https://terraria.wiki.gg/images/Morning_Star.png">Morning Star</a><button class="tooltip-btn" onclick="openPopup(event,'morning-star')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
       </div>
       <div class="section">
         <h3>Minions</h3>
         <div class="item-wrap" data-item-id="blade-staff" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Blade_Staff" target="_blank"><img src="https://terraria.wiki.gg/images/Blade_Staff.png">Blade Staff</a><button class="tooltip-btn" onclick="openPopup(event,'blade-staff')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        <div class="sub-group">
+          <h4>Old One's Army Event</h4>
+          <div class="item-wrap" data-item-id="sanguine-staff" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Sanguine_Staff" target="_blank"><img src="https://terraria.wiki.gg/images/Sanguine_Staff.png">Sanguine Staff</a><button class="tooltip-btn" onclick="openPopup(event,'sanguine-staff')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        </div>
         <div class="sub-group">
           <h4>Solar Eclipse Event</h4>
           <div class="item-wrap" data-item-id="deadly-sphere-staff" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Deadly_Sphere_Staff" target="_blank"><img src="https://terraria.wiki.gg/images/Deadly_Sphere_Staff.png">Deadly Sphere Staff</a><button class="tooltip-btn" onclick="openPopup(event,'deadly-sphere-staff')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
@@ -724,16 +787,107 @@ footer{text-align:center;padding:24px;color:var(--muted);font-size:12px;border-t
         <h3>Sentries</h3>
         <div class="item-wrap" data-item-id="flameburst-cane" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Flameburst_sentry_summons" target="_blank"><img src="https://terraria.wiki.gg/images/Flameburst_Cane.png">Flameburst Cane</a><button class="tooltip-btn" onclick="openPopup(event,'flameburst-cane')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
         <div class="item-wrap" data-item-id="ballista-cane" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Ballista_sentry_summons" target="_blank"><img src="https://terraria.wiki.gg/images/Ballista_Cane.png">Ballista Cane</a><button class="tooltip-btn" onclick="openPopup(event,'ballista-cane')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
-        <div class="item-wrap" data-item-id="queen-spider-staff" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Queen_Spider_Staff" target="_blank"><img src="https://terraria.wiki.gg/images/Queen_Spider_Staff.png">Queen Spider Staff</a><button class="tooltip-btn" onclick="openPopup(event,'queen-spider-staff')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
       </div>
       <div class="section">
         <h3>Armor</h3>
+        <div class="sub-group">
+          <h4>Pumpkin Moon Event</h4>
+          <div class="item-wrap" data-item-id="spooky-armor" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Spooky_armor" target="_blank"><img src="https://terraria.wiki.gg/images/Spooky_armor.png">Spooky Armor</a><button class="tooltip-btn" onclick="openPopup(event,'spooky-armor')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        </div>
         <div class="item-wrap" data-item-id="tiki-armor" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Tiki_armor" target="_blank"><img src="https://terraria.wiki.gg/images/Tiki_armor.png">Tiki Armor</a><button class="tooltip-btn" onclick="openPopup(event,'tiki-armor')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
       </div>
       <div class="section">
         <h3>Accessories</h3>
         <div class="item-wrap" data-item-id="summoner-emblem" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Summoner_Emblem" target="_blank"><img src="https://terraria.wiki.gg/images/Summoner_Emblem.png">Summoner Emblem</a><button class="tooltip-btn" onclick="openPopup(event,'summoner-emblem')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
         <div class="item-wrap" data-item-id="pygmy-necklace" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Pygmy_Necklace" target="_blank"><img src="https://terraria.wiki.gg/images/Pygmy_Necklace.png">Pygmy Necklace</a><button class="tooltip-btn" onclick="openPopup(event,'pygmy-necklace')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        <div class="sub-group">
+          <h4>Pumpkin Moon Event</h4>
+          <div class="item-wrap" data-item-id="necromantic-scroll" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Necromantic_Scroll" target="_blank"><img src="https://terraria.wiki.gg/images/Necromantic_Scroll.png">Necromantic Scroll</a><button class="tooltip-btn" onclick="openPopup(event,'necromantic-scroll')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+          <div class="item-wrap" data-item-id="papyrus-scarab" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Papyrus_Scarab" target="_blank"><img src="https://terraria.wiki.gg/images/Papyrus_Scarab.png">Papyrus Scarab</a><button class="tooltip-btn" onclick="openPopup(event,'papyrus-scarab')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        </div>
+        <div class="sub-group">
+          <h4>Old One's Army Event</h4>
+          <div class="sub-group">
+            <div class="item-wrap" data-item-id="apprentices-scarf" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Apprentice%27s_Scarf" target="_blank"><img src="https://terraria.wiki.gg/images/Apprentice%27s_Scarf.png">Apprentice's Scarf</a><button class="tooltip-btn" onclick="openPopup(event,'apprentices-scarf')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+            <h5>or</h5>
+            <div class="item-wrap" data-item-id="squires-shield" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Squire%27s_Shield" target="_blank"><img src="https://terraria.wiki.gg/images/Squire%27s_Shield.png">Squire's Shield</a><button class="tooltip-btn" onclick="openPopup(event,'squires-shield')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+          </div>
+        </div>
+      </div>
+      <div class="section">
+        <h3>Buffs</h3>
+        <div class="sub-group">
+          <h4>Old One's Army Event</h4>
+          <div class="item-wrap" data-item-id="war-table" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/War_Table" target="_blank"><img src="https://terraria.wiki.gg/images/War_Table.png">War Table</a><button class="tooltip-btn" onclick="openPopup(event,'war-table')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        </div>
+        <div class="item-wrap" data-item-id="bewitching-table" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Bewitching_Table" target="_blank"><img src="https://terraria.wiki.gg/images/Bewitching_Table.png">Bewitching Table</a><button class="tooltip-btn" onclick="openPopup(event,'bewitching-table')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+      </div>
+      <div class="section">
+        <h3>Potions</h3>
+        <div class="item-wrap" data-item-id="summoning-potion" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Summoning_Potion" target="_blank"><img src="https://terraria.wiki.gg/images/Summoning_Potion.png">Summoning Potion</a><button class="tooltip-btn" onclick="openPopup(event,'summoning-potion')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ 9. Pre Optional Duke Fishron -> Optional Empress of Light ═══ -->
+<div class="stage" data-stage="stage-golem">
+  <div class="stage-header" onclick="toggleStage(this)">
+    <span class="stage-index"></span>
+    <h2>Pre (Optional Duke Fishron) -> (Optional Empress of Light)</h2>
+    <span class="done-label" style="display:none">✓ Done</span>
+    <input type="checkbox" class="stage-checkbox" onclick="event.preventDefault()">
+  </div>
+  <div class="stage-body">
+    <div class="grid">
+      <div class="section">
+        <h3>Weapons</h3>
+        <div class="item-wrap" data-item-id="vulgar-display-of-flower" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Vulgar_Display_of_Flower" target="_blank"><img src="https://terraria.wiki.gg/images/Vulgar_Display_of_Flower.png">Vulgar Display of Flower</a><button class="tooltip-btn" onclick="openPopup(event,'vulgar-display-of-flower')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        <div class="sub-group">
+          <h4>Pumpkin Moon Event</h4>
+          <div class="item-wrap" data-item-id="dark-harvest" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Dark_Harvest" target="_blank"><img src="https://terraria.wiki.gg/images/Dark_Harvest.png">Dark Harvest</a><button class="tooltip-btn" onclick="openPopup(event,'dark-harvest')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        </div>
+        <div class="item-wrap" data-item-id="morning-star" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Morning_Star" target="_blank"><img src="https://terraria.wiki.gg/images/Morning_Star.png">Morning Star</a><button class="tooltip-btn" onclick="openPopup(event,'morning-star')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+      </div>
+      <div class="section">
+        <h3>Minions</h3>
+        <div class="item-wrap" data-item-id="blade-staff" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Blade_Staff" target="_blank"><img src="https://terraria.wiki.gg/images/Blade_Staff.png">Blade Staff</a><button class="tooltip-btn" onclick="openPopup(event,'blade-staff')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        <div class="sub-group">
+          <h4>Martian Madness Event</h4>
+          <div class="item-wrap" data-item-id="xeno-staf" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Xeno_Staff" target="_blank"><img src="https://terraria.wiki.gg/images/Xeno_Staff.png">Xeno Staff</a><button class="tooltip-btn" onclick="openPopup(event,'xeno-staf')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        </div>
+        <div class="item-wrap" data-item-id="desert-tiger-staff" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Desert_Tiger_Staff" target="_blank"><img src="https://terraria.wiki.gg/images/Desert_Tiger_Staff.png">Desert Tiger Staff</a><button class="tooltip-btn" onclick="openPopup(event,'desert-tiger-staff')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+      </div>
+      <div class="section">
+        <h3>Sentries</h3>
+        <div class="item-wrap" data-item-id="flameburst-staff" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Flameburst_sentry_summons" target="_blank"><img src="https://terraria.wiki.gg/images/Flameburst_Staff.png">Flameburst Staff</a><button class="tooltip-btn" onclick="openPopup(event,'flameburst-staff')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        <div class="item-wrap" data-item-id="ballista-staff" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Ballista_sentry_summons" target="_blank"><img src="https://terraria.wiki.gg/images/Ballista_Staff.png">Ballista Staff</a><button class="tooltip-btn" onclick="openPopup(event,'ballista-staff')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+      </div>
+      <div class="section">
+        <h3>Armor</h3>
+        <div class="sub-group">
+          <h4>Pumpkin Moon Event</h4>
+          <div class="item-wrap" data-item-id="spooky-armor" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Spooky_armor" target="_blank"><img src="https://terraria.wiki.gg/images/Spooky_armor.png">Spooky Armor</a><button class="tooltip-btn" onclick="openPopup(event,'spooky-armor')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        </div>
+        <div class="item-wrap" data-item-id="tiki-armor" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Tiki_armor" target="_blank"><img src="https://terraria.wiki.gg/images/Tiki_armor.png">Tiki Armor</a><button class="tooltip-btn" onclick="openPopup(event,'tiki-armor')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+      </div>
+      <div class="section">
+        <h3>Accessories</h3>
+        <div class="item-wrap" data-item-id="summoner-emblem" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Summoner_Emblem" target="_blank"><img src="https://terraria.wiki.gg/images/Summoner_Emblem.png">Summoner Emblem</a><button class="tooltip-btn" onclick="openPopup(event,'summoner-emblem')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        <div class="item-wrap" data-item-id="pygmy-necklace" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Pygmy_Necklace" target="_blank"><img src="https://terraria.wiki.gg/images/Pygmy_Necklace.png">Pygmy Necklace</a><button class="tooltip-btn" onclick="openPopup(event,'pygmy-necklace')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        <div class="sub-group">
+          <h4>Pumpkin Moon Event</h4>
+          <div class="item-wrap" data-item-id="necromantic-scroll" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Necromantic_Scroll" target="_blank"><img src="https://terraria.wiki.gg/images/Necromantic_Scroll.png">Necromantic Scroll</a><button class="tooltip-btn" onclick="openPopup(event,'necromantic-scroll')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+          <div class="item-wrap" data-item-id="papyrus-scarab" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Papyrus_Scarab" target="_blank"><img src="https://terraria.wiki.gg/images/Papyrus_Scarab.png">Papyrus Scarab</a><button class="tooltip-btn" onclick="openPopup(event,'papyrus-scarab')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        </div>
+        <div class="sub-group">
+          <h4>Old One's Army Event</h4>
+          <div class="sub-group">
+            <div class="item-wrap" data-item-id="apprentices-scarf" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Apprentice%27s_Scarf" target="_blank"><img src="https://terraria.wiki.gg/images/Apprentice%27s_Scarf.png">Apprentice's Scarf</a><button class="tooltip-btn" onclick="openPopup(event,'apprentices-scarf')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+            <h5>or</h5>
+            <div class="item-wrap" data-item-id="squires-shield" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Squire%27s_Shield" target="_blank"><img src="https://terraria.wiki.gg/images/Squire%27s_Shield.png">Squire's Shield</a><button class="tooltip-btn" onclick="openPopup(event,'squires-shield')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+          </div>
+        </div>
       </div>
       <div class="section">
         <h3>Buffs</h3>
