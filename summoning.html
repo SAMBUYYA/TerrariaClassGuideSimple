@@ -330,6 +330,11 @@ footer{text-align:center;padding:24px;color:var(--muted);font-size:12px;border-t
     <div class="grid">
       <div class="section">
         <h3>Weapons</h3>
+        <div class="item-wrap" data-item-id="cobwhip" data-state="none">
+          <a class="item" href="https://terraria.wiki.gg/wiki/Cobwhip" target="_blank"><img src="https://terraria.wiki.gg/images/Cobwhip.png">Cobwhip</a>
+          <button class="tooltip-btn" onclick="openPopup(event,'cobwhip')">ℹ</button>
+          <button class="item-btn" data-s="none" onclick="cycleItem(this)"></button>
+        </div>
         <div class="item-wrap" data-item-id="leather-whip" data-state="none">
           <a class="item" href="https://terraria.wiki.gg/wiki/Leather_Whip" target="_blank"><img src="https://terraria.wiki.gg/images/Leather_Whip.png">Leather Whip</a>
           <button class="tooltip-btn" onclick="openPopup(event,'leather-whip')">ℹ</button>
@@ -459,8 +464,13 @@ footer{text-align:center;padding:24px;color:var(--muted);font-size:12px;border-t
       </div>
       <div class="section">
         <h3>Sentries</h3>
-        <div class="item-wrap" data-item-id="flameburst-rod" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Flameburst_sentry_summons" target="_blank"><img src="https://terraria.wiki.gg/images/Flameburst_Rod.png">Flameburst Rod</a><button class="tooltip-btn" onclick="openPopup(event,'flameburst-rod')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
-        <div class="item-wrap" data-item-id="ballista-rod" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Ballista_sentry_summons" target="_blank"><img src="https://terraria.wiki.gg/images/Ballista_Rod.png">Ballista Rod</a><button class="tooltip-btn" onclick="openPopup(event,'ballista-rod')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        <div class="sub-group">
+          <h4>Choice Only 1</h4>
+          <div class="item-wrap" data-item-id="lightning-aura-rod" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Lightning_Aura_sentry_summons" target="_blank"><img src="https://terraria.wiki.gg/images/Lightning_Aura_Rod.png">Lightning Aura Rod</a><button class="tooltip-btn" onclick="openPopup(event,'lightning-aura-rod')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+          <div class="item-wrap" data-item-id="explosive-trap-rod" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Explosive_Trap_sentry_summons" target="_blank"><img src="https://terraria.wiki.gg/images/Explosive_Trap_Rod.png">Explosive Trap Rod</a><button class="tooltip-btn" onclick="openPopup(event,'explosive-trap-rod')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+          <div class="item-wrap" data-item-id="flameburst-rod" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Flameburst_sentry_summons" target="_blank"><img src="https://terraria.wiki.gg/images/Flameburst_Rod.png">Flameburst Rod</a><button class="tooltip-btn" onclick="openPopup(event,'flameburst-rod')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+          <div class="item-wrap" data-item-id="ballista-rod" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Ballista_sentry_summons" target="_blank"><img src="https://terraria.wiki.gg/images/Ballista_Rod.png">Ballista Rod</a><button class="tooltip-btn" onclick="openPopup(event,'ballista-rod')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        </div>
       </div>
       <div class="section">
         <h3>Armor</h3>
@@ -521,8 +531,13 @@ footer{text-align:center;padding:24px;color:var(--muted);font-size:12px;border-t
       </div>
       <div class="section">
         <h3>Sentries</h3>
-        <div class="item-wrap" data-item-id="flameburst-rod" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Flameburst_sentry_summons" target="_blank"><img src="https://terraria.wiki.gg/images/Flameburst_Rod.png">Flameburst Rod</a><button class="tooltip-btn" onclick="openPopup(event,'flameburst-rod')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
-        <div class="item-wrap" data-item-id="ballista-rod" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Ballista_sentry_summons" target="_blank"><img src="https://terraria.wiki.gg/images/Ballista_Rod.png">Ballista Rod</a><button class="tooltip-btn" onclick="openPopup(event,'ballista-rod')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        <div class="sub-group">
+          <h4>Choice Only 1</h4>
+          <div class="item-wrap" data-item-id="lightning-aura-rod" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Lightning_Aura_sentry_summons" target="_blank"><img src="https://terraria.wiki.gg/images/Lightning_Aura_Rod.png">Lightning Aura Rod</a><button class="tooltip-btn" onclick="openPopup(event,'lightning-aura-rod')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+          <div class="item-wrap" data-item-id="explosive-trap-rod" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Explosive_Trap_sentry_summons" target="_blank"><img src="https://terraria.wiki.gg/images/Explosive_Trap_Rod.png">Explosive Trap Rod</a><button class="tooltip-btn" onclick="openPopup(event,'explosive-trap-rod')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+          <div class="item-wrap" data-item-id="flameburst-rod" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Flameburst_sentry_summons" target="_blank"><img src="https://terraria.wiki.gg/images/Flameburst_Rod.png">Flameburst Rod</a><button class="tooltip-btn" onclick="openPopup(event,'flameburst-rod')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+          <div class="item-wrap" data-item-id="ballista-rod" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Ballista_sentry_summons" target="_blank"><img src="https://terraria.wiki.gg/images/Ballista_Rod.png">Ballista Rod</a><button class="tooltip-btn" onclick="openPopup(event,'ballista-rod')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        </div>
       </div>
       <div class="section">
         <h3>Armor</h3>
@@ -576,8 +591,13 @@ footer{text-align:center;padding:24px;color:var(--muted);font-size:12px;border-t
       </div>
       <div class="section">
         <h3>Sentries</h3>
-        <div class="item-wrap" data-item-id="flameburst-rod" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Flameburst_sentry_summons" target="_blank"><img src="https://terraria.wiki.gg/images/Flameburst_Rod.png">Flameburst Rod</a><button class="tooltip-btn" onclick="openPopup(event,'flameburst-rod')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
-        <div class="item-wrap" data-item-id="ballista-rod" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Ballista_sentry_summons" target="_blank"><img src="https://terraria.wiki.gg/images/Ballista_Rod.png">Ballista Rod</a><button class="tooltip-btn" onclick="openPopup(event,'ballista-rod')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        <div class="sub-group">
+          <h4>Choice Only 1</h4>
+          <div class="item-wrap" data-item-id="lightning-aura-rod" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Lightning_Aura_sentry_summons" target="_blank"><img src="https://terraria.wiki.gg/images/Lightning_Aura_Rod.png">Lightning Aura Rod</a><button class="tooltip-btn" onclick="openPopup(event,'lightning-aura-rod')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+          <div class="item-wrap" data-item-id="explosive-trap-rod" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Explosive_Trap_sentry_summons" target="_blank"><img src="https://terraria.wiki.gg/images/Explosive_Trap_Rod.png">Explosive Trap Rod</a><button class="tooltip-btn" onclick="openPopup(event,'explosive-trap-rod')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+          <div class="item-wrap" data-item-id="flameburst-rod" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Flameburst_sentry_summons" target="_blank"><img src="https://terraria.wiki.gg/images/Flameburst_Rod.png">Flameburst Rod</a><button class="tooltip-btn" onclick="openPopup(event,'flameburst-rod')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+          <div class="item-wrap" data-item-id="ballista-rod" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Ballista_sentry_summons" target="_blank"><img src="https://terraria.wiki.gg/images/Ballista_Rod.png">Ballista Rod</a><button class="tooltip-btn" onclick="openPopup(event,'ballista-rod')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        </div>
       </div>
       <div class="section">
         <h3>Armor</h3>
@@ -635,8 +655,13 @@ footer{text-align:center;padding:24px;color:var(--muted);font-size:12px;border-t
       </div>
       <div class="section">
         <h3>Sentries</h3>
-        <div class="item-wrap" data-item-id="flameburst-rod" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Flameburst_sentry_summons" target="_blank"><img src="https://terraria.wiki.gg/images/Flameburst_Rod.png">Flameburst Rod</a><button class="tooltip-btn" onclick="openPopup(event,'flameburst-rod')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
-        <div class="item-wrap" data-item-id="ballista-rod" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Ballista_sentry_summons" target="_blank"><img src="https://terraria.wiki.gg/images/Ballista_Rod.png">Ballista Rod</a><button class="tooltip-btn" onclick="openPopup(event,'ballista-rod')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        <div class="sub-group">
+          <h4>Choice Only 1</h4>
+          <div class="item-wrap" data-item-id="lightning-aura-rod" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Lightning_Aura_sentry_summons" target="_blank"><img src="https://terraria.wiki.gg/images/Lightning_Aura_Rod.png">Lightning Aura Rod</a><button class="tooltip-btn" onclick="openPopup(event,'lightning-aura-rod')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+          <div class="item-wrap" data-item-id="explosive-trap-rod" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Explosive_Trap_sentry_summons" target="_blank"><img src="https://terraria.wiki.gg/images/Explosive_Trap_Rod.png">Explosive Trap Rod</a><button class="tooltip-btn" onclick="openPopup(event,'explosive-trap-rod')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+          <div class="item-wrap" data-item-id="flameburst-rod" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Flameburst_sentry_summons" target="_blank"><img src="https://terraria.wiki.gg/images/Flameburst_Rod.png">Flameburst Rod</a><button class="tooltip-btn" onclick="openPopup(event,'flameburst-rod')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+          <div class="item-wrap" data-item-id="ballista-rod" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Ballista_sentry_summons" target="_blank"><img src="https://terraria.wiki.gg/images/Ballista_Rod.png">Ballista Rod</a><button class="tooltip-btn" onclick="openPopup(event,'ballista-rod')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        </div>
         <div class="item-wrap" data-item-id="queen-spider-staff" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Queen_Spider_Staff" target="_blank"><img src="https://terraria.wiki.gg/images/Queen_Spider_Staff.png">Queen Spider Staff</a><button class="tooltip-btn" onclick="openPopup(event,'queen-spider-staff')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
       </div>
       <div class="section">
@@ -707,11 +732,19 @@ footer{text-align:center;padding:24px;color:var(--muted);font-size:12px;border-t
       </div>
       <div class="section">
         <h3>Sentries</h3>
+        <div class="sub-group">
+          <h4>Choice Only 1</h4>
+          <div class="item-wrap" data-item-id="lightning-aura-rod" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Lightning_Aura_sentry_summons" target="_blank"><img src="https://terraria.wiki.gg/images/Lightning_Aura_Rod.png">Lightning Aura Rod</a><button class="tooltip-btn" onclick="openPopup(event,'lightning-aura-rod')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+          <div class="item-wrap" data-item-id="explosive-trap-rod" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Explosive_Trap_sentry_summons" target="_blank"><img src="https://terraria.wiki.gg/images/Explosive_Trap_Rod.png">Explosive Trap Rod</a><button class="tooltip-btn" onclick="openPopup(event,'explosive-trap-rod')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+          <div class="item-wrap" data-item-id="flameburst-rod" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Flameburst_sentry_summons" target="_blank"><img src="https://terraria.wiki.gg/images/Flameburst_Rod.png">Flameburst Rod</a><button class="tooltip-btn" onclick="openPopup(event,'flameburst-rod')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+          <div class="item-wrap" data-item-id="ballista-rod" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Ballista_sentry_summons" target="_blank"><img src="https://terraria.wiki.gg/images/Ballista_Rod.png">Ballista Rod</a><button class="tooltip-btn" onclick="openPopup(event,'ballista-rod')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        </div>
         <div class="item-wrap" data-item-id="queen-spider-staff" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Queen_Spider_Staff" target="_blank"><img src="https://terraria.wiki.gg/images/Queen_Spider_Staff.png">Queen Spider Staff</a><button class="tooltip-btn" onclick="openPopup(event,'queen-spider-staff')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
-        <div class="item-wrap" data-item-id="flameburst-rod" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Flameburst_sentry_summons" target="_blank"><img src="https://terraria.wiki.gg/images/Flameburst_Rod.png">Flameburst Rod</a><button class="tooltip-btn" onclick="openPopup(event,'flameburst-rod')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
-        <div class="item-wrap" data-item-id="ballista-rod" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Ballista_sentry_summons" target="_blank"><img src="https://terraria.wiki.gg/images/Ballista_Rod.png">Ballista Rod</a><button class="tooltip-btn" onclick="openPopup(event,'ballista-rod')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
         <div class="sub-group">
           <h4>After 1 mechanical boss defeated</h4>
+          <h4>Choice Only 1</h4>
+          <div class="item-wrap" data-item-id="lightning-aura-cane" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Lightning_Aura_sentry_summons" target="_blank"><img src="https://terraria.wiki.gg/images/Lightning_Aura_Cane.png">Lightning Aura Cane</a><button class="tooltip-btn" onclick="openPopup(event,'lightning-aura-cane')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+          <div class="item-wrap" data-item-id="explosive-trap-cane" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Explosive_Trap_sentry_summons" target="_blank"><img src="https://terraria.wiki.gg/images/Explosive_Trap_Cane.png">Explosive Trap Cane</a><button class="tooltip-btn" onclick="openPopup(event,'explosive-trap-cane')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
           <div class="item-wrap" data-item-id="flameburst-cane" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Flameburst_sentry_summons" target="_blank"><img src="https://terraria.wiki.gg/images/Flameburst_Cane.png">Flameburst Cane</a><button class="tooltip-btn" onclick="openPopup(event,'flameburst-cane')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
           <div class="item-wrap" data-item-id="ballista-cane" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Ballista_sentry_summons" target="_blank"><img src="https://terraria.wiki.gg/images/Ballista_Cane.png">Ballista Cane</a><button class="tooltip-btn" onclick="openPopup(event,'ballista-cane')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
         </div>
@@ -730,6 +763,7 @@ footer{text-align:center;padding:24px;color:var(--muted);font-size:12px;border-t
         <div class="item-wrap" data-item-id="pygmy-necklace" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Pygmy_Necklace" target="_blank"><img src="https://terraria.wiki.gg/images/Pygmy_Necklace.png">Pygmy Necklace</a><button class="tooltip-btn" onclick="openPopup(event,'pygmy-necklace')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
         <div class="sub-group">
           <h4>Old One's Army Event</h4>
+          <h4>Choice Only 1</h4>
           <div class="sub-group">
             <div class="item-wrap" data-item-id="apprentices-scarf" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Apprentice%27s_Scarf" target="_blank"><img src="https://terraria.wiki.gg/images/Apprentice%27s_Scarf.png">Apprentice's Scarf</a><button class="tooltip-btn" onclick="openPopup(event,'apprentices-scarf')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
             <h5>or</h5>
@@ -784,8 +818,13 @@ footer{text-align:center;padding:24px;color:var(--muted);font-size:12px;border-t
       <div class="section">
         <h3>Sentries</h3>
         <div class="item-wrap" data-item-id="queen-spider-staff" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Queen_Spider_Staff" target="_blank"><img src="https://terraria.wiki.gg/images/Queen_Spider_Staff.png">Queen Spider Staff</a><button class="tooltip-btn" onclick="openPopup(event,'queen-spider-staff')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
-        <div class="item-wrap" data-item-id="flameburst-cane" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Flameburst_sentry_summons" target="_blank"><img src="https://terraria.wiki.gg/images/Flameburst_Cane.png">Flameburst Cane</a><button class="tooltip-btn" onclick="openPopup(event,'flameburst-cane')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
-        <div class="item-wrap" data-item-id="ballista-cane" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Ballista_sentry_summons" target="_blank"><img src="https://terraria.wiki.gg/images/Ballista_Cane.png">Ballista Cane</a><button class="tooltip-btn" onclick="openPopup(event,'ballista-cane')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        <div class="sub-group">
+          <h4>Choice Only 1</h4>
+          <div class="item-wrap" data-item-id="lightning-aura-cane" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Lightning_Aura_sentry_summons" target="_blank"><img src="https://terraria.wiki.gg/images/Lightning_Aura_Cane.png">Lightning Aura Cane</a><button class="tooltip-btn" onclick="openPopup(event,'lightning-aura-cane')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+          <div class="item-wrap" data-item-id="explosive-trap-cane" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Explosive_Trap_sentry_summons" target="_blank"><img src="https://terraria.wiki.gg/images/Explosive_Trap_Cane.png">Explosive Trap Cane</a><button class="tooltip-btn" onclick="openPopup(event,'explosive-trap-cane')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+          <div class="item-wrap" data-item-id="flameburst-cane" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Flameburst_sentry_summons" target="_blank"><img src="https://terraria.wiki.gg/images/Flameburst_Cane.png">Flameburst Cane</a><button class="tooltip-btn" onclick="openPopup(event,'flameburst-cane')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+          <div class="item-wrap" data-item-id="ballista-cane" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Ballista_sentry_summons" target="_blank"><img src="https://terraria.wiki.gg/images/Ballista_Cane.png">Ballista Cane</a><button class="tooltip-btn" onclick="openPopup(event,'ballista-cane')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        </div>
       </div>
       <div class="section">
         <h3>Armor</h3>
@@ -797,6 +836,7 @@ footer{text-align:center;padding:24px;color:var(--muted);font-size:12px;border-t
         <div class="item-wrap" data-item-id="pygmy-necklace" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Pygmy_Necklace" target="_blank"><img src="https://terraria.wiki.gg/images/Pygmy_Necklace.png">Pygmy Necklace</a><button class="tooltip-btn" onclick="openPopup(event,'pygmy-necklace')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
         <div class="sub-group">
           <h4>Old One's Army Event</h4>
+          <h4>Choice Only 1</h4>
           <div class="sub-group">
             <div class="item-wrap" data-item-id="apprentices-scarf" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Apprentice%27s_Scarf" target="_blank"><img src="https://terraria.wiki.gg/images/Apprentice%27s_Scarf.png">Apprentice's Scarf</a><button class="tooltip-btn" onclick="openPopup(event,'apprentices-scarf')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
             <h5>or</h5>
@@ -858,8 +898,13 @@ footer{text-align:center;padding:24px;color:var(--muted);font-size:12px;border-t
       <div class="section">
         <h3>Sentries</h3>
         <div class="item-wrap" data-item-id="queen-spider-staff" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Queen_Spider_Staff" target="_blank"><img src="https://terraria.wiki.gg/images/Queen_Spider_Staff.png">Queen Spider Staff</a><button class="tooltip-btn" onclick="openPopup(event,'queen-spider-staff')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
-        <div class="item-wrap" data-item-id="flameburst-cane" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Flameburst_sentry_summons" target="_blank"><img src="https://terraria.wiki.gg/images/Flameburst_Cane.png">Flameburst Cane</a><button class="tooltip-btn" onclick="openPopup(event,'flameburst-cane')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
-        <div class="item-wrap" data-item-id="ballista-cane" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Ballista_sentry_summons" target="_blank"><img src="https://terraria.wiki.gg/images/Ballista_Cane.png">Ballista Cane</a><button class="tooltip-btn" onclick="openPopup(event,'ballista-cane')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        <div class="sub-group">
+          <h4>Choice Only 1</h4>
+          <div class="item-wrap" data-item-id="lightning-aura-cane" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Lightning_Aura_sentry_summons" target="_blank"><img src="https://terraria.wiki.gg/images/Lightning_Aura_Cane.png">Lightning Aura Cane</a><button class="tooltip-btn" onclick="openPopup(event,'lightning-aura-cane')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+          <div class="item-wrap" data-item-id="explosive-trap-cane" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Explosive_Trap_sentry_summons" target="_blank"><img src="https://terraria.wiki.gg/images/Explosive_Trap_Cane.png">Explosive Trap Cane</a><button class="tooltip-btn" onclick="openPopup(event,'explosive-trap-cane')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+          <div class="item-wrap" data-item-id="flameburst-cane" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Flameburst_sentry_summons" target="_blank"><img src="https://terraria.wiki.gg/images/Flameburst_Cane.png">Flameburst Cane</a><button class="tooltip-btn" onclick="openPopup(event,'flameburst-cane')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+          <div class="item-wrap" data-item-id="ballista-cane" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Ballista_sentry_summons" target="_blank"><img src="https://terraria.wiki.gg/images/Ballista_Cane.png">Ballista Cane</a><button class="tooltip-btn" onclick="openPopup(event,'ballista-cane')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        </div>
         <div class="item-wrap" data-item-id="staff-of-the-frost-hydra" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Staff_of_the_Frost_Hydra" target="_blank"><img src="https://terraria.wiki.gg/images/Staff_of_the_Frost_Hydra.png">Staff of the Frost Hydra</a><button class="tooltip-btn" onclick="openPopup(event,'staff-of-the-frost-hydra')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
       </div>
       <div class="section">
@@ -882,6 +927,7 @@ footer{text-align:center;padding:24px;color:var(--muted);font-size:12px;border-t
         </div>
         <div class="sub-group">
           <h4>Old One's Army Event</h4>
+          <h4>Choice Only 1</h4>
           <div class="sub-group">
             <div class="item-wrap" data-item-id="apprentices-scarf" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Apprentice%27s_Scarf" target="_blank"><img src="https://terraria.wiki.gg/images/Apprentice%27s_Scarf.png">Apprentice's Scarf</a><button class="tooltip-btn" onclick="openPopup(event,'apprentices-scarf')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
             <h5>or</h5>
@@ -945,8 +991,13 @@ footer{text-align:center;padding:24px;color:var(--muted);font-size:12px;border-t
       </div>
       <div class="section">
         <h3>Sentries</h3>
-        <div class="item-wrap" data-item-id="flameburst-staff" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Flameburst_sentry_summons" target="_blank"><img src="https://terraria.wiki.gg/images/Flameburst_Staff.png">Flameburst Staff</a><button class="tooltip-btn" onclick="openPopup(event,'flameburst-staff')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
-        <div class="item-wrap" data-item-id="ballista-staff" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Ballista_sentry_summons" target="_blank"><img src="https://terraria.wiki.gg/images/Ballista_Staff.png">Ballista Staff</a><button class="tooltip-btn" onclick="openPopup(event,'ballista-staff')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        <div class="sub-group">
+          <h4>Choice Only 1</h4>
+          <div class="item-wrap" data-item-id="lightning-aura-staff" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Lightning_Aura_sentry_summons" target="_blank"><img src="https://terraria.wiki.gg/images/Lightning_Aura_Staff.png">Lightning Aura Staff</a><button class="tooltip-btn" onclick="openPopup(event,'lightning-aura-staff')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+          <div class="item-wrap" data-item-id="explosive-trap-staff" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Explosive_Trap_sentry_summons" target="_blank"><img src="https://terraria.wiki.gg/images/Explosive_Trap_Staff.png">Explosive Trap Staff</a><button class="tooltip-btn" onclick="openPopup(event,'explosive-trap-staff')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+          <div class="item-wrap" data-item-id="flameburst-staff" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Flameburst_sentry_summons" target="_blank"><img src="https://terraria.wiki.gg/images/Flameburst_Staff.png">Flameburst Staff</a><button class="tooltip-btn" onclick="openPopup(event,'flameburst-staff')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+          <div class="item-wrap" data-item-id="ballista-staff" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Ballista_sentry_summons" target="_blank"><img src="https://terraria.wiki.gg/images/Ballista_Staff.png">Ballista Staff</a><button class="tooltip-btn" onclick="openPopup(event,'ballista-staff')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        </div>
         <div class="item-wrap" data-item-id="staff-of-the-frost-hydra" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Staff_of_the_Frost_Hydra" target="_blank"><img src="https://terraria.wiki.gg/images/Staff_of_the_Frost_Hydra.png">Staff of the Frost Hydra</a><button class="tooltip-btn" onclick="openPopup(event,'staff-of-the-frost-hydra')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
       </div>
       <div class="section">
@@ -970,6 +1021,7 @@ footer{text-align:center;padding:24px;color:var(--muted);font-size:12px;border-t
         </div>
         <div class="sub-group">
           <h4>Old One's Army Event</h4>
+          <h4>Choice Only 1</h4>
           <div class="sub-group">
             <div class="item-wrap" data-item-id="apprentices-scarf" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Apprentice%27s_Scarf" target="_blank"><img src="https://terraria.wiki.gg/images/Apprentice%27s_Scarf.png">Apprentice's Scarf</a><button class="tooltip-btn" onclick="openPopup(event,'apprentices-scarf')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
             <h5>or</h5>
@@ -1035,8 +1087,13 @@ footer{text-align:center;padding:24px;color:var(--muted);font-size:12px;border-t
       </div>
       <div class="section">
         <h3>Sentries</h3>
-        <div class="item-wrap" data-item-id="flameburst-staff" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Flameburst_sentry_summons" target="_blank"><img src="https://terraria.wiki.gg/images/Flameburst_Staff.png">Flameburst Staff</a><button class="tooltip-btn" onclick="openPopup(event,'flameburst-staff')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
-        <div class="item-wrap" data-item-id="ballista-staff" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Ballista_sentry_summons" target="_blank"><img src="https://terraria.wiki.gg/images/Ballista_Staff.png">Ballista Staff</a><button class="tooltip-btn" onclick="openPopup(event,'ballista-staff')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        <div class="sub-group">
+          <h4>Choice Only 1</h4>
+          <div class="item-wrap" data-item-id="lightning-aura-staff" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Lightning_Aura_sentry_summons" target="_blank"><img src="https://terraria.wiki.gg/images/Lightning_Aura_Staff.png">Lightning Aura Staff</a><button class="tooltip-btn" onclick="openPopup(event,'lightning-aura-staff')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+          <div class="item-wrap" data-item-id="explosive-trap-staff" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Explosive_Trap_sentry_summons" target="_blank"><img src="https://terraria.wiki.gg/images/Explosive_Trap_Staff.png">Explosive Trap Staff</a><button class="tooltip-btn" onclick="openPopup(event,'explosive-trap-staff')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+          <div class="item-wrap" data-item-id="flameburst-staff" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Flameburst_sentry_summons" target="_blank"><img src="https://terraria.wiki.gg/images/Flameburst_Staff.png">Flameburst Staff</a><button class="tooltip-btn" onclick="openPopup(event,'flameburst-staff')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+          <div class="item-wrap" data-item-id="ballista-staff" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Ballista_sentry_summons" target="_blank"><img src="https://terraria.wiki.gg/images/Ballista_Staff.png">Ballista Staff</a><button class="tooltip-btn" onclick="openPopup(event,'ballista-staff')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        </div>
         <div class="item-wrap" data-item-id="staff-of-the-frost-hydra" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Staff_of_the_Frost_Hydra" target="_blank"><img src="https://terraria.wiki.gg/images/Staff_of_the_Frost_Hydra.png">Staff of the Frost Hydra</a><button class="tooltip-btn" onclick="openPopup(event,'staff-of-the-frost-hydra')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
       </div>
       <div class="section">
@@ -1060,6 +1117,7 @@ footer{text-align:center;padding:24px;color:var(--muted);font-size:12px;border-t
         </div>
         <div class="sub-group">
           <h4>Old One's Army Event</h4>
+          <h4>Choice Only 1</h4>
           <div class="sub-group">
             <div class="item-wrap" data-item-id="apprentices-scarf" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Apprentice%27s_Scarf" target="_blank"><img src="https://terraria.wiki.gg/images/Apprentice%27s_Scarf.png">Apprentice's Scarf</a><button class="tooltip-btn" onclick="openPopup(event,'apprentices-scarf')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
             <h5>or</h5>
@@ -1116,8 +1174,13 @@ footer{text-align:center;padding:24px;color:var(--muted);font-size:12px;border-t
       </div>
       <div class="section">
         <h3>Sentries</h3>
-        <div class="item-wrap" data-item-id="flameburst-staff" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Flameburst_sentry_summons" target="_blank"><img src="https://terraria.wiki.gg/images/Flameburst_Staff.png">Flameburst Staff</a><button class="tooltip-btn" onclick="openPopup(event,'flameburst-staff')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
-        <div class="item-wrap" data-item-id="ballista-staff" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Ballista_sentry_summons" target="_blank"><img src="https://terraria.wiki.gg/images/Ballista_Staff.png">Ballista Staff</a><button class="tooltip-btn" onclick="openPopup(event,'ballista-staff')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        <div class="sub-group">
+          <h4>Choice Only 1</h4>
+          <div class="item-wrap" data-item-id="lightning-aura-staff" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Lightning_Aura_sentry_summons" target="_blank"><img src="https://terraria.wiki.gg/images/Lightning_Aura_Staff.png">Lightning Aura Staff</a><button class="tooltip-btn" onclick="openPopup(event,'lightning-aura-staff')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+          <div class="item-wrap" data-item-id="explosive-trap-staff" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Explosive_Trap_sentry_summons" target="_blank"><img src="https://terraria.wiki.gg/images/Explosive_Trap_Staff.png">Explosive Trap Staff</a><button class="tooltip-btn" onclick="openPopup(event,'explosive-trap-staff')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+          <div class="item-wrap" data-item-id="flameburst-staff" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Flameburst_sentry_summons" target="_blank"><img src="https://terraria.wiki.gg/images/Flameburst_Staff.png">Flameburst Staff</a><button class="tooltip-btn" onclick="openPopup(event,'flameburst-staff')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+          <div class="item-wrap" data-item-id="ballista-staff" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Ballista_sentry_summons" target="_blank"><img src="https://terraria.wiki.gg/images/Ballista_Staff.png">Ballista Staff</a><button class="tooltip-btn" onclick="openPopup(event,'ballista-staff')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        </div>
         <div class="item-wrap" data-item-id="staff-of-the-frost-hydra" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Staff_of_the_Frost_Hydra" target="_blank"><img src="https://terraria.wiki.gg/images/Staff_of_the_Frost_Hydra.png">Staff of the Frost Hydra</a><button class="tooltip-btn" onclick="openPopup(event,'staff-of-the-frost-hydra')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
       </div>
       <div class="section">
@@ -1141,6 +1204,7 @@ footer{text-align:center;padding:24px;color:var(--muted);font-size:12px;border-t
         </div>
         <div class="sub-group">
           <h4>Old One's Army Event</h4>
+          <h4>Choice Only 1</h4>
           <div class="sub-group">
             <div class="item-wrap" data-item-id="apprentices-scarf" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Apprentice%27s_Scarf" target="_blank"><img src="https://terraria.wiki.gg/images/Apprentice%27s_Scarf.png">Apprentice's Scarf</a><button class="tooltip-btn" onclick="openPopup(event,'apprentices-scarf')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
             <h5>or</h5>
@@ -1200,8 +1264,13 @@ footer{text-align:center;padding:24px;color:var(--muted);font-size:12px;border-t
       </div>
       <div class="section">
         <h3>Sentries</h3>
-        <div class="item-wrap" data-item-id="flameburst-staff" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Flameburst_sentry_summons" target="_blank"><img src="https://terraria.wiki.gg/images/Flameburst_Staff.png">Flameburst Staff</a><button class="tooltip-btn" onclick="openPopup(event,'flameburst-staff')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
-        <div class="item-wrap" data-item-id="ballista-staff" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Ballista_sentry_summons" target="_blank"><img src="https://terraria.wiki.gg/images/Ballista_Staff.png">Ballista Staff</a><button class="tooltip-btn" onclick="openPopup(event,'ballista-staff')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        <div class="sub-group">
+          <h4>Choice Only 1</h4>
+          <div class="item-wrap" data-item-id="lightning-aura-staff" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Lightning_Aura_sentry_summons" target="_blank"><img src="https://terraria.wiki.gg/images/Lightning_Aura_Staff.png">Lightning Aura Staff</a><button class="tooltip-btn" onclick="openPopup(event,'lightning-aura-staff')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+          <div class="item-wrap" data-item-id="explosive-trap-staff" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Explosive_Trap_sentry_summons" target="_blank"><img src="https://terraria.wiki.gg/images/Explosive_Trap_Staff.png">Explosive Trap Staff</a><button class="tooltip-btn" onclick="openPopup(event,'explosive-trap-staff')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+          <div class="item-wrap" data-item-id="flameburst-staff" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Flameburst_sentry_summons" target="_blank"><img src="https://terraria.wiki.gg/images/Flameburst_Staff.png">Flameburst Staff</a><button class="tooltip-btn" onclick="openPopup(event,'flameburst-staff')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+          <div class="item-wrap" data-item-id="ballista-staff" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Ballista_sentry_summons" target="_blank"><img src="https://terraria.wiki.gg/images/Ballista_Staff.png">Ballista Staff</a><button class="tooltip-btn" onclick="openPopup(event,'ballista-staff')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
+        </div>
         <div class="item-wrap" data-item-id="staff-of-the-frost-hydra" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Staff_of_the_Frost_Hydra" target="_blank"><img src="https://terraria.wiki.gg/images/Staff_of_the_Frost_Hydra.png">Staff of the Frost Hydra</a><button class="tooltip-btn" onclick="openPopup(event,'staff-of-the-frost-hydra')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
       </div>
       <div class="section">
@@ -1225,6 +1294,7 @@ footer{text-align:center;padding:24px;color:var(--muted);font-size:12px;border-t
         </div>
         <div class="sub-group">
           <h4>Old One's Army Event</h4>
+          <h4>Choice Only 1</h4>
           <div class="sub-group">
             <div class="item-wrap" data-item-id="apprentices-scarf" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Apprentice%27s_Scarf" target="_blank"><img src="https://terraria.wiki.gg/images/Apprentice%27s_Scarf.png">Apprentice's Scarf</a><button class="tooltip-btn" onclick="openPopup(event,'apprentices-scarf')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
             <h5>or</h5>
@@ -1290,6 +1360,7 @@ footer{text-align:center;padding:24px;color:var(--muted);font-size:12px;border-t
         </div>
         <div class="sub-group">
           <h4>Old One's Army Event</h4>
+          <h4>Choice Only 1</h4>
           <div class="sub-group">
             <div class="item-wrap" data-item-id="apprentices-scarf" data-state="none"><a class="item" href="https://terraria.wiki.gg/wiki/Apprentice%27s_Scarf" target="_blank"><img src="https://terraria.wiki.gg/images/Apprentice%27s_Scarf.png">Apprentice's Scarf</a><button class="tooltip-btn" onclick="openPopup(event,'apprentices-scarf')">ℹ</button><button class="item-btn" data-s="none" onclick="cycleItem(this)"></button></div>
             <h5>or</h5>
@@ -1348,6 +1419,7 @@ const ITEM_INFO = {
     - Variegated Lardfish:\n Can get fish on biome Underground Jungle` },
   'firecracker': { unlock: 'After Defeated Boss Wall of Flesh', get: '25% Chance of Dropped Boss', desc: '—' },
   'terraprisma': { unlock: 'After Defeated Boss Empress of Light', get: 'Must be 100% Damage on Daytime', desc: '—' },
+  'cobwhip': { unlock: 'First Item', get: 'Crafting on Loom: \n\n Cobweb ×30\n Any Wood ×10', desc: 'Dont Use for Bosses' },
 };
 
 // ═══ POPUP LOGIC ═══
@@ -1583,11 +1655,3 @@ window.addEventListener('DOMContentLoaded', () => {
 </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
